@@ -3,7 +3,7 @@
       	"mode": "NORMAL",
       	"vertices": [
         	{
-              "_id": 1,
+              "uri": "1",
               "date": "? - 1851",
               "geo": [
                   51.7282653,
@@ -14,7 +14,7 @@
               "type": "hg:Straat"
           },
           {
-              "_id": 2,
+              "uri": "2",
               "date": "1851 - 31/12/1940",
               "geo": [
                   51.7282653,
@@ -25,7 +25,7 @@
               "type": "hg:Straat"
           },
           {
-              "_id": 3,
+              "uri": "3",
               "date": "01/01/1941 - 1970",
               "geo": [
                   51.7282653,
@@ -36,7 +36,7 @@
               "type": "hg:Straat"
           },
           {
-              "_id": 4,
+              "uri": "4",
               "date": "1970 - heden",
               "geo": [
                   51.7282653,
@@ -47,7 +47,7 @@
               "type": "hg:Straat"
           },
           {
-              "_id": 5,
+              "uri": "5",
               "date": "01/01/1851 - 1940",
               "geo": [
                   51.7282653,
@@ -58,7 +58,7 @@
               "type": "hg:Gemeente"
           },
           {
-              "_id": 6,
+              "uri": "6",
               "date": "1941 - 1970",
               "geo": [
                   51.7282653,
@@ -69,7 +69,7 @@
               "type": "hg:Gemeente"
           },
           {
-              "_id": 7,
+              "uri": "7",
               "date": "1970 - heden",
               "geo": [
                   51.7282653,
@@ -80,7 +80,7 @@
               "type": "hg:Gemeente"
           },
           {
-              "_id": 8,
+              "uri": "8",
               "date": "01/01/1851 - 1970",
               "geo": [
                   51.7282653,
@@ -91,7 +91,7 @@
               "type": "hg:Gemeente"
           },
           {
-              "_id": 9,
+              "uri": "9",
               "date": "1971 - heden",
               "geo": [
                   51.7282653,
@@ -102,7 +102,7 @@
               "type": "hg:Gemeente"
           },
           {
-              "_id": 10,
+              "uri": "10",
               "date": "10e eeuw - 1851",
               "geo": [
                   52.162052,
@@ -115,7 +115,7 @@
               "type": "hg:Plaats"
           },
           {
-              "_id": 11,
+              "uri": "11",
               "date": "1851 - 31/12/1940",
               "geo": [
                   52.162052,
@@ -128,7 +128,7 @@
               "type": "hg:Plaats"
           },
           {
-              "_id": 12,
+              "uri": "12",
               "date": "01/01/1941 - heden",
               "geo": [
                   52.162052,
@@ -141,7 +141,7 @@
               "type": "hg:Plaats"
           },
           {
-              "_id": 13,
+              "uri": "13",
               "date": "1108 - 1851",
               "geo": [
                   52.1353998,
@@ -154,7 +154,7 @@
               "type": "hg:Plaats"
           },
           {
-              "_id": 14,
+              "uri": "14",
               "date": "1851 - 1970",
               "geo": [
                   52.1353998,
@@ -167,7 +167,7 @@
               "type": "hg:Plaats"
           },
           {
-              "_id": 15,
+              "uri": "15",
               "date": "1970 - heden",
               "geo": [
                   52.1353998,
@@ -180,7 +180,7 @@
               "type": "hg:Plaats"
           },
           {
-              "_id": 16,
+              "uri": "16",
               "date": "unknown",
               "geo": "unknown",
               "name": "Hollant",
@@ -188,7 +188,7 @@
               "type": "Gewest"
           },
           {
-              "_id": 17,
+              "uri": "17",
               "date": "unknown",
               "geo": [
                   52.333382,
@@ -200,188 +200,188 @@
               "source": "source2",
               "type": "Provincie"
           }
-      	],	
+      	],
         "edges": [
             {
-                "_id": 18,
-                "_inV": 2,
+                "uri": "18",
+                "_inV": "2",
                 "_label": "hg:became",
-                "_outV": 1,
+                "_outV": "1",
                 "source": "source1"
             },
             {
-                "_id": 19,
-                "_inV": 3,
+                "uri": "19",
+                "_inV": "3",
                 "_label": "hg:renamedTo",
-                "_outV": 2,
+                "_outV": "2",
                 "source": "source1"
             },
             {
-                "_id": 20,
-                "_inV": 4,
+                "uri": "20",
+                "_inV": "4",
                 "_label": "hg:became",
-                "_outV": 3,
+                "_outV": "3",
                 "source": "source1"
             },
             {
-                "_id": 21,
-                "_inV": 11,
+                "uri": "21",
+                "_inV": "11",
                 "_label": "hg:liesIn",
-                "_outV": 2,
+                "_outV": "2",
                 "source": "source1"
             },
             {
-                "_id": 22,
-                "_inV": 5,
+                "uri": "22",
+                "_inV": "5",
                 "_label": "hg:liesIn",
-                "_outV": 2,
+                "_outV": "2",
                 "source": "source1"
             },
             {
-                "_id": 23,
-                "_inV": 6,
+                "uri": "23",
+                "_inV": "6",
                 "_label": "hg:liesIn",
-                "_outV": 3,
+                "_outV": "3",
                 "source": "source1"
             },
             {
-                "_id": 24,
-                "_inV": 15,
+                "uri": "24",
+                "_inV": "15",
                 "_label": "hg:liesIn",
-                "_outV": 4,
+                "_outV": "4",
                 "source": "source1"
             },
             {
-                "_id": 25,
-                "_inV": 9,
+                "uri": "25",
+                "_inV": "9",
                 "_label": "hg:liesIn",
-                "_outV": 4,
+                "_outV": "4",
                 "source": "source1"
             },
             {
-                "_id": 26,
-                "_inV": 5,
+                "uri": "26",
+                "_inV": "5",
                 "_label": "hg:liesIn",
-                "_outV": 11,
+                "_outV": "11",
                 "source": "source2"
             },
             {
-                "_id": 27,
-                "_inV": 6,
+                "uri": "27",
+                "_inV": "6",
                 "_label": "hg:became",
-                "_outV": 5,
+                "_outV": "5",
                 "source": "source1"
             },
             {
-                "_id": 28,
-                "_inV": 7,
+                "uri": "28",
+                "_inV": "7",
                 "_label": "hg:became",
-                "_outV": 6,
+                "_outV": "6",
                 "source": "source1"
             },
             {
-                "_id": 29,
-                "_inV": 8,
+                "uri": "29",
+                "_inV": "8",
                 "_label": "hg:liesIn",
-                "_outV": 14,
+                "_outV": "14",
                 "source": "source2"
             },
             {
-                "_id": 30,
-                "_inV": 9,
+                "uri": "30",
+                "_inV": "9",
                 "_label": "hg:became",
-                "_outV": 8,
+                "_outV": "8",
                 "source": "source1"
             },
             {
-                "_id": 31,
-                "_inV": 9,
+                "uri": "31",
+                "_inV": "9",
                 "_label": "hg:liesIn",
-                "_outV": 15,
+                "_outV": "15",
                 "source": "source2"
             },
             {
-                "_id": 32,
-                "_inV": 10,
+                "uri": "32",
+                "_inV": "10",
                 "_label": "hg:liesIn",
-                "_outV": 1,
+                "_outV": "1",
                 "source": "source1"
             },
             {
-                "_id": 33,
-                "_inV": 11,
+                "uri": "33",
+                "_inV": "11",
                 "_label": "hg:became",
-                "_outV": 10,
+                "_outV": "10",
                 "source": "source1"
             },
             {
-                "_id": 34,
-                "_inV": 12,
+                "uri": "34",
+                "_inV": "12",
                 "_label": "hg:became",
-                "_outV": 11,
+                "_outV": "11",
                 "source": "source1"
             },
             {
-                "_id": 35,
-                "_inV": 14,
+                "uri": "35",
+                "_inV": "14",
                 "_label": "hg:became",
-                "_outV": 13,
+                "_outV": "13",
                 "source": "source2"
             },
             {
-                "_id": 36,
-                "_inV": 15,
+                "uri": "36",
+                "_inV": "15",
                 "_label": "hg:became",
-                "_outV": 14,
+                "_outV": "14",
                 "source": "source2"
             },
             {
-                "_id": 38,
-                "_inV": 17,
+                "uri": "38",
+                "_inV": "17",
                 "_label": "hg:liesIn",
-                "_outV": 12,
+                "_outV": "12",
                 "source": "source1"
             },
             {
-                "_id": 39,
-                "_inV": 16,
+                "uri": "39",
+                "_inV": "16",
                 "_label": "hg:liesIn",
-                "_outV": 13,
+                "_outV": "13",
                 "source": "source1"
             },
             {
-                "_id": 40,
-                "_inV": 17,
+                "uri": "40",
+                "_inV": "17",
                 "_label": "hg:liesIn",
-                "_outV": 11,
+                "_outV": "11",
                 "source": "source1"
             },
             {
-                "_id": 41,
-                "_inV": 17,
+                "uri": "41",
+                "_inV": "17",
                 "_label": "hg:liesIn",
-                "_outV": 16,
+                "_outV": "16",
                 "source": "source1"
             },
             {
-                "_id": 42,
-                "_inV": 17,
+                "uri": "42",
+                "_inV": "17",
                 "_label": "hg:liesIn",
-                "_outV": 14,
+                "_outV": "14",
                 "source": "source1"
             },
             {
-                "_id": 43,
-                "_inV": 17,
+                "uri": "43",
+                "_inV": "17",
                 "_label": "hg:liesIn",
-                "_outV": 15,
+                "_outV": "15",
                 "source": "source1"
             },
             {
-                "_id": 44,
-                "_inV": 16,
+                "uri": "44",
+                "_inV": "16",
                 "_label": "hg:liesIn",
-                "_outV": 10,
+                "_outV": "10",
                 "source": "source1"
             }
         ]
