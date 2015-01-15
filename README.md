@@ -11,6 +11,7 @@ We'll use:
 Like this:
 
 - Download Titan in directory `titan`
+- Run `npm install grex`
 - run `bin/titan.sh start`
 - run `./import.js`
 - run `read.js`
