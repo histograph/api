@@ -15,3 +15,5 @@ Like this:
 - run `bin/titan.sh start`
 - run `./import.js`
 - run `read.js`
+
+For some examples on how to enter data into Titan graph with Gremlin, see https://github.com/zcox/rexster-titan-scala#rexster-console.
