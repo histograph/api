@@ -12,8 +12,15 @@ Like this:
 
 - Download Titan in directory `titan`
 - Run `npm install grex`
-- run `bin/titan.sh start`
-- run `./import.js`
-- run `read.js`
+- Run `npm install line-reader`
+- Run `bin/titan.sh start`
+- Run `./import.js`
+- Run `read.js`
 
 For some examples on how to enter data into Titan graph with Gremlin, see https://github.com/zcox/rexster-titan-scala#rexster-console.
+
+To delete all vertices and edges, exectute the following Gremlin script:
+
+    g = rexster.getGraph("graph")
+    g.V.each{g.removeVertex(it)}
+    g.stopTransaction(SUCCESS)
