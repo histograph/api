@@ -1,6 +1,15 @@
 #!/usr/local/bin/node
 
+// TODO: make importer use stdin!
+// http://shapeshed.com/command-line-utilities-with-nodejs/
+
 var grex = require('grex'),
+    argv =require('optimist')
+      .usage('Load a GraphSON file into Titan.\nUsage: $0')
+      .demand('f')
+      .alias('f', 'file')
+      .describe('f', 'Load a file')
+      .argv
     async = require('async'),
     fs = require('fs'),
     options = {
@@ -12,7 +21,7 @@ var grex = require('grex'),
     gremlin = grex.gremlin,
     g = grex.g;
 
-var json = JSON.parse(fs.readFileSync('molenstraat.json', 'utf8'));
+var json = JSON.parse(fs.readFileSync(argv.file, 'utf8'));
 
 function execute(query, callback) {
   client.execute(query, function(err, response) {
