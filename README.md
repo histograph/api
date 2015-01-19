@@ -12,7 +12,7 @@ Like this:
 
 - Download Titan in directory `titan`
 - Run `npm install grex`
-- Run `bin/titan.sh start`
+- Run `titan/bin/titan.sh start`
 - Run `./import.js`
 - Run `read.js`
 
