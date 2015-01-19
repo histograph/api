@@ -14,7 +14,9 @@ var grex = require('grex'),
     async = require('async'),
     parse = require('csv-parse');
 
-var objectTypeMap = { 
+// Transforms TGN object types to HG ontology types 
+// hg:Place, hg:Polder, hg:Province or hg:Waterway
+var objectTypeMap = {
 	"inhabited places": "place",
 	"national capitals": "place",
 	"provincial capitals": "place",
@@ -58,6 +60,7 @@ function containsObject(obj, list) {
     return false;
 }
 
+// TGN object types not used in our ontology. TODO Subject to change.
 var notUsed = [
 	"parks (recreation areas)",
 	"docks",
@@ -125,7 +128,8 @@ var notUsed = [
 	"historic sites"
 ];
 
-var provinceURIs = { // Hard-coded, taken from source file
+// Hard-coded, taken from source file entries for the provinces
+var provinceURIs = { 
 	"NH": "7006951",
 	"NB": "7003624",
 	"Ut": "7003627",
@@ -170,7 +174,8 @@ function parseVertices(callback) {
 					var vertex = {};
 					var objType = objectTypeMap[obj[7]];
 		
-					vertex["uri"] = source + /*"/" + objType +*/ "/" + uri;
+					vertex["_id"] = source + "/" + uri;
+					vertex["uri"] = source + "/" + uri;
 
 					vertex["name"] = obj[2];
 					vertex["source"] = source;
@@ -194,6 +199,7 @@ function parseVertices(callback) {
 	});
 }
 
+// EDGES
 function parseEdges(callback) {
 	fs.appendFileSync(fileNameOut, edgesHeader);
 
@@ -216,11 +222,11 @@ function parseEdges(callback) {
 					var edge = {};
 					var objType = objectTypeMap[obj[7]];
 	
-					edge["uri"] = source + "/e" + ++edgeCounter;
+					edge["_id"] = source + "/e" + ++edgeCounter;
 					edge["_outV"] = source + "/" + uri;
 					edge["_inV"] = source + "/" + provinceURIs[obj[3]];
 					edge["source"] = source;
-					edge["label"] = "hg:liesIn";
+					edge["_label"] = "hg:liesIn";
 					edge["startDate"] = "";
 					edge["endDate"] = "";
 				
@@ -248,4 +254,3 @@ async.series([
 		doneMsg
   ]
 );
-
