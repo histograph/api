@@ -1,0 +1,35 @@
+{
+  "name": "histograph",
+  "version": "0.0.1",
+  "description": "Light-weight option parsing with an argv hash. No optstrings attached.",
+  "main": "./index.js",
+  "dependencies": {
+    "grex": "~0.7.3",
+    "optimist": "~0.6.1",
+    "async": "~0.9.0"
+  },
+  "devDependencies": {
+  },
+  "scripts": {
+  },
+  "repository": {
+    "type": "git",
+    "url": "http://github.com/erfgoed-en-locatie/histograph.git"
+  },
+  "keywords": [
+  ],
+  "author": "Bert Spaan <bert@waag.org>",
+  "contributors": [
+    {
+      "name": "Bert Spaan",
+      "email": "bert@waag.org"
+    },
+    {
+      "name": "Rutger van Willigen",
+      "email": "rutger@waag.org"
+    }
+  ],
+  "license": "",
+  "engine": {
+  }
+}
