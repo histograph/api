@@ -12,11 +12,7 @@ var grex = require('grex'),
       .argv
     async = require('async'),
     fs = require('fs'),
-    options = {
-      'host': 'localhost',
-      'port': 8182,
-      'graph': 'graph'
-    },
+    options = JSON.parse(fs.readFileSync('config.json', 'utf8')),
     client = grex.createClient(options),
     gremlin = grex.gremlin,
     g = grex.g;
