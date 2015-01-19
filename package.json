@@ -1,7 +1,7 @@
 {
   "name": "histograph",
   "version": "0.0.1",
-  "description": "Light-weight option parsing with an argv hash. No optstrings attached.",
+  "description": "Load a GraphSON file into Titan",
   "main": "./index.js",
   "dependencies": {
     "grex": "~0.7.3",
