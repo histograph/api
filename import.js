@@ -28,10 +28,11 @@ function execute(query, callback) {
 }
 
 function addVertices(callback) {
+  var i = 1;
   async.each(json.graph.vertices, function(vertex, callback) {
-    console.log("Adding vertex: " + vertex.name);
     var query = gremlin(g.addVertex(vertex));
     execute(query, function(response) {
+      console.log("Added vertex " + (i++) + "/" + json.graph.edges.length + ": " + vertex.name);
       callback();
     });
   });
@@ -39,6 +40,7 @@ function addVertices(callback) {
 }
 
 function addEdges(callback) {
+  var i = 1;
   async.each(json.graph.edges, function(edge, callback) {
     var outVId, inVId;
     execute(gremlin(g.V('uri', edge._outV)), function(response) {
@@ -51,7 +53,7 @@ function addEdges(callback) {
         var inV = query.var(g.v(inVId));
         query(g.addEdge(outV, inV, edge._label));
         execute(query, function(response) {
-          console.log("Jaaatjes, added edge!");
+          console.log("Added edge " + (i++) + "/" + json.graph.edges.length + "!");
           callback();
         });
       });
