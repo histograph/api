@@ -68,9 +68,6 @@ function addEdges(callback) {
       });
     });
   });
-<<<<<<< HEAD:example/import.js
-});
-=======
   callback(null, true);
 }
 
@@ -79,4 +76,4 @@ async.series([
     addEdges
   ]
 );
->>>>>>> decfab01117f97cae710c37c67d9b5d14665b74c:import.js
+
