@@ -10,8 +10,6 @@ var grex = require('grex'),
     gremlin = grex.gremlin,
     g = grex.g;
 
-g.V()
-
 var query = gremlin(g.V());
 
 client.execute(query, function(err, response) {

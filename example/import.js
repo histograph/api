@@ -12,7 +12,7 @@ var grex = require('grex'),
     gremlin = grex.gremlin,
     g = grex.g;
 
-var json = JSON.parse(fs.readFileSync('molenstraat2.json', 'utf8'));
+var json = JSON.parse(fs.readFileSync('molenstraat.json', 'utf8'));
 
 function execute(query, callback) {
   client.execute(query, function(err, response) {
