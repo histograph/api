@@ -38,6 +38,8 @@ You can view imported data using the [Dog House](http://localhost:8182/doghouse/
 
 From [Chapter 8. Indexing for better Performance](http://s3.thinkaurelius.com/docs/titan/current/indexes.html) in Titan docs:
 
+### `uri`
+
     g = rexster.getGraph("graph")
     mgmt = g.getManagementSystem()
     uri = mgmt.makePropertyKey('uri').dataType(String.class).make()
@@ -46,11 +48,26 @@ From [Chapter 8. Indexing for better Performance](http://s3.thinkaurelius.com/do
     // See if index is created correctly:
     g.getIndexedKeys(Vertex.class)
 
-Test indices:
+### `name`
+
+See [Chapter 20. Index Parameters and Full-Text Search](http://s3.thinkaurelius.com/docs/titan/current/index-parameters.html#_string_search):
 
     g = rexster.getGraph("graph")
-    g.V.has('hgUri','tgn/7261167')
-    g.V.has('hgUri','tgn/7271334')
+    mgmt = g.getManagementSystem()
+    name = mgmt.makePropertyKey('name').dataType(String.class).make()
+    mgmt.buildIndex('byName', Vertex.class).addKey(name, Mapping.TEXT.getParameter()).buildMixedIndex("search")
+    mgmt.commit()
+    // See if index is created correctly:
+    g.getIndexedKeys(Vertex.class)
+
+### Test indices:
+
+    g = rexster.getGraph("graph")
+    g.V.has('hgUri', 'tgn/7261167')
+    g.V.has('name', 'tgn/7271334')
+    g.V.has('name', Text.CONTAINS, 'Amsterdam')
+    g.V.has('name', Text.CONTAINS_REGEX, '.*dam.*').map
+    g.V.has('name', Text.CONTAINS_REGEX, '.*bert.*').name
 
 Clean database and indices:
 
