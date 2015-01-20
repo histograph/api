@@ -213,7 +213,6 @@ function parseEdges(callback) {
 
 		for (var i=1; i<data.length; i++) { // Skip CSV header -- contents hardcoded
 			var obj = data[i];
-			var objType = obj[7];
 			
 			var splitURI = obj[1].split("/");
 			var uri = splitURI[splitURI.length - 1];
@@ -222,7 +221,6 @@ function parseEdges(callback) {
 				if (provinceURIs.hasOwnProperty(obj[3])) {
 	
 					var edge = {};
-					var objType = objectTypeMap[obj[7]];
 	
 					edge["_id"] = source + "/e" + ++edgeCounter;
 					edge["_outV"] = source + "/" + uri;
