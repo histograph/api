@@ -7,7 +7,8 @@
     "grex": "~0.7.3",
     "optimist": "~0.6.1",
     "async": "~0.9.0",
-    "path": "~0.11.14"
+    "path": "~0.11.14",
+    "csv-parse": "~0.0.6"
   },
   "devDependencies": {
   },
