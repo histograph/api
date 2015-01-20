@@ -10,12 +10,14 @@ We'll use:
 
 Do this:
 
-- First, download Titan in directory `titan`
+- [Download Titan](https://github.com/thinkaurelius/titan/wiki/Downloads) in directory `titan`
 
 Then:
 
     npm install grex
     titan/bin/titan.sh start
+
+## Test data
 
 Titan is now running! Let's import some test data:
 
@@ -24,6 +26,13 @@ Titan is now running! Let's import some test data:
 You can use [`histograph-viewer`](https://github.com/erfgoed-en-locatie/histograph-viewer/) to view the test graph:
 
     ./read.js > ../histograph-viewer/molenstraat.json
+
+## Import datasets
+
+    converters/tgn.js -f ../historische-geocoder/data/tgn/tgn_nl.csv
+    ./import.js -f ../historische-geocoder/data/tgn/tgn.graphson.json
+
+## Gremlin
 
 For some examples on how to enter data into Titan graph with Gremlin, see https://github.com/zcox/rexster-titan-scala#rexster-console.
 
