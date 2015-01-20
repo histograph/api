@@ -63,8 +63,8 @@ See [Chapter 20. Index Parameters and Full-Text Search](http://s3.thinkaurelius.
 ### Test indices:
 
     g = rexster.getGraph("graph")
-    g.V.has('hgUri', 'tgn/7261167')
-    g.V.has('name', 'tgn/7271334')
+    g.V.has('uri', 'tgn/7261167')
+    g.V.has('uri', 'tgn/7271334')
     g.V.has('name', Text.CONTAINS, 'Amsterdam')
     g.V.has('name', Text.CONTAINS_REGEX, '.*dam.*').map
     g.V.has('name', Text.CONTAINS_REGEX, '.*bert.*').name
