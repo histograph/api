@@ -62,7 +62,7 @@ See [Chapter 20. Index Parameters and Full-Text Search](http://s3.thinkaurelius.
 
 ### TODO:
 
-Make indices on the following fields, and use a _range index_ for `startDate`/`endData`:
+Make indices on the following fields, and use a _range index_ for `startDate`/`endDate`:
 
 - `source`
 - `type`
