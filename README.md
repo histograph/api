@@ -40,19 +40,21 @@ From [Chapter 8. Indexing for better Performance](http://s3.thinkaurelius.com/do
 
     g = rexster.getGraph("graph")
     mgmt = g.getManagementSystem()
-    hgUri = mgmt.makePropertyKey('hgUri').dataType(String.class).make()
-    mgmt.buildIndex('byUri', Vertex.class).addKey(hgUri).buildCompositeIndex()
+    uri = mgmt.makePropertyKey('uri').dataType(String.class).make()
+    mgmt.buildIndex('byUri', Vertex.class).addKey(uri).unique().buildCompositeIndex()
     mgmt.commit()
     // See if index is created correctly:
     g.getIndexedKeys(Vertex.class)
-
-TODO: property `uri` already exists, therefore we'll use `hgUri`. See if we can change this default behaviour.
 
 Test indices:
 
     g = rexster.getGraph("graph")
     g.V.has('hgUri','tgn/7261167')
     g.V.has('hgUri','tgn/7271334')
+
+Clean database and indices:
+
+    titan/bin/titan.sh clean
 
 ## Gremlin
 
