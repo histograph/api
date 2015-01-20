@@ -1,6 +1,6 @@
 #!/usr/local/bin/node
 
-// Importer script for Getty Thesaurus of Geographic Names (TGN) data set
+// Conversion script for Getty Thesaurus of Geographic Names (TGN) data set
 var fileNameOut = 'tgn.graphson.json';
 var source = 'tgn';
 
