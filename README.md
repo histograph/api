@@ -10,12 +10,14 @@ We'll use:
 
 Do this:
 
-- First, download Titan in directory `titan`
+- [Download Titan](https://github.com/thinkaurelius/titan/wiki/Downloads) in directory `titan`
 
 Then:
 
     npm install grex
     titan/bin/titan.sh start
+
+## Test data
 
 Titan is now running! Let's import some test data:
 
@@ -25,7 +27,40 @@ You can use [`histograph-viewer`](https://github.com/erfgoed-en-locatie/histogra
 
     ./read.js > ../histograph-viewer/molenstraat.json
 
-For some examples on how to enter data into Titan graph with Gremlin, see https://github.com/zcox/rexster-titan-scala#rexster-console.
+## Import datasets
+
+    converters/tgn.js -f ../historische-geocoder/data/tgn/tgn_nl.csv
+    ./import.js -f ../historische-geocoder/data/tgn/tgn.graphson.json
+
+You can view imported data using the [Dog House](http://localhost:8182/doghouse/main/graph/graph)!
+
+## Indices
+
+From [Chapter 8. Indexing for better Performance](http://s3.thinkaurelius.com/docs/titan/current/indexes.html) in Titan docs:
+
+    g = rexster.getGraph("graph")
+    mgmt = g.getManagementSystem()
+    uri = mgmt.makePropertyKey('uri').dataType(String.class).make()
+    mgmt.buildIndex('byUri', Vertex.class).addKey(uri).unique().buildCompositeIndex()
+    mgmt.commit()
+    // See if index is created correctly:
+    g.getIndexedKeys(Vertex.class)
+
+Test indices:
+
+    g = rexster.getGraph("graph")
+    g.V.has('hgUri','tgn/7261167')
+    g.V.has('hgUri','tgn/7271334')
+
+Clean database and indices:
+
+    titan/bin/titan.sh clean
+
+## Gremlin
+
+For some examples on how to enter data into Titan graph with Gremlin, see https://github.com/zcox/rexster-titan-scala#rexster-console. Start the console with:
+
+    titan/bin/rexster-console.sh
 
 To delete all vertices and edges, exectute the following Gremlin script:
 
