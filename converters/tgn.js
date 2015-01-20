@@ -162,8 +162,9 @@ function parseVertices(callback) {
 		console.log("Parsing vertices...");
 		
 		var vertices = [];
+    data.shift(); // Skip CSV header
 
-		for (var i=1; i<data.length; i++) { // Skip CSV header -- contents hardcoded
+		for (var i=0; i<data.length; i++) {
 			var obj = data[i];
 			var objType = obj[7];
 			
@@ -173,19 +174,19 @@ function parseVertices(callback) {
 			if (objectTypeMap.hasOwnProperty(objType)) {
 				if (!containsObject(uri, usedURIs)) {
 		
-					var vertex = {};
 					var objType = objectTypeMap[obj[7]];
-		
-					vertex["_id"] = source + "/" + uri;
-					vertex["uri"] = source + "/" + uri;
 
-					vertex["name"] = obj[2];
-					vertex["source"] = source;
-					vertex["type"] = "hg:" + objType.charAt(0).toUpperCase() + objType.slice(1);				
-					vertex["geometry"] = {"type": "Point", "coordinates": [parseFloat(obj[5]), parseFloat(obj[4])]};
-					vertex["startDate"] = "";
-					vertex["endDate"] = "";
-				
+					var vertex = {	
+  					_id: source + "/" + uri,
+            _type: "vertex",
+  					uri: source + "/" + uri,
+  					name: obj[2],
+  					source: source,
+  					type: "hg:" + objType.charAt(0).toUpperCase() + objType.slice(1),				
+  					geometry: {"type": "Point", "coordinates": [parseFloat(obj[5]), parseFloat(obj[4])]},
+  					startDate: "",
+  					endDate: ""
+          };
 					vertices.push(vertex);
 					usedURIs.push(uri);
 				}
@@ -210,8 +211,9 @@ function parseEdges(callback) {
 		
 		var edges = [];
 		var edgeCounter = 0;
+    data.shift(); // Skip CSV header
 
-		for (var i=1; i<data.length; i++) { // Skip CSV header -- contents hardcoded
+		for (var i=0; i<data.length; i++) {
 			var obj = data[i];
 			
 			var splitURI = obj[1].split("/");
@@ -220,16 +222,14 @@ function parseEdges(callback) {
 			if (containsObject(uri, usedURIs)) {
 				if (provinceURIs.hasOwnProperty(obj[3])) {
 	
-					var edge = {};
-	
-					edge["_id"] = source + "/e" + ++edgeCounter;
-					edge["_outV"] = source + "/" + uri;
-					edge["_inV"] = source + "/" + provinceURIs[obj[3]];
-					edge["source"] = source;
-					edge["_label"] = "hg:liesIn";
-					edge["startDate"] = "";
-					edge["endDate"] = "";
-				
+					var edge = {
+  					_id: source + "/e" + ++edgeCounter,
+            _type: "edge",
+  					_outV: source + "/" + uri,
+  					_inV: source + "/" + provinceURIs[obj[3]],
+  					source: source,
+  					_label: "hg:liesIn"
+          };
 					edges.push(edge);
 				}
 			}
