@@ -30,8 +30,10 @@ You can use [`histograph-viewer`](https://github.com/erfgoed-en-locatie/histogra
 ## Import datasets
 
     converters/tgn.js -f ../historische-geocoder/data/tgn/tgn_nl.csv
-    ./import.js -f ../historische-geocoder/data/tgn/tgn.graphson.json
-
+    converters/tgn.js -f ../historische-geocoder/data/geonames/geonames_nl_places.csv
+    converters/aggregateGraphSON.js ../historische-geocoder/data/tgn/tgn.graphson.json ../historische-geocoder/data/geonames/geonames.graphson.json
+    ./import.js -f converters/totalGraph.graphson.json
+    
 You can view imported data using the [Dog House](http://localhost:8182/doghouse/main/graph/graph)!
 
 ## Indices
