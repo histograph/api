@@ -1,6 +1,7 @@
 #!/usr/local/bin/node
 
-var fileNameOut = 'tgn.json';
+// Importer script for Getty Thesaurus of Geographic Names (TGN) data set
+var fileNameOut = 'tgn.graphson.json';
 var source = 'tgn';
 
 var grex = require('grex'),
@@ -12,7 +13,8 @@ var grex = require('grex'),
       .argv
     fs = require('fs'),
     async = require('async'),
-    parse = require('csv-parse');
+    parse = require('csv-parse'),
+		path = require('path');
 
 // Transforms TGN object types to HG ontology types 
 // hg:Place, hg:Polder, hg:Province or hg:Waterway
@@ -56,7 +58,6 @@ function containsObject(obj, list) {
             return true;
         }
     }
-
     return false;
 }
 
@@ -149,11 +150,12 @@ var verticesHeader = '{ "graph": { "mode": "NORMAL", "vertices": ',
 		footer = '} }';
 
 var usedURIs = [];
+var fileOut = path.join(path.dirname(path.resolve(argv.file)), fileNameOut);
 
 // VERTICES
 function parseVertices(callback) {
 	
-	fs.writeFileSync(fileNameOut, verticesHeader);
+	fs.writeFileSync(fileOut, verticesHeader);
 
 	parse(fs.readFileSync(argv.file, {encoding: 'utf8'}), {delimiter: ','}, function(err, data) {
 	
@@ -193,7 +195,7 @@ function parseVertices(callback) {
 			}
 		}
 		
-		fs.appendFileSync(fileNameOut, JSON.stringify(vertices, null, 4));
+		fs.appendFileSync(fileOut, JSON.stringify(vertices, null, 4));
 		callback(null, true);		
 		
 	});
@@ -201,7 +203,7 @@ function parseVertices(callback) {
 
 // EDGES
 function parseEdges(callback) {
-	fs.appendFileSync(fileNameOut, edgesHeader);
+	fs.appendFileSync(fileOut, edgesHeader);
 
 	parse(fs.readFileSync(argv.file, {encoding: 'utf8'}), {delimiter: ','}, function(err, data){
 		console.log("Parsing province edges...");
@@ -235,15 +237,14 @@ function parseEdges(callback) {
 			}
 		}
 		
-		fs.appendFileSync(fileNameOut, JSON.stringify(edges, null, 4));
-		
+		fs.appendFileSync(fileOut, JSON.stringify(edges, null, 4));
 		callback(null, true);
 	});
 
 }
 
 function doneMsg(callback) {
-	fs.appendFileSync(fileNameOut, footer);
+	fs.appendFileSync(fileOut, footer);
 	console.log("Done!");
 	callback(null, true);
 }
