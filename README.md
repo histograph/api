@@ -32,6 +32,8 @@ You can use [`histograph-viewer`](https://github.com/erfgoed-en-locatie/histogra
     converters/tgn.js -f ../historische-geocoder/data/tgn/tgn_nl.csv
     ./import.js -f ../historische-geocoder/data/tgn/tgn.graphson.json
 
+You can view imported data using the [Dog House](http://localhost:8182/doghouse/main/graph/graph)!
+
 ## Gremlin
 
 For some examples on how to enter data into Titan graph with Gremlin, see https://github.com/zcox/rexster-titan-scala#rexster-console.
