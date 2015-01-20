@@ -21,7 +21,7 @@ Then:
 
 Titan is now running! Let's import some test data:
 
-    ./import.js -f examples/molenstraat.json
+    ./import.js -f example/molenstraat.json
 
 You can use [`histograph-viewer`](https://github.com/erfgoed-en-locatie/histograph-viewer/) to view the test graph:
 
