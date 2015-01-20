@@ -1,388 +1,371 @@
 {
   "graph": {
-    "edges": [
-      {
-        "_inV": "2",
-        "_label": "hg:became",
-        "_outV": "1",
-        "source": "source1",
-        "uri": "18"
-      },
-      {
-        "_inV": "3",
-        "_label": "hg:renamedTo",
-        "_outV": "2",
-        "source": "source1",
-        "uri": "19"
-      },
-      {
-        "_inV": "4",
-        "_label": "hg:became",
-        "_outV": "3",
-        "source": "source1",
-        "uri": "20"
-      },
-      {
-        "_inV": "11",
-        "_label": "hg:liesIn",
-        "_outV": "2",
-        "source": "source1",
-        "uri": "21"
-      },
-      {
-        "_inV": "5",
-        "_label": "hg:liesIn",
-        "_outV": "2",
-        "source": "source1",
-        "uri": "22"
-      },
-      {
-        "_inV": "6",
-        "_label": "hg:liesIn",
-        "_outV": "3",
-        "source": "source1",
-        "uri": "23"
-      },
-      {
-        "_inV": "15",
-        "_label": "hg:liesIn",
-        "_outV": "4",
-        "source": "source1",
-        "uri": "24"
-      },
-      {
-        "_inV": "9",
-        "_label": "hg:liesIn",
-        "_outV": "4",
-        "source": "source1",
-        "uri": "25"
-      },
-      {
-        "_inV": "5",
-        "_label": "hg:liesIn",
-        "_outV": "11",
-        "source": "source2",
-        "uri": "26"
-      },
-      {
-        "_inV": "6",
-        "_label": "hg:became",
-        "_outV": "5",
-        "source": "source1",
-        "uri": "27"
-      },
-      {
-        "_inV": "7",
-        "_label": "hg:became",
-        "_outV": "6",
-        "source": "source1",
-        "uri": "28"
-      },
-      {
-        "_inV": "8",
-        "_label": "hg:liesIn",
-        "_outV": "14",
-        "source": "source2",
-        "uri": "29"
-      },
-      {
-        "_inV": "9",
-        "_label": "hg:became",
-        "_outV": "8",
-        "source": "source1",
-        "uri": "30"
-      },
-      {
-        "_inV": "9",
-        "_label": "hg:liesIn",
-        "_outV": "15",
-        "source": "source2",
-        "uri": "31"
-      },
-      {
-        "_inV": "10",
-        "_label": "hg:liesIn",
-        "_outV": "1",
-        "source": "source1",
-        "uri": "32"
-      },
-      {
-        "_inV": "11",
-        "_label": "hg:became",
-        "_outV": "10",
-        "source": "source1",
-        "uri": "33"
-      },
-      {
-        "_inV": "12",
-        "_label": "hg:became",
-        "_outV": "11",
-        "source": "source1",
-        "uri": "34"
-      },
-      {
-        "_inV": "14",
-        "_label": "hg:became",
-        "_outV": "13",
-        "source": "source2",
-        "uri": "35"
-      },
-      {
-        "_inV": "15",
-        "_label": "hg:became",
-        "_outV": "14",
-        "source": "source2",
-        "uri": "36"
-      },
-      {
-        "_inV": "17",
-        "_label": "hg:liesIn",
-        "_outV": "12",
-        "source": "source1",
-        "uri": "38"
-      },
-      {
-        "_inV": "16",
-        "_label": "hg:liesIn",
-        "_outV": "13",
-        "source": "source1",
-        "uri": "39"
-      },
-      {
-        "_inV": "17",
-        "_label": "hg:liesIn",
-        "_outV": "11",
-        "source": "source1",
-        "uri": "40"
-      },
-      {
-        "_inV": "17",
-        "_label": "hg:liesIn",
-        "_outV": "16",
-        "source": "source1",
-        "uri": "41"
-      },
-      {
-        "_inV": "17",
-        "_label": "hg:liesIn",
-        "_outV": "14",
-        "source": "source1",
-        "uri": "42"
-      },
-      {
-        "_inV": "17",
-        "_label": "hg:liesIn",
-        "_outV": "15",
-        "source": "source1",
-        "uri": "43"
-      },
-      {
-        "_inV": "16",
-        "_label": "hg:liesIn",
-        "_outV": "10",
-        "source": "source1",
-        "uri": "44"
-      }
-    ],
     "mode": "NORMAL",
     "vertices": [
       {
-        "date": "? - 1851",
-        "geo": [
-          51.7282653,
-          4.4236974
-        ],
+        "_id": "test-source1/1",
+        "uri": "test-source1/1",
+        "endDate": "1851",
+        "geometry": {
+          "type": "Point",
+          "coordinates": [51.7282653, 4.4236974]
+        },
         "name": "Molenstraat",
-        "source": "source1",
-        "type": "hg:Straat",
-        "uri": "1"
+        "source": "test-source1",
+        "type": "hg:Street"
       },
       {
-        "date": "1851 - 31/12/1940",
-        "geo": [
-          51.7282653,
-          4.4236974
-        ],
+        "_id": "test-source1/2",
+        "uri": "test-source1/2",
         "name": "Molenstraat",
-        "source": "source1",
-        "type": "hg:Straat",
-        "uri": "2"
+        "startDate": "1851-01-01",
+        "endDate": "1940-12-31",
+        "geometry": {
+          "type": "Point",
+          "coordinates": [51.7282653, 4.4236974]
+        },
+        "source": "test-source1",
+        "type": "hg:Street"
       },
       {
-        "date": "01/01/1941 - 1970",
-        "geo": [
-          51.7282653,
-          4.4236974
-        ],
+        "_id": "test-source1/3",
+        "uri": "test-source1/3",
         "name": "Burgemeesterstraat",
-        "source": "source1",
-        "type": "hg:Straat",
-        "uri": "3"
+        "startDate": "1941-01-01",
+        "endDate": "1970-12-31",
+        "geometry": {
+          "type": "Point",
+          "coordinates": [51.7282653, 4.4236974]
+        },
+        "source": "test-source1",
+        "type": "hg:Street"
       },
       {
-        "date": "1970 - heden",
-        "geo": [
-          51.7282653,
-          4.4236974
-        ],
+        "_id": "test-source1/4",
+        "uri": "test-source1/4",
         "name": "Burgemeesterstraat",
-        "source": "source1",
-        "type": "hg:Straat",
-        "uri": "4"
+        "startDate": "1970-01-01",
+        "geometry": {
+          "type": "Point",
+          "coordinates": [51.7282653, 4.4236974]
+        },
+        "source": "test-source1",
+        "type": "hg:Street"
       },
       {
-        "date": "01/01/1851 - 1940",
-        "geo": [
+        "_id": "test-source3/5",
+        "uri": "test-source3/5",
+        "name": "Oegstgeest",
+        "startDate": "1851-01-01",
+        "endDate": "1940-12-31",
+        "geometry": {
+          "type": "Point",
+          "coordinates": [51.7282653, 4.4236974]
+        },
+        "source": "test-source3",
+        "type": "hg:Municipality"
+      },
+      {
+        "_id": "test-source3/6",
+        "uri": "test-source3/6",
+        "name": "Oegstgeest",
+        "startDate": "1941-01-01",
+        "endDate": "1970-12-31",
+        "geometry": [
           51.7282653,
           4.4236974
         ],
-        "name": "Oegstgeest",
-        "source": "gemeentegeschiedenis",
-        "type": "hg:Gemeente",
-        "uri": "5"
+        "source": "test-source3",
+        "type": "hg:Municipality"
       },
       {
-        "date": "1941 - 1970",
-        "geo": [
+        "_id": "test-source3/7",
+        "uri": "test-source3/7",
+        "name": "Oegstgeest",
+        "startDate": "1970-01-01",
+        "geometry": [
           51.7282653,
           4.4236974
         ],
-        "name": "Oegstgeest",
-        "source": "gemeentegeschiedenis",
-        "type": "hg:Gemeente",
-        "uri": "6"
+        "source": "test-source3",
+        "type": "hg:Municipality"
       },
       {
-        "date": "1970 - heden",
-        "geo": [
+        "_id": "test-source3/8",
+        "uri": "test-source3/8",
+        "name": "Leiden",
+        "startDate": "1851-01-01",
+        "endDate": "1970-12-31",
+        "geometry": [
           51.7282653,
           4.4236974
         ],
-        "name": "Oegstgeest",
-        "source": "gemeentegeschiedenis",
-        "type": "hg:Gemeente",
-        "uri": "7"
+        "source": "test-source3",
+        "type": "hg:Municipality"
       },
       {
-        "date": "01/01/1851 - 1970",
-        "geo": [
+        "_id": "test-source3/9",
+        "uri": "test-source3/9",
+        "name": "Leiden",
+        "startDate": "1971-01-01",
+        "geometry": [
           51.7282653,
           4.4236974
         ],
-        "name": "Leiden",
-        "source": "gemeentegeschiedenis",
-        "type": "hg:Gemeente",
-        "uri": "8"
+        "source": "test-source3",
+        "type": "hg:Municipality"
       },
       {
-        "date": "1971 - heden",
-        "geo": [
-          51.7282653,
-          4.4236974
-        ],
-        "name": "Leiden",
-        "source": "gemeentegeschiedenis",
-        "type": "hg:Gemeente",
-        "uri": "9"
-      },
-      {
-        "date": "10e eeuw - 1851",
-        "geo": [
-          52.162052,
-          4.4349469,
-          52.2047989,
-          4.4975923
-        ],
+        "_id": "test-source4/10",
+        "uri": "test-source4/10",
         "name": "Oegstgeest",
-        "source": "oorkonde",
-        "type": "hg:Plaats",
-        "uri": "10"
+        "startDate": "900-01-01",
+        "endDate": "1851-12-31",
+        "geometry": {
+          "type": "Point",
+          "coordinates": [51.7282653, 4.4236974]
+        },
+        "source": "test-source4",
+        "type": "hg:Place"
       },
       {
-        "date": "1851 - 31/12/1940",
-        "geo": [
-          52.162052,
-          4.4349469,
-          52.2047989,
-          4.4975923
-        ],
+        "_id": "test-source4/11",
+        "uri": "test-source4/11",
         "name": "Oegstgeest",
-        "source": "oorkonde",
-        "type": "hg:Plaats",
-        "uri": "11"
+        "startDate": "1851-01-01",
+        "endDate": "1940-12-31",
+        "geometry": {
+          "type": "Point",
+          "coordinates": [51.7282653, 4.4236974]
+        },
+        "source": "test-source4",
+        "type": "hg:Place"
       },
       {
-        "date": "01/01/1941 - heden",
-        "geo": [
-          52.162052,
-          4.4349469,
-          52.2047989,
-          4.4975923
-        ],
+        "_id": "test-source4/12",
+        "uri": "test-source4/12",
         "name": "Oegstgeest",
-        "source": "oorkonde",
-        "type": "hg:Plaats",
-        "uri": "12"
+        "startDate": "1941-01-01",
+        "geometry": {
+          "type": "Point",
+          "coordinates": [51.7282653, 4.4236974]
+        },
+        "source": "test-source4",
+        "type": "hg:Place"
       },
       {
-        "date": "1108 - 1851",
-        "geo": [
-          52.1353998,
-          4.4410634,
-          52.1842373,
-          4.5239
-        ],
+        "_id": "test-source4/13",
+        "uri": "test-source4/13",
         "name": "Leiden",
-        "source": "oorkonde",
-        "type": "hg:Plaats",
-        "uri": "13"
+        "startDate": "1108-01-01",
+        "endDate": "1851-12-31",
+        "geometry": {
+          "type": "Point",
+          "coordinates": [51.7282653, 4.4236974]
+        },
+        "source": "test-source4",
+        "type": "hg:Place"
       },
       {
-        "date": "1851 - 1970",
-        "geo": [
-          52.1353998,
-          4.4410634,
-          52.1842373,
-          4.5239
-        ],
+        "_id": "test-source4/14",
+        "uri": "test-source4/14",
         "name": "Leiden",
-        "source": "oorkonde",
-        "type": "hg:Plaats",
-        "uri": "14"
+        "startDate": "1851-01-01",
+        "endDate": "1970-12-31",
+        "geometry": {
+          "type": "Point",
+          "coordinates": [51.7282653, 4.4236974]
+        },
+        "source": "test-source4",
+        "type": "hg:Place"
       },
       {
-        "date": "1970 - heden",
-        "geo": [
-          52.1353998,
-          4.4410634,
-          52.1842373,
-          4.5239
-        ],
+        "_id": "test-source4/15",
+        "uri": "test-source4/15",
         "name": "Leiden",
-        "source": "oorkonde",
-        "type": "hg:Plaats",
-        "uri": "15"
+        "startDate": "1970-01-01",
+        "geometry": {
+          "type": "Point",
+          "coordinates": [51.7282653, 4.4236974]
+        },
+        "source": "test-source4",
+        "type": "hg:Place"
       },
       {
-        "date": "unknown",
-        "geo": "unknown",
+        "_id": "test-source2/16",
+        "uri": "test-source2/16",
         "name": "Hollant",
-        "source": "source2",
-        "type": "Gewest",
-        "uri": "16"
+        "source": "test-source2",
+        "type": "hg:Gewest"
       },
       {
-        "date": "unknown",
-        "geo": [
-          52.333382,
-          5.14925,
-          51.643749,
-          3.71816
-        ],
+        "_id": "test-source2/17",
+        "uri": "test-source2/17",
         "name": "Zuid-Holland",
-        "source": "source2",
-        "type": "Provincie",
-        "uri": "17"
+        "geometry": {
+          "type": "Point",
+          "coordinates": [51.7282653, 4.4236974]
+        },
+        "source": "test-source2",
+        "type": "hg:Province"
+      }
+    ],
+    "edges": [
+      {
+        "_inV": "test-source1/2",
+        "_label": "hg:became",
+        "_outV": "test-source1/1",
+        "source": "test-source1"
+      },
+      {
+        "_inV": "test-source1/3",
+        "_label": "hg:renamedTo",
+        "_outV": "test-source1/2",
+        "source": "test-source1"
+      },
+      {
+        "_inV": "test-source1/4",
+        "_label": "hg:became",
+        "_outV": "test-source1/3",
+        "source": "test-source1"
+      },
+      {
+        "_inV": "test-source4/11",
+        "_label": "hg:liesIn",
+        "_outV": "test-source1/2",
+        "source": "test-source1"
+      },
+      {
+        "_inV": "test-source3/5",
+        "_label": "hg:liesIn",
+        "_outV": "test-source1/2",
+        "source": "test-source1"
+      },
+      {
+        "_inV": "test-source3/6",
+        "_label": "hg:liesIn",
+        "_outV": "test-source1/3",
+        "source": "test-source1"
+      },
+      {
+        "_inV": "test-source4/15",
+        "_label": "hg:liesIn",
+        "_outV": "test-source1/4",
+        "source": "test-source1"
+      },
+      {
+        "_inV": "test-source3/9",
+        "_label": "hg:liesIn",
+        "_outV": "test-source1/4",
+        "source": "test-source1"
+      },
+      {
+        "_inV": "test-source3/5",
+        "_label": "hg:liesIn",
+        "_outV": "test-source4/11",
+        "source": "test-source2"
+      },
+      {
+        "_inV": "test-source3/6",
+        "_label": "hg:became",
+        "_outV": "test-source3/5",
+        "source": "test-source1"
+      },
+      {
+        "_inV": "test-source3/7",
+        "_label": "hg:became",
+        "_outV": "test-source3/6",
+        "source": "test-source1"
+      },
+      {
+        "_inV": "test-source3/8",
+        "_label": "hg:liesIn",
+        "_outV": "test-source4/14",
+        "source": "test-source2"
+      },
+      {
+        "_inV": "test-source3/9",
+        "_label": "hg:became",
+        "_outV": "test-source3/8",
+        "source": "test-source1"
+      },
+      {
+        "_inV": "test-source3/9",
+        "_label": "hg:liesIn",
+        "_outV": "test-source4/15",
+        "source": "test-source2"
+      },
+      {
+        "_inV": "test-source4/10",
+        "_label": "hg:liesIn",
+        "_outV": "test-source1/1",
+        "source": "test-source1"
+      },
+      {
+        "_inV": "test-source4/11",
+        "_label": "hg:became",
+        "_outV": "test-source4/10",
+        "source": "test-source1"
+      },
+      {
+        "_inV": "test-source4/12",
+        "_label": "hg:became",
+        "_outV": "test-source4/11",
+        "source": "test-source1"
+      },
+      {
+        "_inV": "test-source4/14",
+        "_label": "hg:became",
+        "_outV": "test-source4/13",
+        "source": "test-source2"
+      },
+      {
+        "_inV": "test-source4/15",
+        "_label": "hg:became",
+        "_outV": "test-source4/14",
+        "source": "test-source2"
+      },
+      {
+        "_inV": "test-source2/17",
+        "_label": "hg:liesIn",
+        "_outV": "test-source4/12",
+        "source": "test-source1"
+      },
+      {
+        "_inV": "test-source2/16",
+        "_label": "hg:liesIn",
+        "_outV": "test-source4/13",
+        "source": "test-source1"
+      },
+      {
+        "_inV": "test-source2/17",
+        "_label": "hg:liesIn",
+        "_outV": "test-source4/11",
+        "source": "test-source1"
+      },
+      {
+        "_inV": "test-source2/17",
+        "_label": "hg:liesIn",
+        "_outV": "test-source2/16",
+        "source": "test-source1"
+      },
+      {
+        "_inV": "test-source2/17",
+        "_label": "hg:liesIn",
+        "_outV": "test-source4/14",
+        "source": "test-source1"
+      },
+      {
+        "_inV": "test-source2/17",
+        "_label": "hg:liesIn",
+        "_outV": "test-source4/15",
+        "source": "test-source1"
+      },
+      {
+        "_inV": "test-source2/16",
+        "_label": "hg:liesIn",
+        "_outV": "test-source4/10",
+        "source": "test-source1"
       }
     ]
   }
