@@ -34,9 +34,23 @@ You can use [`histograph-viewer`](https://github.com/erfgoed-en-locatie/histogra
 
 You can view imported data using the [Dog House](http://localhost:8182/doghouse/main/graph/graph)!
 
+## Indices
+
+From [Chapter 8. Indexing for better Performance](http://s3.thinkaurelius.com/docs/titan/current/indexes.html) in Titan docs:
+
+    g = rexster.getGraph("graph")
+    mgmt = g.getManagementSystem()
+    hgUri = mgmt.makePropertyKey('hgUri').dataType(String.class).make()
+    mgmt.buildIndex('byUri',Vertex.class).addKey(hgUri).buildCompositeIndex()
+    mgmt.commit()
+
+TODO: property `uri` already exists, therefore we'll use `hgUri`. See if we can change this default behaviour.
+
 ## Gremlin
 
-For some examples on how to enter data into Titan graph with Gremlin, see https://github.com/zcox/rexster-titan-scala#rexster-console.
+For some examples on how to enter data into Titan graph with Gremlin, see https://github.com/zcox/rexster-titan-scala#rexster-console. Start the console with:
+
+    titan/bin/rexster-console.sh
 
 To delete all vertices and edges, exectute the following Gremlin script:
 
