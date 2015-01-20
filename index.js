@@ -1,7 +1,8 @@
 #!/usr/local/bin/node
 
 var express = require('express'),
-    app = express();
+    cors = require('cors'),
+    app = express(),
     grex = require('grex'),
     fs = require('fs'),
     path = require('path'),
@@ -9,6 +10,8 @@ var express = require('express'),
     client = grex.createClient(options),
     gremlin = grex.gremlin,
     g = grex.g;
+
+app.use(cors());
 
 function execute(query, callback) {
   client.execute(query, function(err, response) {
