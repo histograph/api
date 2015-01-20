@@ -60,6 +60,15 @@ See [Chapter 20. Index Parameters and Full-Text Search](http://s3.thinkaurelius.
     // See if index is created correctly:
     g.getIndexedKeys(Vertex.class)
 
+### TODO:
+
+Make indices on the following fields, and use a _range index_ for `startDate`/`endData`:
+
+- `source`
+- `type`
+- `startDate`
+- `endDate`
+
 ### Test indices:
 
     g = rexster.getGraph("graph")
