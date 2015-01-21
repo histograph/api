@@ -1,12 +1,13 @@
 #!/usr/local/bin/node
 
-// Conversion script for Militieregisters data set
-var fileNameOut = 'militieregisters.graphson.json';
-var source = 'militieregisters';
+// Conversion script for Verdwenen Dorpen data set.
+// No edges!
+var fileNameOut = 'verdwenen-dorpen.graphson.json';
+var source = 'verdwenen-dorpen';
 
 var grex = require('grex'),
     argv = require('optimist')
-      .usage('Transforms Militieregisters data set into GraphSON format.\nUsage: $0')
+      .usage('Transforms Verdwenen Dorpen data set into GraphSON format.\nUsage: $0')
       .demand('f')
       .alias('f', 'file')
       .describe('f', 'Load a file')
@@ -50,56 +51,18 @@ function parseVertices(callback) {
         _id: uri,
         _type: "vertex",
         uri: uri,
-        name: obj[0],
+        name: obj[2],
         source: source,
         type: "hg:Place",
-        geometry: {},
-        startDate: obj[2],
-        endDate: obj[3]
+        geometry: {"type": "Point", "coordinates": [parseFloat(obj[6]), parseFloat(obj[5])]},
+        startDate: "",
+        endDate: obj[12]
       }
       vertices.push(vertex);
     }
 
     console.log(data.length + " vertices parsed.");
     fs.appendFileSync(fileOut, JSON.stringify(vertices, null, 4));
-    callback(null, true);
-  });
-}
-
-// EDGES
-function parseEdges(callback) {
-  fs.appendFileSync(fileOut, edgesHeader);
-
-  parse(fs.readFileSync(argv.file, {encoding: 'utf8'}), {delimiter: ','}, function(err, data) {    
-    var edges = [];
-    data.shift(); // Remove CSV header
-    
-    console.log("Parsing GeoNames link edges...");
-    
-    for (var i=0; i<data.length; i++) {
-      var obj = data[i];
-      var uri = source + "/" + i;
-  
-      if (obj[5].length > 0) {
-        
-        var splitGNuri = obj[5].split("/");
-        var geonamesURI = "geonames/" + splitGNuri[splitGNuri.length - 1];
-          
-        var edge = {
-          _id: source + "/e" + i,
-          _outV: uri,
-          _inV: geonamesURI,
-          source: source,
-          _type: "edge",
-          _label: "hg:wasUsedFor"
-        };
-
-        edges.push(edge);     
-      }
-    }
-    
-    console.log(edges.length + " GeoNames link edges parsed.");
-    fs.appendFileSync(fileOut, JSON.stringify(edges, null, 4));
     callback(null, true);
   });
 }
@@ -112,7 +75,6 @@ function doneMsg(callback) {
 
 async.series([
     parseVertices,
-    parseEdges,
     doneMsg
   ]
 );
