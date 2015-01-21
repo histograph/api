@@ -37,7 +37,6 @@ app.get('/', function (req, res) {
 app.get('/:source/:id', function (req, res) {
   var uri = req.params.source + '/' +  req.params.id,
       query = "g.V('uri', '" + uri + "').as('x').outE.inV.loop('x'){it.loops < 100}{true}.path";
-      query = "g.V('uri', '" + uri + "').as('x').inE.outV.loop('x'){it.loops < 100}{true}.path";
 
   execute(gremlin(query), function(response) {
     if (response.results.length > 0) {
