@@ -14,24 +14,7 @@ var grex = require('grex'),
     fs = require('fs'),
     async = require('async'),
     parse = require('csv-parse'),
-    path = require('path'),
-    options = JSON.parse(fs.readFileSync(path.join(__dirname, '../config.json'), 'utf8')),
-    client = grex.createClient(options),
-    gremlin = grex.gremlin,
-    g = grex.g;
-
-function execute(query, callback) {
-  client.execute(query, function(err, response) {
-    if (response) {
-      return callback(response);
-    }
-    if (err) {
-      console.log("ERROR:");
-      console.log(err);
-      callback(null);
-    }
-  });
-};
+    path = require('path');
 
 // Transforms GeoNames object types to HG ontology types
 var objectTypeMap = {
@@ -98,7 +81,7 @@ function parseVertices(callback) {
       }
     }
 
-    console.log(usedURIs.length + " objects parsed.");
+    console.log(usedURIs.length + " vertices parsed.");
     console.log("Parsing provinces...");
   
     var provinces = [],
@@ -171,7 +154,6 @@ function parseEdges(callback) {
     console.log(edgeCount + " province edges parsed.");
     console.log("Parsing TGN link edges...");
     var provEdgeCount = edgeCount;
-    var queryCount = 0;
         
     for (var i=0; i<data.length; i++) {
       var obj = data[i];
@@ -193,8 +175,6 @@ function parseEdges(callback) {
         };
 
         edges.push(edge);     
-      } else {
-        queryCount++;
       }
     }
     console.log((edgeCount - provEdgeCount) + " TGN link edges parsed.");
