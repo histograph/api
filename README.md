@@ -30,7 +30,8 @@ You can use [`histograph-viewer`](https://github.com/erfgoed-en-locatie/histogra
 ## Import datasets
 
     converters/tgn.js -f ../historische-geocoder/data/tgn/tgn_nl.csv
-    converters/tgn.js -f ../historische-geocoder/data/geonames/geonames_nl_places.csv
+    converters/geonames.js -f ../historische-geocoder/data/geonames/geonames_nl_places.csv
+    converters/bag.js -f ../historische-geocoder/data/bag/bag_nl_woonplaatsen_with_gn_tgn.csv
     converters/aggregateGraphSON.js ../historische-geocoder/data/tgn/tgn.graphson.json ../historische-geocoder/data/geonames/geonames.graphson.json
     ./import.js -f converters/totalGraph.graphson.json
     
