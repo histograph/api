@@ -1,12 +1,12 @@
 #!/usr/local/bin/node
 
-// Conversion script for BAG data set
-var fileNameOut = 'bag.graphson.json';
-var source = 'bag';
+// Conversion script for Militieregisters data set
+var fileNameOut = 'militieregisters.graphson.json';
+var source = 'militieregisters';
 
 var grex = require('grex'),
     argv = require('optimist')
-      .usage('Transforms BAG data set into GraphSON format.\nUsage: $0')
+      .usage('Transforms Militieregisters data set into GraphSON format.\nUsage: $0')
       .demand('f')
       .alias('f', 'file')
       .describe('f', 'Load a file')
@@ -14,7 +14,11 @@ var grex = require('grex'),
     fs = require('fs'),
     async = require('async'),
     parse = require('csv-parse'),
-    path = require('path');
+    path = require('path'),
+    options = JSON.parse(fs.readFileSync(path.join(__dirname, '../config.json'), 'utf8')),
+    client = grex.createClient(options),
+    gremlin = grex.gremlin,
+    g = grex.g;
 
 function containsObject(obj, list) {
     for (var i=0; i<list.length; i++) {
@@ -29,7 +33,6 @@ var verticesHeader = '{ "graph": { "mode": "NORMAL", "vertices": ',
     edgesHeader = ', "edges": ',
     footer = '} }';
 
-var usedURIs = [];
 var fileOut = path.join(path.dirname(path.resolve(argv.file)), fileNameOut);
 
 // VERTICES
@@ -37,37 +40,32 @@ function parseVertices(callback) {
   
   fs.writeFileSync(fileOut, verticesHeader);
 
-  parse(fs.readFileSync(argv.file, {encoding: 'utf8'}), {delimiter: ','}, function(err, data) {
-  
+  parse(fs.readFileSync(argv.file, {encoding: 'utf8'}), {delimiter: ','}, function(err, data) {  
     console.log("Parsing vertices...");
-    
     var vertices = [];
-    
+        
     data.shift(); // Remove CSV header
 
     for (var i=0; i<data.length; i++) {
       var obj = data[i];
-      var uri = source + "/" + obj[1];
-      
-      if (!containsObject(uri, usedURIs)) {
-  
-        var vertex = {
-          _id: uri,
-          _type: "vertex",
-          uri: uri,
-          name: obj[2],
-          source: source,
-          type: "hg:Place",
-          geometry: {"type": "Point", "coordinates": [parseFloat(obj[4]), parseFloat(obj[3])]},
-          startDate: "",
-          endDate: ""
-        }
-        vertices.push(vertex);
-        usedURIs.push(uri);
+      var uri = source + "/" + i;
+        
+      var vertex = {
+        _id: uri,
+        _type: "vertex",
+        uri: uri,
+        name: obj[0],
+        source: source,
+        type: "hg:Place",
+        geometry: {},
+        startDate: obj[2],
+        endDate: obj[3],
+        aantal: obj[4]
       }
+      vertices.push(vertex);
     }
 
-    console.log(usedURIs.length + " vertices parsed.");
+    console.log(data.length + " vertices parsed.");
     fs.appendFileSync(fileOut, JSON.stringify(vertices, null, 4));
     callback(null, true);
   });
@@ -79,60 +77,33 @@ function parseEdges(callback) {
 
   parse(fs.readFileSync(argv.file, {encoding: 'utf8'}), {delimiter: ','}, function(err, data) {    
     var edges = [];
-    var edgeCount = 0;
     data.shift(); // Remove CSV header
     
-    console.log("Parsing TGN link edges...");
-        
-    for (var i=0; i<data.length; i++) {
-      var obj = data[i];
-      var uri = source + "/" + obj[1];
-  
-      if (containsObject(uri, usedURIs) && obj[6].length > 0) {
-        
-        var splitTGNuri = obj[6].split("/");
-        var tgnURI = "tgn/" + splitTGNuri[splitTGNuri.length - 1];
-          
-        var edge = {
-          _id: source + "/e" + ++edgeCount,
-          _outV: uri,
-          _inV: tgnURI,
-          source: source,
-          _type: "edge",
-          _label: "hg:sameAs"
-        };
-
-        edges.push(edge);     
-      }
-    }
-    
-    console.log(edgeCount + " TGN link edges parsed.");
     console.log("Parsing GeoNames link edges...");
-    var tgnCount = edgeCount;
     
     for (var i=0; i<data.length; i++) {
       var obj = data[i];
-      var uri = source + "/" + obj[1];
+      var uri = source + "/" + i;
   
-      if (containsObject(uri, usedURIs) && obj[5].length > 0) {
+      if (obj[5].length > 0) {
         
         var splitGNuri = obj[5].split("/");
         var geonamesURI = "geonames/" + splitGNuri[splitGNuri.length - 1];
           
         var edge = {
-          _id: source + "/e" + ++edgeCount,
+          _id: source + "/e" + i,
           _outV: uri,
           _inV: geonamesURI,
           source: source,
           _type: "edge",
-          _label: "hg:sameAs"
+          _label: "hg:wasUsedFor"
         };
 
         edges.push(edge);     
       }
     }
     
-    console.log((edgeCount - tgnCount) + " GeoNames link edges parsed.");
+    console.log(edges.length + " GeoNames link edges parsed.");
     fs.appendFileSync(fileOut, JSON.stringify(edges, null, 4));
     callback(null, true);
   });

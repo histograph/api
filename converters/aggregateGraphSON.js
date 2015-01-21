@@ -1,6 +1,6 @@
 #!/usr/local/bin/node
 
-// Conversion script for GeoNames data set
+// Aggregation script for GraphSON files
 var fileNameOut = 'totalGraph.graphson.json';
 
 var grex = require('grex'),
