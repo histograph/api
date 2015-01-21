@@ -18,12 +18,10 @@ var grex = require('grex'),
     path = require('path');
 
 function containsObject(obj, list) {
-    for (var i=0; i<list.length; i++) {
-        if (list[i] === obj) {
-            return true;
-        }
-    }
-    return false;
+  for (var i=0; i<list.length; i++) {
+    if (list[i] === obj) return true;
+  }
+  return false;
 }
 
 var verticesHeader = '{ "graph": { "mode": "NORMAL", "vertices": ',
@@ -67,6 +65,13 @@ function parseVertices(callback) {
   });
 }
 
+function parseEdges(callback) {
+  // No edges!
+  fs.appendFileSync(fileOut, edgesHeader);
+  fs.appendFileSync(fileOut, "[]");
+  callback(null, true);
+}
+
 function doneMsg(callback) {
   fs.appendFileSync(fileOut, footer);
   console.log("Done!");
@@ -74,7 +79,7 @@ function doneMsg(callback) {
 }
 
 async.series([
-    parseVertices,
-    doneMsg
-  ]
-);
+  parseVertices,
+  parseEdges,
+  doneMsg
+]);

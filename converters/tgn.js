@@ -52,12 +52,10 @@ var objectTypeMap = {
 };
 
 function containsObject(obj, list) {
-    for (var i=0; i<list.length; i++) {
-        if (list[i] === obj) {
-            return true;
-        }
-    }
-    return false;
+  for (var i=0; i<list.length; i++) {
+    if (list[i] === obj) return true;
+  }
+  return false;
 }
 
 // TGN object types not used in our ontology. TODO Subject to change.

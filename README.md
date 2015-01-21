@@ -33,8 +33,8 @@ You can use [`histograph-viewer`](https://github.com/erfgoed-en-locatie/histogra
     converters/geonames.js -f ../historische-geocoder/data/geonames/geonames_nl_places.csv
     converters/bag.js -f ../historische-geocoder/data/bag/bag_nl_woonplaatsen_with_gn_tgn.csv
     converters/militieregisters.js -f ../historische-geocoder/data/militieregisters/militieregisters.csv
-    converters/aggregateGraphSON.js ../historische-geocoder/data/tgn/tgn.graphson.json ../historische-geocoder/data/geonames/geonames.graphson.json ../historische-geocoder/data/bag/bag.graphson.json ../historische-geocoder/data/militieregisters/militieregisters.graphson.json
-    ./import.js -f converters/totalGraph.graphson.json
+    converters/verdwenen-dorpen.js -f ../historische-geocoder/data/verdwenen-dorpen/verdwenen-dorpen.csv
+    converters/aggregateGraphSON.js ../historische-geocoder/data tgn geonames bag militieregisters verdwenen-dorpen
     
 You can view imported data using the [Dog House](http://localhost:8182/doghouse/main/graph/graph)!
 

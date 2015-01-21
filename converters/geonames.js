@@ -24,12 +24,10 @@ var objectTypeMap = {
 var provinceMap = {};
 
 function containsObject(obj, list) {
-    for (var i=0; i<list.length; i++) {
-        if (list[i] === obj) {
-            return true;
-        }
-    }
-    return false;
+  for (var i=0; i<list.length; i++) {
+    if (list[i] === obj) return true;
+  }
+  return false;
 }
 
 var verticesHeader = '{ "graph": { "mode": "NORMAL", "vertices": ',
