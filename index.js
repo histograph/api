@@ -37,12 +37,13 @@ app.get('/', function (req, res) {
 app.get('/:source/:id', function (req, res) {
   var uri = req.params.source + '/' +  req.params.id,
       query = "g.V('uri', '" + uri + "').as('x').outE.inV.loop('x'){it.loops < 100}{true}.path";
+      query = "g.V('uri', '" + uri + "').as('x').inE.outV.loop('x'){it.loops < 100}{true}.path";
 
   execute(gremlin(query), function(response) {
     if (response.results.length > 0) {
       var graph = {
         nodes: {},
-        links: []
+        links: {}
       };
       response.results.forEach(function(path) {
         path.forEach(function(object) {
@@ -58,11 +59,11 @@ app.get('/:source/:id', function (req, res) {
             };
           } else {
             // Edge!
-            graph.links.push({
+            graph.links[object._id] = {
               "source": object._outV,
               "target": object._inV,
               "label": object._label
-            });
+            };
           }
         });
       });
