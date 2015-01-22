@@ -105,7 +105,16 @@ To delete all vertices and edges, exectute the following Gremlin script:
 
 List of all edge labels, deduplicated:
 
-  g.E.label.dedup()
+    g.E.label.dedup()
+
+    g.V('uri', 'verdwenen-dorpen/82').copySplit(_(), _().outE.inV.loop('x'){it.loops < 100}{true}.path)
+
+    g.V('uri', 'geonames/2753805').as('x').outE.inV.loop('x'){it.loops < 100}{true}.path
+    g.V('uri', 'geonames/2753805').copySplit(_(), _().as('x').outE.inV.loop('x'){it.loops < 100}{true}.path).exhaustMerge()
+
+    g.V('uri', 'verdwenen-dorpen/82').as('x').outE.inV.loop('x'){it.loops < 100}{true}.path
+    g.V('uri', 'verdwenen-dorpen/82').copySplit(_(), _().as('x').outE.inV.loop('x'){it.loops < 100}{true}.path).exhaustMerge()
+
 
 ## Histograph API
 

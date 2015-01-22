@@ -33,7 +33,13 @@ function gremlinToD3(query, callback) {
         nodes: {},
         links: {}
       };
-      response.results.forEach(function(path) {
+      response.results.forEach(function(pathOrVertex) {
+        path = [];
+        if (pathOrVertex.constructor === Array) {
+          path = pathOrVertex;
+        } else {
+          path = [pathOrVertex];
+        }
         path.forEach(function(object) {
           if (object._type === "vertex") {
             graph.nodes[object._id] = {
@@ -72,7 +78,8 @@ app.get('/', function (req, res) {
   });
 })
 
-var GREMLIN_DFS = ".as('x').outE.inV.loop('x'){it.loops < 100}{true}.path";
+//var GREMLIN_DFS = ".as('x').outE.inV.loop('x'){it.loops < 100}{true}.path";
+var GREMLIN_DFS = ".copySplit(_(), _().as('x').outE.inV.loop('x'){it.loops < 100}{true}.path).exhaustMerge()";
 
 app.get('/q', function (req, res) {
   if (req.query.uri) {
