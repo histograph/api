@@ -46,29 +46,15 @@ You can view imported data using the [Dog House](http://localhost:8182/doghouse/
 
 ## Indices
 
-From [Chapter 8. Indexing for better Performance](http://s3.thinkaurelius.com/docs/titan/current/indexes.html) in Titan docs:
-
-### `uri`
+From [Chapter 8. Indexing for better Performance](http://s3.thinkaurelius.com/docs/titan/current/indexes.html) and [Chapter 20. Index Parameters and Full-Text Search](http://s3.thinkaurelius.com/docs/titan/current/index-parameters.html#_string_search) in Titan docs:
 
     g = rexster.getGraph("graph")
     mgmt = g.getManagementSystem()
     uri = mgmt.makePropertyKey('uri').dataType(String.class).make()
     mgmt.buildIndex('byUri', Vertex.class).addKey(uri).unique().buildCompositeIndex()
-    mgmt.commit()
-    // See if index is created correctly:
-    g.getIndexedKeys(Vertex.class)
-
-### `name`
-
-See [Chapter 20. Index Parameters and Full-Text Search](http://s3.thinkaurelius.com/docs/titan/current/index-parameters.html#_string_search):
-
-    g = rexster.getGraph("graph")
-    mgmt = g.getManagementSystem()
     name = mgmt.makePropertyKey('name').dataType(String.class).make()
     mgmt.buildIndex('byName', Vertex.class).addKey(name, Mapping.TEXT.getParameter()).buildMixedIndex("search")
     mgmt.commit()
-    // See if index is created correctly:
-    g.getIndexedKeys(Vertex.class)
 
 ### TODO:
 
