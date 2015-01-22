@@ -42,7 +42,7 @@ app.get('/:source/:id', function (req, res) {
     if (response.results.length > 0) {
       var graph = {
         nodes: {},
-        links: []
+        links: {}
       };
       response.results.forEach(function(path) {
         path.forEach(function(object) {
@@ -58,11 +58,11 @@ app.get('/:source/:id', function (req, res) {
             };
           } else {
             // Edge!
-            graph.links.push({
+            graph.links[object._id] = {
               "source": object._outV,
               "target": object._inV,
               "label": object._label
-            });
+            };
           }
         });
       });

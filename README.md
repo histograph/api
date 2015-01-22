@@ -36,8 +36,8 @@ You can use [`histograph-viewer`](https://github.com/erfgoed-en-locatie/histogra
     converters/verdwenen-dorpen.js -f ../historische-geocoder/data/verdwenen-dorpen/verdwenen-dorpen.csv
     converters/gemeentegeschiedenis.js -f ../historische-geocoder/data/gemeentegeschiedenis/gg_geometries.csv
     converters/aggregateGraphSON.js ../historische-geocoder/data tgn geonames bag militieregisters verdwenen-dorpen gemeentegeschiedenis
-	./import.js -f converters/completeGraph.graphson.son
-    
+    ./import.js -f converters/completeGraph.graphson.son
+
 You can view imported data using the [Dog House](http://localhost:8182/doghouse/main/graph/graph)!
 
 ## Indices
@@ -100,3 +100,8 @@ To delete all vertices and edges, exectute the following Gremlin script:
     g.V.each{g.removeVertex(it)}
     g.stopTransaction(SUCCESS)
 
+### Example queries
+
+List of all edge labels, deduplicated:
+
+  g.E.label.dedup()
