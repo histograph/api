@@ -52,8 +52,8 @@ function parseVertices(callback) {
         source: source,
         type: "hg:Place",
         geometry: "",
-        startDate: "",
-        endDate: ""
+        startDate: obj[3],
+        endDate: obj[6]
       }
       vertices.push(vertex);
     }
