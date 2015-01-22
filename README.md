@@ -12,10 +12,19 @@ Do this:
 
 - [Download Titan](https://github.com/thinkaurelius/titan/wiki/Downloads) in directory `titan`
 
-Then:
+Then, to start Titan, run
 
-    npm install grex
     titan/bin/titan.sh start
+
+To start Histograph, run
+
+    npm install
+    npm run start
+
+Some example URLs (don't forget to import data, first):
+
+- http://localhost:3000/militieregisters/747
+- http://localhost:3000/q?name=appel.*
 
 ## Test data
 
@@ -104,8 +113,3 @@ List of all edge labels, deduplicated:
     g.V('uri', 'verdwenen-dorpen/82').as('x').outE.inV.loop('x'){it.loops < 100}{true}.path
     g.V('uri', 'verdwenen-dorpen/82').copySplit(_(), _().as('x').outE.inV.loop('x'){it.loops < 100}{true}.path).exhaustMerge()
 
-
-## Histograph API
-
-- http://localhost:3000/militieregisters/747
-- http://localhost:3000/q?name=appel.*
