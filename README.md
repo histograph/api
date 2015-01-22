@@ -105,3 +105,8 @@ To delete all vertices and edges, exectute the following Gremlin script:
 List of all edge labels, deduplicated:
 
   g.E.label.dedup()
+
+## Histograph API
+
+- http://localhost:3000/militieregisters/747
+- http://localhost:3000/q?name=appel.*

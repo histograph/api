@@ -26,18 +26,7 @@ function execute(query, callback) {
   });
 }
 
-app.get('/', function (req, res) {
-  res.send({
-    name: 'histograph',
-    version: '0.0.1',
-    message: 'Hallootjes!'
-  });
-})
-
-app.get('/:source/:id', function (req, res) {
-  var uri = req.params.source + '/' +  req.params.id,
-      query = "g.V('uri', '" + uri + "').as('x').outE.inV.loop('x'){it.loops < 100}{true}.path";
-
+function gremlinToD3(query, callback) {
   execute(gremlin(query), function(response) {
     if (response.results.length > 0) {
       var graph = {
@@ -66,17 +55,51 @@ app.get('/:source/:id', function (req, res) {
           }
         });
       });
-      res.send(graph);
+      callback(graph);
     } else {
-      res.send({
+      callback({
         "message": "Vertex with URI '" + uri + "' not found..."
       });
     }
   });
+}
+
+app.get('/', function (req, res) {
+  res.send({
+    name: 'histograph',
+    version: '0.0.1',
+    message: 'Hallootjes!'
+  });
+})
+
+var GREMLIN_DFS = ".as('x').outE.inV.loop('x'){it.loops < 100}{true}.path";
+
+app.get('/q', function (req, res) {
+  if (req.query.uri) {
+    var uri = req.query.uri,
+        query = "g.V('uri', '" + uri + "')" + GREMLIN_DFS;
+
+    gremlinToD3(query, function(result) {
+      res.send(result);
+    });
+  } else if (req.query.name) {
+    var name = req.query.name,
+        query = "g.V.has('name', Text.CONTAINS_REGEX, '" + name + "')" + GREMLIN_DFS;
+
+    gremlinToD3(query, function(result) {
+      res.send(result);
+    });
+  } else {
+    var host = server.address().address,
+        port = server.address().port;
+    res.send({
+      "message": "Please use `uri` or `name` parameter, e.g. http://" +  host + ":" + port + "/q?name=amsterdam"
+    });
+  }
 });
 
 var server = app.listen(3000, function () {
-  var host = server.address().address
-  var port = server.address().port
-  console.log('Example app listening at http://%s:%s', host, port)
+  var host = server.address().address,
+      port = server.address().port;
+  console.log('Example app listening at http://%s:%s', host, port);
 });
