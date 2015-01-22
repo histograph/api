@@ -74,7 +74,7 @@ function parseEdges(callback) {
   parse(fs.readFileSync(argv.file, {encoding: 'utf8'}), {delimiter: ',', escape: '\\'}, function(err, data) {  
     for (var i=0; i<data.length; i++) {
       var obj = data[i];
-      var uri = source + "/" + obj[1];
+      var uri = source + "/" + obj[0];
 
       var splitGNuri = obj[2].split("/");
       
