@@ -58,7 +58,7 @@ function gremlinToD3(query, callback) {
       callback(graph);
     } else {
       callback({
-        "message": "Vertex with URI '" + uri + "' not found..."
+        "message": "Nothing found..."
       });
     }
   });
