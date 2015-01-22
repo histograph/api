@@ -61,6 +61,8 @@ function parseVertices(callback) {
       if (!containsObject(uri, usedURIs)) {
   
         var geometry = (obj[11] == "null") ? "" : JSON.parse(obj[11]).features[0].geometry;
+        var startDate = (obj[12] == "0") ? "" : obj[12] + "-01-01";
+        var endDate = (obj[13] == "heden") ? "" : obj[13] + "-01-01";
   
         var vertex = {
           _id: uri,
@@ -70,8 +72,8 @@ function parseVertices(callback) {
           source: source,
           type: "hg:Gemeente",
           geometry: geometry,
-          startDate: obj[12],
-          endDate: obj[13]
+          startDate: startDate,
+          endDate: endDate
         }
       
         vertices.push(vertex);
