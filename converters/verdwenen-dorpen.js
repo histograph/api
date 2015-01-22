@@ -1,7 +1,8 @@
 #!/usr/local/bin/node
 
+// TODO Eindjaar MIN / MAX. Nu wordt MAX genomen, maar dat is niet juist.
+
 // Conversion script for Verdwenen Dorpen data set.
-// No edges!
 var fileNameOut = 'verdwenen-dorpen.graphson.json';
 var source = 'verdwenen-dorpen';
 

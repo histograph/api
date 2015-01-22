@@ -1,7 +1,7 @@
 #!/usr/local/bin/node
 
 // Aggregation script for GraphSON files
-var fileNameOut = 'totalGraph.graphson.json';
+var fileNameOut = 'completeGraph.graphson.json';
 var rejectedEdgesOut = 'rejectedEdges.json';
 
 var grex = require('grex'),
@@ -35,13 +35,13 @@ function validateFiles (callback) {
     var file = path.join(dataDir, datasetName, datasetName + ".graphson.json");
     
     if (!fs.existsSync(file)) {
-      return callback("File " + file + " does not exist or cannot be read.");
+      return callback("File \"" + file + "\" does not exist or cannot be read.");
     } 
     
     var g = JSON.parse(fs.readFileSync(file, {encoding: 'utf8'}));
     if (!('graph' in g && 'vertices' in g.graph && 'edges' in g.graph && 'mode' in g.graph)) {
       console.log(g);
-      return callback("File " + file + " contains malformed GraphSON data.");
+      return callback("File \"" + file + "\" contains malformed GraphSON data.");
     }
     callback();
   }, function(err) {
@@ -86,7 +86,7 @@ function readEdges (callback) {
     callback();
   }, function(err) {
     if (err) return callback(err);
-    console.log("Finished reading edges. " + acceptedEdges.length + " edges accepted, " + rejectedEdges.length + " edges rejected.");
+    console.log("Finished reading edges. " + (acceptedEdges.length + rejectedEdges.length) + " edges read (" + acceptedEdges.length + " accepted, " + rejectedEdges.length + " rejected).");
     callback(null, true);
   });
 };

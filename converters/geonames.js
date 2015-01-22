@@ -133,19 +133,16 @@ function parseEdges(callback) {
       var splitURI = obj[2].split("/");
       var uri = source + "/" + splitURI[splitURI.length - 1];
   
-      if (containsObject(uri, usedURIs)) {
-        if (provinceMap.hasOwnProperty(obj[6])) {
-  
-          var edge = {
-            _id: source + "/e" + ++edgeCount,
-            _outV: uri,
-            _inV: provinceMap[obj[6]],
-            source: source,
-            _type: "edge",
-            _label: "hg:liesIn"
-          };
-          edges.push(edge);
-        }
+      if (containsObject(uri, usedURIs) && provinceMap.hasOwnProperty(obj[6])) {
+        var edge = {
+          _id: source + "/e" + ++edgeCount,
+          _outV: uri,
+          _inV: provinceMap[obj[6]],
+          source: source,
+          _type: "edge",
+          _label: "hg:liesIn"
+        };
+        edges.push(edge);
       }
     }
     
