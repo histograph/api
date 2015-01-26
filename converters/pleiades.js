@@ -42,7 +42,7 @@ function parseVertices(callback) {
 
     for (var i=0; i<data.length; i++) {
       var obj = data[i];
-      var uri = source + "/" + obj[1];
+      var uri = source + "/" + obj[0];
       
       var startDate = (obj[2].length > 0) ? parseInt(obj[8]) + "-01-01" : "";
       var endDate = (obj[3].length > 0) ? parseInt(obj[7]) + "-01-01" : "";
@@ -80,7 +80,7 @@ function parseEdges(callback) {
     
     for (var i=0; i<data.length; i++) {
       var obj = data[i];
-      var uri = source + "/" + obj[1];
+      var uri = source + "/" + obj[0];
   
       if (obj[6] != "NULL") {
         
