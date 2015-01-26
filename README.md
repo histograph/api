@@ -65,6 +65,8 @@ From [Chapter 8. Indexing for better Performance](http://s3.thinkaurelius.com/do
     name = mgmt.makePropertyKey('name').dataType(String.class).make()
     mgmt.buildIndex('byName', Vertex.class).addKey(name, Mapping.TEXT.getParameter()).buildMixedIndex("search")
     mgmt.commit()
+    // To check whether the indices are created correctly, run
+    g.getIndexedKeys(Vertex.class)
 
 ### TODO:
 
