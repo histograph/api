@@ -70,7 +70,7 @@ function parseVertices(callback) {
           uri: uri,
           name: obj[1],
           source: source,
-          type: "hg:Gemeente",
+          type: "hg:Municipality",
           geometry: geometry,
           startDate: startDate,
           endDate: endDate
