@@ -48,8 +48,9 @@ You can use [`histograph-viewer`](https://github.com/erfgoed-en-locatie/histogra
     converters/ilvb.js -f ../historische-geocoder/data/ilvb/ilvb.csv
     converters/pleiades.js -f ../historische-geocoder/data/pleiades/pleiades.csv
     converters/poorterboeken.js -f ../historische-geocoder/data/poorterboeken/poorterboeken_places.csv
-
-    converters/aggregateGraphSON.js ../historische-geocoder/data tgn geonames bag militieregisters verdwenen-dorpen gemeentegeschiedenis simon-hart ilvb pleiades poorterboeken
+    converters/voc-opvarenden.js -f ../historische-geocoder/data/voc-opvarenden/voc_opvarenden_v1.csv
+    
+    converters/aggregateGraphSON.js ../historische-geocoder/data tgn geonames bag militieregisters verdwenen-dorpen gemeentegeschiedenis simon-hart ilvb pleiades poorterboeken voc-opvarenden
 
     ./import.js -f converters/completeGraph.graphson.json
 
