@@ -43,6 +43,9 @@ function parseVertices(callback) {
     for (var i=0; i<data.length; i++) {
       var obj = data[i];
       var uri = source + "/" + obj[0];
+      
+      var startDate = obj[3] + "-01-01";
+      var endDate = obj[6] + "-01-01";
               
       var vertex = {
         _id: uri,
@@ -52,8 +55,8 @@ function parseVertices(callback) {
         source: source,
         type: "hg:Place",
         geometry: "",
-        startDate: obj[3],
-        endDate: obj[6]
+        startDate: startDate,
+        endDate: endDate
       }
       vertices.push(vertex);
     }
