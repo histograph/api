@@ -46,8 +46,9 @@ You can use [`histograph-viewer`](https://github.com/erfgoed-en-locatie/histogra
     converters/gemeentegeschiedenis.js -f ../historische-geocoder/data/gemeentegeschiedenis/gg_geometries.csv
     converters/simon-hart.js -f ../historische-geocoder/data/simon-hart/simon-hart.csv
     converters/ilvb.js -f ../historische-geocoder/data/ilvb/ilvb.csv
+    converters/pleiades.js -f ../historische-geocoder/data/pleiades/pleiades.csv
 
-    converters/aggregateGraphSON.js ../historische-geocoder/data tgn geonames bag militieregisters verdwenen-dorpen gemeentegeschiedenis simon-hart ilvb
+    converters/aggregateGraphSON.js ../historische-geocoder/data tgn geonames bag militieregisters verdwenen-dorpen gemeentegeschiedenis simon-hart ilvb pleiades
 
     ./import.js -f converters/completeGraph.graphson.json
 
