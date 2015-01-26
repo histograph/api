@@ -4,9 +4,9 @@ Graph database API for [historical geocoder](https://github.com/erfgoed-en-locat
 
 We'll use:
 
-1. [Titan](http://thinkaurelius.github.io/titan/)!
+1. [Titan](http://thinkaurelius.github.io/titan/), (requires [java 7](http://openjdk.java.net/install/))!
 2. [Rexster](https://github.com/thinkaurelius/titan/wiki/Rexster-Graph-Server)!
-3. Node.js + [Grex](https://github.com/jbmusso/grex)
+3. [Node.js](http://nodejs.org/download/) + [Grex](https://github.com/jbmusso/grex)
 
 Do this:
 
