@@ -36,6 +36,20 @@ You can use [`histograph-viewer`](https://github.com/erfgoed-en-locatie/histogra
 
     node read.js > ../histograph-viewer/js/molenstraat.json
 
+## Indices
+
+From [Chapter 8. Indexing for better Performance](http://s3.thinkaurelius.com/docs/titan/current/indexes.html) and [Chapter 20. Index Parameters and Full-Text Search](http://s3.thinkaurelius.com/docs/titan/current/index-parameters.html#_string_search) in Titan docs:
+
+    g = rexster.getGraph("graph")
+    mgmt = g.getManagementSystem()
+    uri = mgmt.makePropertyKey('uri').dataType(String.class).make()
+    mgmt.buildIndex('byUri', Vertex.class).addKey(uri).unique().buildCompositeIndex()
+    name = mgmt.makePropertyKey('name').dataType(String.class).make()
+    mgmt.buildIndex('byName', Vertex.class).addKey(name, Mapping.TEXT.getParameter()).buildMixedIndex("search")
+    mgmt.commit()
+    // To check whether the indices are created correctly, run
+    g.getIndexedKeys(Vertex.class)
+
 ## Import datasets
 
     node converters/tgn.js -f ../historische-geocoder/data/tgn/tgn_nl.csv
@@ -55,20 +69,6 @@ You can use [`histograph-viewer`](https://github.com/erfgoed-en-locatie/histogra
     node import.js -f converters/completeGraph.graphson.json
 
 You can view imported data using the [Dog House](http://localhost:8182/doghouse/main/graph/graph)!
-
-## Indices
-
-From [Chapter 8. Indexing for better Performance](http://s3.thinkaurelius.com/docs/titan/current/indexes.html) and [Chapter 20. Index Parameters and Full-Text Search](http://s3.thinkaurelius.com/docs/titan/current/index-parameters.html#_string_search) in Titan docs:
-
-    g = rexster.getGraph("graph")
-    mgmt = g.getManagementSystem()
-    uri = mgmt.makePropertyKey('uri').dataType(String.class).make()
-    mgmt.buildIndex('byUri', Vertex.class).addKey(uri).unique().buildCompositeIndex()
-    name = mgmt.makePropertyKey('name').dataType(String.class).make()
-    mgmt.buildIndex('byName', Vertex.class).addKey(name, Mapping.TEXT.getParameter()).buildMixedIndex("search")
-    mgmt.commit()
-    // To check whether the indices are created correctly, run
-    g.getIndexedKeys(Vertex.class)
 
 ### TODO:
 
