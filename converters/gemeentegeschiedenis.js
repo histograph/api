@@ -191,7 +191,7 @@ function parseEdges(callback) {
         _inV: becameList[i][1],
         source: source,
         _type: "edge",
-        _label: "hg:became"
+        _label: "hg:absorbed"
       };
       edges.push(edge);     
     }
