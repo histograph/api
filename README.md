@@ -30,29 +30,29 @@ Some example URLs (don't forget to import data, first):
 
 Titan is now running! Let's import some test data:
 
-    ./import.js -f example/molenstraat.json
+    node import.js -f example/molenstraat.json
 
 You can use [`histograph-viewer`](https://github.com/erfgoed-en-locatie/histograph-viewer/) to view the test graph:
 
-    ./read.js > ../histograph-viewer/molenstraat.json
+    node read.js > ../histograph-viewer/molenstraat.json
 
 ## Import datasets
 
-    converters/tgn.js -f ../historische-geocoder/data/tgn/tgn_nl.csv
-    converters/geonames.js -f ../historische-geocoder/data/geonames/geonames_nl_places.csv
-    converters/bag.js -f ../historische-geocoder/data/bag/bag_nl_woonplaatsen_with_gn_tgn.csv
-    converters/militieregisters.js -f ../historische-geocoder/data/militieregisters/militieregisters.csv
-    converters/verdwenen-dorpen.js -f ../historische-geocoder/data/verdwenen-dorpen/verdwenen-dorpen.csv
-    converters/gemeentegeschiedenis.js -f ../historische-geocoder/data/gemeentegeschiedenis/gg_geometries.csv
-    converters/simon-hart.js -f ../historische-geocoder/data/simon-hart/simon-hart.csv
-    converters/ilvb.js -f ../historische-geocoder/data/ilvb/ilvb.csv
-    converters/pleiades.js -f ../historische-geocoder/data/pleiades/pleiades.csv
-    converters/poorterboeken.js -f ../historische-geocoder/data/poorterboeken/poorterboeken_places.csv
-    converters/voc-opvarenden.js -f ../historische-geocoder/data/voc-opvarenden/voc_opvarenden_v1.csv
+    node converters/tgn.js -f ../historische-geocoder/data/tgn/tgn_nl.csv
+    node converters/geonames.js -f ../historische-geocoder/data/geonames/geonames_nl_places.csv
+    node converters/bag.js -f ../historische-geocoder/data/bag/bag_nl_woonplaatsen_with_gn_tgn.csv
+    node converters/militieregisters.js -f ../historische-geocoder/data/militieregisters/militieregisters.csv
+    node converters/verdwenen-dorpen.js -f ../historische-geocoder/data/verdwenen-dorpen/verdwenen-dorpen.csv
+    node converters/gemeentegeschiedenis.js -f ../historische-geocoder/data/gemeentegeschiedenis/gg_geometries.csv
+    node converters/simon-hart.js -f ../historische-geocoder/data/simon-hart/simon-hart.csv
+    node converters/ilvb.js -f ../historische-geocoder/data/ilvb/ilvb.csv
+    node converters/pleiades.js -f ../historische-geocoder/data/pleiades/pleiades.csv
+    node converters/poorterboeken.js -f ../historische-geocoder/data/poorterboeken/poorterboeken_places.csv
+    node converters/voc-opvarenden.js -f ../historische-geocoder/data/voc-opvarenden/voc_opvarenden_v1.csv
     
-    converters/aggregateGraphSON.js ../historische-geocoder/data tgn geonames bag militieregisters verdwenen-dorpen gemeentegeschiedenis simon-hart ilvb pleiades poorterboeken voc-opvarenden
+    node converters/aggregateGraphSON.js ../historische-geocoder/data tgn geonames bag militieregisters verdwenen-dorpen gemeentegeschiedenis simon-hart ilvb pleiades poorterboeken voc-opvarenden
 
-    ./import.js -f converters/completeGraph.graphson.json
+    node import.js -f converters/completeGraph.graphson.json
 
 You can view imported data using the [Dog House](http://localhost:8182/doghouse/main/graph/graph)!
 
