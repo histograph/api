@@ -128,18 +128,18 @@ var notUsed = [
 
 // Hard-coded, taken from source file entries for the provinces
 var provinceURIs = { 
-  "NH": "7006951",
-  "NB": "7003624",
-  "Ut": "7003627",
-  "Ze": "7003635",
-  "Fl": "7003615",
-  "Gr": "7003613",
-  "Ge": "7003619",
-  "Fr": "7003616",
-  "Li": "7003622",
-  "Ov": "7003626",
-  "Dr": "7003614",
-  "ZH": "7003632"
+  "Noord-Holland": "7006951",
+  "Noord-Brabant": "7003624",
+  "Utrecht": "7003627",
+  "Zeeland": "7003635",
+  "Flevoland": "7003615",
+  "Groningen": "7003613",
+  "Gelderland": "7003619",
+  "Friesland": "7003616",
+  "Limburg": "7003622",
+  "Overijssel": "7003626",
+  "Drenthe": "7003614",
+  "Zuid-Holland": "7003632"
 };
 
 var verticesHeader = '{ "graph": { "mode": "NORMAL", "vertices": ',
@@ -147,6 +147,7 @@ var verticesHeader = '{ "graph": { "mode": "NORMAL", "vertices": ',
     footer = '} }';
 
 var usedURIs = [];
+var altNameEdges = [];
 var fileOut = path.join(path.dirname(path.resolve(argv.file)), fileNameOut);
 
 // VERTICES
@@ -163,16 +164,15 @@ function parseVertices(callback) {
 
     for (var i=0; i<data.length; i++) {
       var obj = data[i];
-      var objType = obj[7];
+      var objType = obj[10];
       
       var splitURI = obj[1].split("/");
       var uri = splitURI[splitURI.length - 1];
   
       if (objectTypeMap.hasOwnProperty(objType)) {
+        var objType = objectTypeMap[obj[10]];
+        
         if (!containsObject(uri, usedURIs)) {
-    
-          var objType = objectTypeMap[obj[7]];
-
           var vertex = {  
             _id: source + "/" + uri,
             _type: "vertex",
@@ -180,19 +180,33 @@ function parseVertices(callback) {
             name: obj[2],
             source: source,
             type: "hg:" + objType.charAt(0).toUpperCase() + objType.slice(1),        
-            geometry: {"type": "Point", "coordinates": [parseFloat(obj[5]), parseFloat(obj[4])]},
+            geometry: {"type": "Point", "coordinates": [parseFloat(obj[8]), parseFloat(obj[7])]},
             startDate: "",
             endDate: ""
           };
           vertices.push(vertex);
           usedURIs.push(uri);
+        } else if (obj[2] != obj[3]) {
+          var altURI = source + "/" + uri + "-" + obj[0];
+          var vertex = {
+            _id: altURI,
+            _type: "vertex",
+            uri: altURI,
+            name: obj[3],
+            source: source,
+            type: "hg:" + objType.charAt(0).toUpperCase() + objType.slice(1),
+            geometry: {"type": "Point", "coordinates": [parseFloat(obj[8]), parseFloat(obj[7])]},
+            startDate: "",
+            endDate: ""       
+          };
+          vertices.push(vertex);
+          altNameEdges.push([altURI, source + "/" + uri]);
         }
     
-      } else if (!containsObject(obj[7], notUsed)) {
-        console.log("Property " + obj[7] + " not part of object types map. Skipping...");
+      } else if (!containsObject(obj[10], notUsed)) {
+        console.log("Property " + obj[10] + " not part of object types map. Skipping...");
       }
     }
-    
     fs.appendFileSync(fileOut, JSON.stringify(vertices, null, 4));
     callback(null, true);    
     
@@ -217,19 +231,33 @@ function parseEdges(callback) {
       var uri = splitURI[splitURI.length - 1];
   
       if (containsObject(uri, usedURIs)) {
-        if (provinceURIs.hasOwnProperty(obj[3])) {
+        if (provinceURIs.hasOwnProperty(obj[6])) {
   
           var edge = {
             _id: source + "/e" + ++edgeCounter,
             _type: "edge",
             _outV: source + "/" + uri,
-            _inV: source + "/" + provinceURIs[obj[3]],
+            _inV: source + "/" + provinceURIs[obj[6]],
             source: source,
             _label: "hg:liesIn"
           };
           edges.push(edge);
         }
       }
+    }
+    
+    console.log("Parsing alternative name edges...");
+    
+    for (var i=0; i<altNameEdges.length; i++) {
+      var edge = {
+        _id: source + "/e" + ++edgeCounter,
+        _type: "edge",
+        _outV: altNameEdges[i][0],
+        _inV: altNameEdges[i][1],
+        source: source,
+        _label: "hg:isUsedFor"
+      };
+      edges.push(edge);
     }
     
     fs.appendFileSync(fileOut, JSON.stringify(edges, null, 4));
