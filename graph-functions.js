@@ -61,6 +61,7 @@ function gremlinToD3(query, callback) {
               type: object.type,
               uri: object.uri,
               // TODO: matched-query: true/false
+              matchedQuery: "TODO"
             };
 
             if (object.geometry && object.geometry.type) {
