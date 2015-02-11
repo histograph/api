@@ -20,40 +20,77 @@ function execute(query, callback) {
 
 function gremlinToD3(query, callback) {
   execute(gremlin(query), function(response) {
+    //console.log(JSON.stringify(response, undefined, 2));
+
     if (response.results.length > 0) {
-      var graph = {
-        nodes: {},
-        links: {}
+      var geojson = {
+        type: "FeatureCollection",
+        features: []
       };
+
       response.results.forEach(function(pathOrVertex) {
-        path = [];
+        var path = [],
+            feature = {
+              type: "Feature",
+              properties: {
+                type: "",
+                pits: [],
+                relations: []
+              },
+              geometry: {
+                type: "GeometryCollection",
+                geometries: []
+              }
+            },
+            geometryIndex = 0;
+
         if (pathOrVertex.constructor === Array) {
           path = pathOrVertex;
         } else {
           path = [pathOrVertex];
         }
         path.forEach(function(object) {
+          feature.properties.type = object.type;
+
           if (object._type === "vertex") {
-            graph.nodes[object._id] = {
+            var pit = {
               startDate: object.startDate,
               source: object.source,
               name: object.name,
               endDate: object.endDate,
               type: object.type,
               uri: object.uri,
-              geometry: object.geometry
+              // TODO: matched-query: true/false
             };
+
+            if (object.geometry && object.geometry.type) {
+              pit.geometryIndex = geometryIndex;
+              feature.geometry.geometries.push(object.geometry);
+              geometryIndex += 1;
+            } else {
+              pit.geometryIndex = -1;
+            }
+
+            feature.properties.pits.push(pit);
           } else {
-            // Edge!
-            graph.links[object._id] = {
-              "source": object._outV,
-              "target": object._inV,
-              "label": object._label
-            };
+            // Found edge!
+
+            // Naming convention for edge URIs, example:
+            // hg:conceptIdentical-inferredAtomicRelationEdge-geonames/2758064-tgn/1047690
+
+            var uriElements = object.uri.split("-");
+            feature.properties.relations.push({
+              from: uriElements[2],
+              to: uriElements[3],
+              source: object.source,
+              uri: object._label
+            });
           }
         });
+        geojson.features.push(feature);
       });
-      callback(graph);
+
+      callback(geojson);
     } else {
       callback({
         "message": "Nothing found..."
