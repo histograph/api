@@ -30,14 +30,14 @@ app.get('/search', function (req, res) {
     var uri = req.query.uri,
         query = "g.V('uri', '" + uri + "')" + GREMLIN_DFS;
 
-    graph.gremlinToD3(query, function(result) {
+    graph.gremlinToGeoJSON(query, function(result) {
       res.send(result);
     });
   } else if (req.query.name) {
     var name = req.query.name,
         query = "g.V.has('name', Text.CONTAINS_REGEX, '" + name + "')" + GREMLIN_DFS;
 
-    graph.gremlinToD3(query, function(result) {
+    graph.gremlinToGeoJSON(query, function(result) {
       res.send(result);
     });
   } else {

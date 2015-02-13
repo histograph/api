@@ -18,7 +18,7 @@ function execute(query, callback) {
   });
 }
 
-function gremlinToD3(query, callback) {
+function gremlinToGeoJSON(query, callback) {
   execute(gremlin(query), function(response) {
     //console.log(JSON.stringify(response, undefined, 2));
 
@@ -100,4 +100,4 @@ function gremlinToD3(query, callback) {
   });
 }
 
-module.exports.gremlinToD3 = gremlinToD3;
+module.exports.gremlinToGeoJSON = gremlinToGeoJSON;
