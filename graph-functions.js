@@ -1,9 +1,7 @@
 var fs = require('fs'),
     options = JSON.parse(fs.readFileSync('config.json', 'utf8')),
-    grex = require('grex'),
-    client = grex.createClient(options),
-    gremlin = grex.gremlin,
-    g = grex.g;
+    gremlin = require('gremlin-client'),
+    client = gremlin.createClient(options.port, options.host);
 
 function execute(query, callback) {
   client.execute(query, function(err, response) {
@@ -19,16 +17,16 @@ function execute(query, callback) {
 }
 
 function gremlinToGeoJSON(query, callback) {
-  execute(gremlin(query), function(response) {
-    //console.log(JSON.stringify(response, undefined, 2));
+  execute(query, function(response) {
+    console.log(JSON.stringify(response, undefined, 2));
 
-    if (response.results.length > 0) {
+    if (response.length > 0) {
       var geojson = {
         type: "FeatureCollection",
         features: []
       };
 
-      response.results.forEach(function(pathOrVertex) {
+      response.forEach(function(pathOrVertex) {
         var path = [],
             feature = {
               type: "Feature",
@@ -50,16 +48,16 @@ function gremlinToGeoJSON(query, callback) {
           path = [pathOrVertex];
         }
         path.forEach(function(object) {
-          feature.properties.type = object.type;
+          feature.properties.type = object.properties.type.value;
 
-          if (object._type === "vertex") {
+          if (object.type === "vertex") {
             var pit = {
-              startDate: object.startDate,
-              source: object.source,
-              name: object.name,
-              endDate: object.endDate,
-              type: object.type,
-              uri: object.uri,
+              //startDate: object.startDate,
+              //source: object.source,
+              name: object.properties.name[0].value,
+              //endDate: object.endDate,
+              type: object.properties.type[0].value,
+              hgid: object.properties.hgid[0].value,
               // TODO: matched-query: true/false
               matchedQuery: "TODO"
             };
