@@ -1,9 +1,9 @@
-#!/usr/local/bin/node
-
-var express = require('express'),
+var fs = require('fs'),
+    express = require('express'),
     cors = require('cors'),
     app = express(),
-    graph = require('./graph-functions');
+    graph = require('./graph-functions'),
+    logo = fs.readFileSync('./histograph.txt', 'utf8');
 
 app.use(cors());
 
@@ -49,8 +49,9 @@ app.get('/search', function (req, res) {
   }
 });
 
-var server = app.listen(3000, function () {
+var server = app.listen(3001, function () {
   var host = server.address().address,
       port = server.address().port;
-  console.log('Example app listening at http://%s:%s', host, port);
+  console.log(logo);
+  console.log('Histograph API listening at http://%s:%s', host, port);
 });
