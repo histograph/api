@@ -7,8 +7,7 @@
     "async": "~0.9.0",
     "cors": "^2.5.2",
     "express": "^4.8.8",
-    "gremlin-client": "~0.3.1",
-	"optimist": "~0.6.1",
+    "optimist": "~0.6.1",
     "path": "~0.11.14"
   },
   "devDependencies": {

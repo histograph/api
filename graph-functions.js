@@ -1,6 +1,5 @@
 var fs = require('fs'),
-    options = require('config.json'),
-    gremlin = require('gremlin-client');
+    options = require('./config.json');
     //client = gremlin.createClient(options.port, options.host);
 
 function execute(query, callback) {
