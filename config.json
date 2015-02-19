@@ -1,4 +1,6 @@
 {
-  "host": "localhost",
-  "port": 8182,
+  "neo4j": {
+    "host": "10.0.135.24",
+    "port": 74714
+  }
 }

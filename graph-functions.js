@@ -1,7 +1,7 @@
 var fs = require('fs'),
-    options = JSON.parse(fs.readFileSync('config.json', 'utf8')),
-    gremlin = require('gremlin-client'),
-    client = gremlin.createClient(options.port, options.host);
+    options = require('config.json'),
+    gremlin = require('gremlin-client');
+    //client = gremlin.createClient(options.port, options.host);
 
 function execute(query, callback) {
   client.execute(query, function(err, response) {
