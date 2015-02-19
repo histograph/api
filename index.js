@@ -24,19 +24,13 @@ app.get('/', function (req, res) {
 
 app.get('/search', function (req, res) {
   if (req.query.hgid) {
-    var hgid = req.query.hgid,
-        query = "";
-
-    // graph.gremlinToGeoJSON(query, function(result) {
-    //   res.send(result);
-    // });
+    graph.findById(req.query.hgid, function(result) {
+      res.send(result);
+    });
   } else if (req.query.name) {
-    var name = req.query.name,
-        query = "g.V().has('name', '" + name + "')";
-
-    // graph.gremlinToGeoJSON(query, function(result) {
-    //   res.send(result);
-    // });
+    graph.findByName(req.query.name, function(result) {
+      res.send(result);
+    });
   } else {
     var host = server.address().address,
         port = server.address().port;

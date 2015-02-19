@@ -7,11 +7,11 @@
     "async": "~0.9.0",
     "cors": "^2.5.2",
     "express": "^4.8.8",
+    "neo4j": "^2.0.0-alpha4",
     "optimist": "~0.6.1",
     "path": "~0.11.14"
   },
-  "devDependencies": {
-  },
+  "devDependencies": {},
   "scripts": {
     "start": "node index.js"
   },

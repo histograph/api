@@ -1,17 +1,34 @@
 var fs = require('fs'),
-    options = require('./config.json');
-    //client = gremlin.createClient(options.port, options.host);
+    config = require('./config.json'),
+    neo4j = require('neo4j'),
+    db = new neo4j.GraphDatabase('http://' + config.neo4j.host + ':' + config.neo4j.port);
 
-function execute(query, callback) {
-  client.execute(query, function(err, response) {
-    if (response) {
-      return callback(response);
+function findById(id, callback) {
+  var cypher = "";
+
+  execute(cypher, {id: id}, callback);
+}
+
+function findByName(name, callback) {
+ var cypher = "MATCH (a)-[r:CONCEPTIDENTICAL*]-(b) WHERE a.name = {name} RETURN distinct a,b,r limit 500";
+
+ execute(cypher, {name: name}, callback);
+}
+
+function execute(query, params, callback) {
+  console.log(query)
+  db.cypher({
+    query: query,
+    params: params,
+  }, function (err, results) {
+    if (err) throw err;
+
+    if (!results) {
+      console.log('No user found.');
+    } else {
+      console.log(JSON.stringify(results, null, 4));
     }
-    if (err) {
-      process.stderr.write("ERROR:");
-      process.stderr.write(err);
-      callback(null);
-    }
+    callback("worst");
   });
 }
 
@@ -97,4 +114,5 @@ function gremlinToGeoJSON(query, callback) {
   });
 }
 
-module.exports.gremlinToGeoJSON = gremlinToGeoJSON;
+module.exports.findByName = findByName;
+module.exports.findById = findById;
