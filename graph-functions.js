@@ -1,5 +1,5 @@
 var fs = require('fs'),
-    config = require('./config.json'),
+    config = require(process.env.HISTOGRAPH_CONFIG),
     neo4j = require('neo4j'),
     graphlib = require("graphlib"),
     db = new neo4j.GraphDatabase('http://' + config.neo4j.host + ':' + config.neo4j.port);
