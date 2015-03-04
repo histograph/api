@@ -80,7 +80,7 @@ function neo4jToGeoJSON(results, callback) {
     component.forEach(function(node) {
       var pit = {
         name: nodes[node].properties.name,
-        hgid: nodes[node].properties.hgID,
+        hgid: nodes[node].properties.hgid,
         source: nodes[node].properties.layer
       };
 
