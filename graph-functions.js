@@ -81,7 +81,7 @@ function neo4jToGeoJSON(results, callback) {
       var pit = {
         name: nodes[node].properties.name,
         hgid: nodes[node].properties.hgID,
-        layer: nodes[node].properties.layer
+        source: nodes[node].properties.layer
       };
 
       feature.properties.type = nodes[node].properties.type;
