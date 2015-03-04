@@ -108,8 +108,8 @@ function neo4jToGeoJSON(results, callback) {
 
       g.outEdges(node).forEach(function(edge) {
         var relation = {
-          from: nodes[edge.v].properties.hgID,
-          to: nodes[edge.w].properties.hgID
+          from: nodes[edge.v].properties.hgid,
+          to: nodes[edge.w].properties.hgid
           // TODO: label
         }
 
