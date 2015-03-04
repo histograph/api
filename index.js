@@ -16,8 +16,8 @@ app.get('/', function (req, res) {
     version: '0.1.0',
     message: 'Hallootjes!',
     examples: [
-       'http://' +  host + ":" + port + '/search?name=utrecht',
-       'http://' +  host + ":" + port + '/search?hgid=geonames/2758064'
+       'http://api.histograph.io/search?name=utrecht',
+       'http://api.histograph.io/search?hgid=geonames/2758064'
     ]
   });
 });
@@ -40,9 +40,8 @@ app.get('/search', function (req, res) {
   }
 });
 
-var server = app.listen(3000, function () {
-  var host = server.address().address,
-      port = server.address().port;
+var port = 3000;
+var server = app.listen(port, function () {
   console.log(logo);
-  console.log('Histograph API listening at http://%s:%s', host, port);
+  console.log('Histograph API listening at port ' + port);
 });
