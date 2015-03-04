@@ -84,6 +84,18 @@ function neo4jToGeoJSON(results, callback) {
         source: nodes[node].properties.layer
       };
 
+      if (nodes[node].properties.uri) {
+        pit.uri = nodes[node].properties.uri;
+      }
+
+      if (nodes[node].properties.startDate) {
+        pit.startDate = nodes[node].properties.startDate;
+      }
+
+      if (nodes[node].properties.endDate) {
+        pit.endDate = nodes[node].properties.endDate;
+      }
+
       feature.properties.type = nodes[node].properties.type;
 
       if (nodes[node].properties.geometry) {
