@@ -3,6 +3,7 @@ var fs = require('fs'),
     cors = require('cors'),
     app = express(),
     graph = require('./graph-functions'),
+    elasticsearch = require('./elasticsearch'),
     logo = fs.readFileSync('./histograph.txt', 'utf8');
 
 app.use(cors());
@@ -23,6 +24,18 @@ app.get('/', function (req, res) {
 });
 
 app.get('/search', function (req, res) {
+  elasticsearch.findByName(req.query.name, function(result) {
+    var hgids = result.map(function(hit) { return hit._id; });
+
+    graph.findByIds(hgids, function(result) {
+      res.send(result);
+    });
+
+
+  });
+});
+
+app.get('/old_search', function (req, res) {
   if (req.query.hgid) {
     graph.findById(req.query.hgid, function(result) {
       res.send(result);

@@ -7,15 +7,25 @@ var fs = require('fs'),
 function findById(id, callback) {
   var cypher = "MATCH (a:PIT {hgID: {id}})-[rels:CONCEPTIDENTICAL*]-(b:PIT) "
     + "UNWIND rels AS rel "
-    + "RETURN distinct startNode(rel) AS a, type(rel) AS rel, endNode(rel) AS b limit 50"
+    + "RETURN distinct startNode(rel) AS a, type(rel) AS rel, endNode(rel) AS b limit 50";
 
   execute(cypher, {id: id}, callback);
 }
 
+function findByIds(ids, callback) {
+  var cypher = "MATCH (a:PIT)-[rels:CONCEPTIDENTICAL*]-(b:PIT) "
+    + "WHERE a.hgid IN {ids} "
+    + "UNWIND rels AS rel "
+    + "RETURN distinct startNode(rel) AS a, type(rel) AS rel, endNode(rel) AS b limit 50";
+
+  execute(cypher, {ids: ids}, callback);
+}
+
+
 function findByName(name, callback) {
   var cypher = "MATCH (a:PIT {name: {name}})-[rels:CONCEPTIDENTICAL*]-(b:PIT) "
     + "UNWIND rels AS rel "
-    + "RETURN distinct startNode(rel) AS a, type(rel) AS rel, endNode(rel) AS b limit 50"
+    + "RETURN distinct startNode(rel) AS a, type(rel) AS rel, endNode(rel) AS b limit 50";
 
   execute(cypher, {name: name}, callback);
 }
@@ -123,3 +133,4 @@ function neo4jToGeoJSON(results, callback) {
 
 module.exports.findByName = findByName;
 module.exports.findById = findById;
+module.exports.findByIds = findByIds;
