@@ -1,8 +1,8 @@
 var fs = require('fs'),
     express = require('express'),
+    request = require('request'),
     cors = require('cors'),
     app = express(),
-    graph = require('./graph-functions'),
     elasticsearch = require('./elasticsearch'),
     logo = fs.readFileSync('./histograph.txt', 'utf8');
 
@@ -27,31 +27,25 @@ app.get('/search', function (req, res) {
   elasticsearch.findByName(req.query.name, function(result) {
     var hgids = result.map(function(hit) { return hit._id; });
 
-    graph.findByIds(hgids, function(result) {
-      res.send(result);
-    });
+    // TODO: load from config repo/env var.
+    var options = {
+      uri: 'http://10.0.135.81:13782/traversal',
+      method: 'POST',
+      json: {
+        hgids: hgids
+      }
+    };
 
+    request(options, function (error, response, body) {
+      // TODO: handle errors!
+      if (!error && response.statusCode == 200) {
+        res.send(body);
+      }
+    });
 
   });
 });
 
-app.get('/old_search', function (req, res) {
-  if (req.query.hgid) {
-    graph.findById(req.query.hgid, function(result) {
-      res.send(result);
-    });
-  } else if (req.query.name) {
-    graph.findByName(req.query.name, function(result) {
-      res.send(result);
-    });
-  } else {
-    var host = server.address().address,
-        port = server.address().port;
-    res.send({
-      "message": "Please use `hgid` or `name` parameter, e.g. http://" +  host + ":" + port + "/search?name=amsterdam"
-    });
-  }
-});
 
 var port = 3000;
 var server = app.listen(port, function () {
