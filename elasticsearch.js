@@ -1,38 +1,70 @@
 var config = require(process.env.HISTOGRAPH_CONFIG),
     elasticsearch = require('elasticsearch'),
+    baseQuery = require('./queries/base.json'),
     client = new elasticsearch.Client({
       host: config.elasticsearch.host + ':' + config.elasticsearch.port
       //log: 'trace'
     });
 
-var query = {
-  _source: ["hgid", "name"],
-  query: {
-    filtered: {
-      query: {
-        query_string: {
-          query: "",
-          fields: [
-            "pit.name"
-          ]
-        }
-      }
+// {
+//   "query_string": {
+//     "fields": [
+//       "name"
+//     ],
+//     "query": "ams*"
+//   }
+// }
+
+function makeQueryStringQuery(field, value) {
+  return {
+    "query_string": {
+      "query": value,
+      "fields": [
+        field
+      ]
     }
-  },
-  size: 50
+  };
 }
 
-function findByName(name, callback) {
-  query.query.filtered.query.query_string.query = name;
+// {
+//   "term": {
+//     "uri": "http://vocab.getty.edu/tgn/7259859"
+//   }
+// }
+
+function makeTermFilter(field, value) {
+  var filter = {
+    "term": {}
+  };
+  filter.term[field] = value;
+  return filter;
+}
+
+function search(searchParam, value, filterParams, callback) {
+  // TODO: find another way to recycle baseQuery
+  baseQuery.query.filtered.query.bool.must = [];
+  baseQuery.query.filtered.filter.bool.must = [];
+
+  if (searchParam === "name") {
+    baseQuery.query.filtered.query.bool.must.push(makeQueryStringQuery(searchParam, value));
+  } else {
+    baseQuery.query.filtered.filter.bool.must.push(makeTermFilter(searchParam, value));
+  }
+
+  filterParams.forEach(function(filterParam) {
+    baseQuery.query.filtered.filter.bool.must.push(makeTermFilter(filterParam.param, filterParam.value));
+  });
+
+
   client.search({
     index: config.elasticsearch.index,
     type: 'pit',
-    body: query
+    body: baseQuery
   }).then(function (resp) {
-    callback(resp.hits.hits);
+    callback(false, resp.hits.hits);
   }, function (err) {
-    callback(err.message);
+    callback(true, err.message);
   });
 }
 
-module.exports.findByName = findByName;
+module.exports.search = search;

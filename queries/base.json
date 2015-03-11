@@ -1,0 +1,26 @@
+{
+  "size": 100,
+  "highlight" : {
+    "fields" : {
+      "name" : {}
+    }
+  },
+  "_source": [
+    "name",
+    "hgid"
+  ],
+  "query": {
+    "filtered": {
+      "filter": {
+        "bool": {
+          "must": []
+        }
+      },
+      "query": {
+        "bool": {
+          "must": []
+        }
+      }
+    }
+  }
+}
