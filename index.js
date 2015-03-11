@@ -41,8 +41,18 @@ app.get('/search', function (req, res) {
   var searchReqParams = paramsFromRequest(validSearchReqParams, req.query),
       filterReqParams = paramsFromRequest(validFilterReqParams, req.query);
 
+  var options = {};
+  if (req.query.highlight === "true") {
+    options.highlight = true;
+  }
+
   if (searchReqParams.length == 1) {
-    elasticsearch.search(searchReqParams[0].param, searchReqParams[0].value, filterReqParams, function(error, result) {
+    elasticsearch.search(
+        searchReqParams[0].param,
+        searchReqParams[0].value,
+        filterReqParams,
+        options,
+        function(error, result) {
       if (error) {
         res.status(400).send({
           error: "Error getting data from Elasticsearch",

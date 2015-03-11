@@ -40,10 +40,20 @@ function makeTermFilter(field, value) {
   return filter;
 }
 
-function search(searchParam, value, filterParams, callback) {
+function search(searchParam, value, filterParams, options, callback) {
   // TODO: find another way to recycle baseQuery
   baseQuery.query.filtered.query.bool.must = [];
   baseQuery.query.filtered.filter.bool.must = [];
+
+  if (options.highlight) {
+    baseQuery.highlight = {
+      fields : {
+        name : {}
+      }
+    }
+  } else {
+    delete baseQuery.highlight;
+  }
 
   if (searchParam === "name") {
     baseQuery.query.filtered.query.bool.must.push(makeQueryStringQuery(searchParam, value));
