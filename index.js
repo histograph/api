@@ -11,7 +11,7 @@ var fs = require('fs'),
         + ':' + config.core.traversal.port
         + '/traversal',
     // Set URI of this API, from config
-    apiUri = config.api.host + (config.api.port ? ':' + config.api.port : ''),
+    apiUri = config.api.host + (config.api.externalPort != 80 ? ':' + config.api.externalPort : ''),
     validSearchReqParams = [
       "name",
       "uri",
@@ -107,7 +107,7 @@ function paramsFromRequest(validParams, query) {
     });
 }
 
-var server = app.listen(config.api.port, function () {
+var server = app.listen(config.api.internalPort, function () {
   console.log(logo);
-  console.log('Histograph API listening at port ' + config.api.port);
+  console.log('Histograph API listening at port ' + config.api.internalPort);
 });
