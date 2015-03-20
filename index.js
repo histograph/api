@@ -29,7 +29,7 @@ app.get('/', function (req, res) {
 
   res.send({
     name: 'Histograph API',
-    version: '0.1.1',
+    version: '0.1.2',
     message: 'Hallootjes!',
     examples: exampleUrls.map(function(query) { return 'http://' + apiUri + query; })
   });
@@ -44,6 +44,12 @@ app.get('/search', function (req, res) {
   var options = {};
   if (req.query.highlight === "true") {
     options.highlight = true;
+  }
+  
+  if (req.query.exact === "true") {
+    options.exactMatch = true;
+  } else {
+    options.exactMatch = false;
   }
 
   if (searchReqParams.length == 1) {

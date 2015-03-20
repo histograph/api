@@ -56,6 +56,11 @@ function search(searchParam, value, filterParams, options, callback) {
   }
 
   if (searchParam === "name") {
+    if (options.exactMatch) {
+      searchParam = searchParam + ".exact";
+    } else {
+      searchParam = searchParam + ".analyzed";
+    }
     baseQuery.query.filtered.query.bool.must.push(makeQueryStringQuery(searchParam, value));
   } else {
     baseQuery.query.filtered.filter.bool.must.push(makeTermFilter(searchParam, value));
@@ -64,7 +69,6 @@ function search(searchParam, value, filterParams, options, callback) {
   filterParams.forEach(function(filterParam) {
     baseQuery.query.filtered.filter.bool.must.push(makeTermFilter(filterParam.param, filterParam.value));
   });
-
 
   client.search({
     index: config.elasticsearch.index,
