@@ -31,7 +31,7 @@ app.get('/', function (req, res) {
     name: 'Histograph API',
     version: '0.1.2',
     message: 'Histograph - historical geocoder (alpha version)',
-    docs: "https://github.com/histograph/api"
+    docs: "https://github.com/histograph/api",
     examples: exampleUrls.map(function(query) { return 'http://' + apiUri + query; })
   });
 });
