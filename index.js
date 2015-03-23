@@ -4,6 +4,7 @@ var fs = require('fs'),
     cors = require('cors'),
     config = require(process.env.HISTOGRAPH_CONFIG),
     exampleUrls = require('./exampleUrls.json'),
+    context = require('./context.json'),
     app = express(),
     elasticsearch = require('./elasticsearch'),
     logo = fs.readFileSync('./histograph.txt', 'utf8'),
@@ -24,12 +25,9 @@ var fs = require('fs'),
 app.use(cors());
 
 app.get('/', function (req, res) {
-  var host = server.address().address,
-      port = server.address().port;
-
   res.send({
     name: 'Histograph API',
-    version: '0.1.2',
+    version: '0.1.3',
     message: 'Histograph - historical geocoder (alpha version)',
     docs: "https://github.com/histograph/api",
     examples: exampleUrls.map(function(query) { return 'http://' + apiUri + query; })
@@ -77,7 +75,32 @@ app.get('/search', function (req, res) {
 
         request(options, function (error, response, body) {
           if (!error && response.statusCode == 200) {
-            res.send(body);
+            res.send({
+              "@context": context,
+              "type": body.type,
+              "features": body.features.map(function(feature) {
+                feature.properties.pits = feature.properties.pits.map(function(pit) {
+                  if (pit.relations) {
+                    Object.keys(pit.relations).map(function(relation) {
+                      pit.relations[relation] = pit.relations[relation].map(function(hgid) {
+                        return {
+                          "@id": hgid
+                        };
+                      });
+                    });
+                    pit.relations["@id"] = pit.hgid;
+                  }
+                  pit["@id"] = pit.hgid;
+                  return pit;
+                });
+
+                return {
+                  type: feature.type,
+                  properties: feature.properties,
+                  geometry: feature.geometry
+                };
+              })
+            });
           } else {
             res.status(response.statusCode).send({
               error: "Error getting data from Histograph Core",

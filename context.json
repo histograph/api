@@ -1,0 +1,22 @@
+{
+  "@base": "http://erfgeo.nl/hg/",
+  "@vocab": "http://erfgeo.nl/",
+  "features": "_:features",
+  "source": {
+    "@id": "source",
+    "@type": "@id"
+  },
+  "uri": {
+    "@id": "owl:sameAs",
+    "@type": "@id"
+  },
+  "relations": "_:relations",
+  "properties": "_:properties",
+  "pits": "_:pits",
+  "name": "dc:title",
+  "geometryIndex": null,
+  "geometry": null,
+  "data": null,
+  "hasBeginning": "time:hasBeginning",
+  "hasEnd": "time:hasEnd"
+}
