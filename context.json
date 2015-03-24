@@ -6,6 +6,10 @@
     "@id": "source",
     "@type": "@id"
   },
+  "type": {
+    "@id": "type",
+    "@type": "@id"
+  },
   "uri": {
     "@id": "owl:sameAs",
     "@type": "@id"
