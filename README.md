@@ -15,7 +15,7 @@ Some example URLs:
 - http://api.histograph.io/search?name=utrecht
 - http://api.histograph.io/search?hgid=geonames/2758064
 - http://api.histograph.io/search?uri=http://vocab.getty.edu/tgn/7271174
-- http://api.histograph.io/search?name=amsterdam&type=hg:Municipality
+- http://api.histograph.io/search?name=amsterdam&type=hg:Gemeente
 
 ## API specification
 
@@ -31,9 +31,9 @@ All Histograph API search calls expect one (_and one only_) or the following sea
 
 ### Filters
 
-| Parameter | Example         | Description
-|-----------|-----------------|---------------------
-| `type`    | `type=hg:Place` | Filter on PIT type
+| Parameter | Example          | Description
+|-----------|------------------|---------------------
+| `type`    | `type=hg:Plaats` | Filter on PIT type
 
 ### Exact name search
 
