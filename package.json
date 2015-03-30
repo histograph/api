@@ -12,9 +12,12 @@
     "path": "~0.11.14",
     "request": "^2.53.0"
   },
-  "devDependencies": {},
+  "devDependencies": {
+    "mocha": "^2.2.1"
+  },
   "scripts": {
-    "start": "node index.js"
+    "start": "node index.js",
+    "test": "node_modules/.bin/mocha test/test.js"
   },
   "repository": {
     "type": "git",
