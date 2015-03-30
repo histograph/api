@@ -7,7 +7,6 @@ var fs = require('fs'),
     context = require('./context.json'),
     app = express(),
     elasticsearch = require('./elasticsearch'),
-    logo = fs.readFileSync('./histograph.txt', 'utf8'),
     traversalApiUri = 'http://' + config.core.traversal.host
         + ':' + config.core.traversal.port
         + '/traversal',
@@ -138,6 +137,6 @@ function paramsFromRequest(validParams, query) {
 }
 
 var server = app.listen(config.api.internalPort, function () {
-  console.log(logo);
+  console.log(config.logo.join("\n"));
   console.log('Histograph API listening at port ' + config.api.internalPort);
 });
