@@ -5,7 +5,7 @@ Histograph's RESTful search API. To start Histograph API, run
     npm install
     forever index.js
 
-Prerequisited:
+Prerequisites:
 
 - Running version of Histograph Core,
 - Elasticsearch with Histograph indexes
