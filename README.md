@@ -21,7 +21,7 @@ Some example URLs:
 
 ### Search
 
-All Histograph API search calls expect one (_and one only_) or the following search parameters:
+All Histograph API search calls expect one (_and one only_) of the following search parameters:
 
 | Parameter  | Example                                  | Description
 |------------|------------------------------------------|-----------------
