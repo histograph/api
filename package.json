@@ -13,11 +13,13 @@
     "request": "^2.53.0"
   },
   "devDependencies": {
-    "mocha": "^2.2.1"
+    "mocha": "^2.2.1",
+    "jscs": "^1.10.0",
+    "jshint": "^2.6.0"
   },
   "scripts": {
     "start": "node index.js",
-    "test": "node_modules/.bin/mocha test/test.js"
+    "test": "jshint index.js lib test && jscs index.js lib test && node_modules/.bin/mocha test/test.js"
   },
   "repository": {
     "type": "git",
@@ -35,6 +37,18 @@
       "email": "rutger@waag.org"
     }
   ],
-  "license": "",
-  "engine": {}
+  "license": "MIT",
+  "jshintConfig": {
+    "node": true,
+    "globalstrict": false,
+    "undef": true,
+    "unused": true,
+    "noarg": true
+  },
+  "jscsConfig": {
+    "preset": "airbnb",
+    "requireCamelCaseOrUpperCaseIdentifiers": null,
+    "disallowMultipleVarDecl": true,
+    "requireMultipleVarDecl": null
+  }
 }

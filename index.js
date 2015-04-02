@@ -1,50 +1,48 @@
-var fs = require('fs'),
-    express = require('express'),
-    request = require('request'),
-    cors = require('cors'),
-    config = require(process.env.HISTOGRAPH_CONFIG),
-    exampleUrls = require('./exampleUrls.json'),
-    context = require('./jsonldContext.json'),
-    app = express(),
-    elasticsearch = require('./elasticsearch'),
-    traversalApiUri = 'http://' + config.core.traversal.host
-        + ':' + config.core.traversal.port
-        + '/traversal',
-    // Set URI of this API, from config
-    apiUri = config.api.host + (config.api.externalPort != 80 ? ':' + config.api.externalPort : ''),
-    validSearchReqParams = [
-      "name",
-      "uri",
-      "hgid"
-    ],
-    validFilterReqParams = [
-      "type"
+var express = require('express');
+var request = require('request');
+var cors = require('cors');
+var config = require(process.env.HISTOGRAPH_CONFIG);
+var exampleUrls = require('./data/exampleUrls.json');
+var context = require('./data/jsonldContext.json');
+var app = express();
+var elasticsearch = require('./lib/elasticsearch');
+var traversalApiUri = 'http://' + config.core.traversal.host +
+        ':' + config.core.traversal.port +
+        '/traversal';
+var apiUri = config.api.host + (config.api.externalPort != 80 ? ':' + config.api.externalPort : '');
+var validSearchReqParams = [
+      'name',
+      'uri',
+      'hgid'
+    ];
+var validFilterReqParams = [
+      'type'
     ];
 
 app.use(cors());
 
-app.get('/', function (req, res) {
+app.get('/', function(req, res) {
   res.send({
     name: 'Histograph API',
     version: '0.1.3',
     message: 'Histograph - historical geocoder (alpha version)',
-    docs: "https://github.com/histograph/api",
+    docs: 'http://histograph.io/docs',
     examples: exampleUrls.map(function(query) { return 'http://' + apiUri + query; })
   });
 });
 
-app.get('/search', function (req, res) {
+app.get('/search', function(req, res) {
 
   // Check request params for valid search and filter parameters
-  var searchReqParams = paramsFromRequest(validSearchReqParams, req.query),
-      filterReqParams = paramsFromRequest(validFilterReqParams, req.query);
-
+  var searchReqParams = paramsFromRequest(validSearchReqParams, req.query);
+  var filterReqParams = paramsFromRequest(validFilterReqParams, req.query);
   var options = {};
-  if (req.query.highlight === "true") {
+
+  if (req.query.highlight === 'true') {
     options.highlight = true;
   }
 
-  if (req.query.exact === "true") {
+  if (req.query.exact === 'true') {
     options.exactMatch = true;
   } else {
     options.exactMatch = false;
@@ -59,12 +57,14 @@ app.get('/search', function (req, res) {
         function(error, result) {
       if (error) {
         res.status(400).send({
-          error: "Error getting data from Elasticsearch",
+          error: 'Error getting data from Elasticsearch',
           message: result
         });
+
       } else {
         var hgids = result.map(function(hit) { return hit._id; });
-            options = {
+
+        var options = {
               uri: traversalApiUri,
               method: 'POST',
               json: {
@@ -72,24 +72,26 @@ app.get('/search', function (req, res) {
               }
             };
 
-        request(options, function (error, response, body) {
+        request(options, function(error, response, body) {
           if (!error && response.statusCode == 200) {
             res.send({
-              "@context": context,
-              "type": body.type,
-              "features": body.features.map(function(feature) {
+              '@context': context,
+              type: body.type,
+              features: body.features.map(function(feature) {
                 feature.properties.pits = feature.properties.pits.map(function(pit) {
                   if (pit.relations) {
                     Object.keys(pit.relations).map(function(relation) {
                       pit.relations[relation] = pit.relations[relation].map(function(hgid) {
                         return {
-                          "@id": hgid
+                          '@id': hgid
                         };
                       });
                     });
-                    pit.relations["@id"] = pit.hgid;
+
+                    pit.relations['@id'] = pit.hgid;
                   }
-                  pit["@id"] = pit.hgid;
+
+                  pit['@id'] = pit.hgid;
                   return pit;
                 });
 
@@ -102,7 +104,7 @@ app.get('/search', function (req, res) {
             });
           } else {
             res.status(response.statusCode).send({
-              error: "Error getting data from Histograph Core",
+              error: 'Error getting data from Histograph Core',
               message: error
             });
           }
@@ -111,10 +113,10 @@ app.get('/search', function (req, res) {
     });
   } else {
     res.status(400).send({
-      error: "Only one of the following search parameters allowed: "
-          + validSearchReqParams
-                .map(function(param) { return "'" + param + "'"; })
-                .join(", ")
+      error: 'Only one of the following search parameters allowed: ' +
+          validSearchReqParams
+              .map(function(param) { return '\'' + param + '\''; })
+              .join(', ')
     });
   }
 });
@@ -136,7 +138,7 @@ function paramsFromRequest(validParams, query) {
     });
 }
 
-var server = app.listen(config.api.internalPort, function () {
-  console.log(config.logo.join("\n"));
+app.listen(config.api.internalPort, function() {
+  console.log(config.logo.join('\n'));
   console.log('Histograph API listening at port ' + config.api.internalPort);
 });

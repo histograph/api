@@ -1,4 +1,4 @@
-var assert = require("assert");
+//var assert = require("assert");
 
 // TODO: create tests:
 //   - create fake Elasticsearch and Core Traversal data
