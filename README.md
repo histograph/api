@@ -47,3 +47,7 @@ value is `false`.
 | `name=Gorinchem&exact=false` | Same as above
 | `name=Gorinchem&exact=true`  | Search for exact PIT names, searches only for PITs exactly named _Gorinchem_
 | `name=gOrINchEm&exact=true`  | Same as the previous, as this search is case-insensitive
+
+## License
+
+The source for Histograph is released under the GNU General Public License as published by the Free Software Foundation, either version 3 of the License, or (at your option) any later version.
