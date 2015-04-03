@@ -1,14 +1,15 @@
 var express = require('express');
 var request = require('request');
+var JSONStream = require('JSONStream');
 var cors = require('cors');
 var config = require(process.env.HISTOGRAPH_CONFIG);
 var exampleUrls = require('./data/exampleUrls.json');
 var context = require('./data/jsonldContext.json');
 var app = express();
 var elasticsearch = require('./lib/elasticsearch');
-var traversalApiUri = 'http://' + config.core.traversal.host +
+var CoreApiUri = 'http://' + config.core.traversal.host +
         ':' + config.core.traversal.port +
-        '/traversal';
+        '/';
 var apiUri = config.api.host + (config.api.externalPort != 80 ? ':' + config.api.externalPort : '');
 var validSearchReqParams = [
       'name',
@@ -29,6 +30,21 @@ app.get('/', function(req, res) {
     docs: 'http://histograph.io/docs',
     examples: exampleUrls.map(function(query) { return 'http://' + apiUri + query; })
   });
+});
+
+app.get('/sources/:source', function(req, res) {
+  res.send({
+    id: req.params.source,
+    description: 'stub for source meta data: owner, last_updated, #pits, weblink, etc.'
+  });
+});
+
+app.get('/sources/:source/rejected_relations', function(req, res) {
+  var uri = CoreApiUri + 'rejected?source=' + req.params.source;
+  request.get(uri)
+      .pipe(JSONStream.parse('rejected_relations.*'))
+      .pipe(JSONStream.stringify())
+      .pipe(res);
 });
 
 app.get('/search', function(req, res) {
@@ -65,7 +81,7 @@ app.get('/search', function(req, res) {
         var hgids = result.map(function(hit) { return hit._id; });
 
         var options = {
-              uri: traversalApiUri,
+              uri: CoreApiUri + 'traversal',
               method: 'POST',
               json: {
                 hgids: hgids
