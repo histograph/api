@@ -19,7 +19,18 @@ Some example URLs:
 
 ## API specification
 
-### Search
+Histograph API currently has two endpoints:
+
+- [`/search`](#search-api): geocoding, searching place names
+- [`/source`](#source-api): source metadata, rejected edges
+
+### Search API
+
+| Endpoint  | Example                                  | Description
+|-----------|------------------------------------------|-----------------
+| `/search` | `/search?name=Bussum`                    | Search for place names
+
+#### Parameters
 
 All Histograph API search calls expect one (_and one only_) of the following search parameters:
 
@@ -29,13 +40,13 @@ All Histograph API search calls expect one (_and one only_) of the following sea
 | `hgid`     | `hgid=tgn/7268026`                       | Exact match on `hgid`
 | `uri`      | `uri=http://vocab.getty.edu/tgn/7268026` | Exact match on `uri`
 
-### Filters
+#### Filters
 
 | Parameter | Example          | Description
 |-----------|------------------|---------------------
 | `type`    | `type=hg:Plaats` | Filter on PIT type
 
-### Exact name search
+#### Exact name search
 
 An extra boolean parameter `exact` is allowed when searching with parameter `name`, to
 specify whether to search for exact match (case insensitive) or not. The default
@@ -47,6 +58,14 @@ value is `false`.
 | `name=Gorinchem&exact=false` | Same as above
 | `name=Gorinchem&exact=true`  | Search for exact PIT names, searches only for PITs exactly named _Gorinchem_
 | `name=gOrINchEm&exact=true`  | Same as the previous, as this search is case-insensitive
+
+### Source API
+
+| Endpoint                              | Example                           | Description
+|---------------------------------------|-----------------------------------|-------------------------------
+| `/sources`                            |                                   | All sources used by Histograph
+| `/sources/:source`                    | `/sources/geonames`               | Metadata of single source
+| `/sources/:source/rejected_relations` | `/sources/tgn/rejected_relations` | Rejected edges of a single source
 
 ## License
 
