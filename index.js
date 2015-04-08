@@ -53,10 +53,10 @@ app.get('/search', function(req, res) {
     options.exactMatch = false;
   }
 
-  if (req.query.geom === 'false') {
-    options.geom = false;
+  if (req.query.geometry === 'false') {
+    options.geometry = false;
   } else {
-    options.geom = true;
+    options.geometry = true;
   }
 
   if (searchReqParams.length == 1) {
@@ -106,7 +106,7 @@ app.get('/search', function(req, res) {
                   return pit;
                 });
 
-                if (options.geom) {
+                if (options.geometry) {
                   return {
                     type: feature.type,
                     properties: feature.properties,
