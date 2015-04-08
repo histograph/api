@@ -1,8 +1,8 @@
 var express = require('express');
 var request = require('request');
-var JSONStream = require('JSONStream');
 var cors = require('cors');
 var config = require(process.env.HISTOGRAPH_CONFIG);
+var io = require(config.api.io);
 var exampleUrls = require('./data/exampleUrls.json');
 var context = require('./data/jsonldContext.json');
 var app = express();
@@ -22,6 +22,9 @@ var validFilterReqParams = [
 
 app.use(cors());
 
+// Mount Histograph IO
+app.use('/', io);
+
 app.get('/', function(req, res) {
   res.send({
     name: 'Histograph API',
@@ -30,21 +33,6 @@ app.get('/', function(req, res) {
     docs: 'http://histograph.io/docs',
     examples: exampleUrls.map(function(query) { return 'http://' + apiUri + query; })
   });
-});
-
-app.get('/sources/:source', function(req, res) {
-  res.send({
-    id: req.params.source,
-    description: 'stub for source meta data: owner, last_updated, #pits, weblink, etc.'
-  });
-});
-
-app.get('/sources/:source/rejected_relations', function(req, res) {
-  var uri = CoreApiUri + 'rejected?source=' + req.params.source;
-  request.get(uri)
-      .pipe(JSONStream.parse('rejected_relations.*'))
-      .pipe(JSONStream.stringify())
-      .pipe(res);
 });
 
 app.get('/search', function(req, res) {

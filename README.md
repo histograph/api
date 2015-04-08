@@ -1,14 +1,17 @@
 # Histograph API
 
-Histograph's RESTful search API. To start Histograph API, run
+Histograph JSON API. To start Histograph API, run
 
     npm install
     forever index.js
 
 Prerequisites:
 
-- Running version of Histograph Core,
-- Elasticsearch with Histograph indexes
+- Running version of [Histograph Core](https://github.com/histograph/core),
+- Running version of Elasticsearch, with Histograph indexes created by Histograph Core
+- `HISTOGRAPH_CONFIG` environment variable pointing to [Histograph configuration file](https://github.com/histograph/config)
+- Directory containing [Histograph IO](https://github.com/histograph/io)
+- [Redis](http://redis.io/)
 
 Some example URLs:
 
@@ -26,9 +29,9 @@ Histograph API currently has two endpoints:
 
 ### Search API
 
-| Endpoint  | Example                                  | Description
-|-----------|------------------------------------------|-----------------
-| `/search` | `/search?name=Bussum`                    | Search for place names
+| Endpoint      | Example                                  | Description
+|---------------|------------------------------------------|-----------------
+| `GET /search` | `/search?name=Bussum`                    | Search for place names
 
 #### Parameters
 
@@ -59,13 +62,15 @@ value is `false`.
 | `name=Gorinchem&exact=true`  | Search for exact PIT names, searches only for PITs exactly named _Gorinchem_
 | `name=gOrINchEm&exact=true`  | Same as the previous, as this search is case-insensitive
 
-### Source API
+### Sources API
 
-| Endpoint                              | Example                           | Description
-|---------------------------------------|-----------------------------------|-------------------------------
-| `/sources`                            |                                   | All sources used by Histograph
-| `/sources/:source`                    | `/sources/geonames`               | Metadata of single source
-| `/sources/:source/rejected_relations` | `/sources/tgn/rejected_relations` | Rejected edges of a single source
+| Endpoint                                  | Example                           | Description
+|-------------------------------------------|-----------------------------------|-------------------------------
+| `GET /sources`                            |                                   | All sources used by Histograph
+| `GET /sources/:source`                    | `/sources/geonames`               | Metadata of single source
+| `GET /sources/:source/pits`               |                                   |
+| `GET /sources/:source/relations`          |                                   |
+| `GET /sources/:source/rejected_relations` | `/sources/tgn/rejected_relations` | Rejected edges of a single source
 
 ## License
 
