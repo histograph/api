@@ -42,6 +42,7 @@ app.get('/search', function(req, res) {
   var filterReqParams = paramsFromRequest(validFilterReqParams, req.query);
   var options = {};
 
+  // TODO: make function paramIsTrue()
   if (req.query.highlight === 'true') {
     options.highlight = true;
   }
@@ -50,6 +51,12 @@ app.get('/search', function(req, res) {
     options.exactMatch = true;
   } else {
     options.exactMatch = false;
+  }
+
+  if (req.query.geom === 'false') {
+    options.geom = false;
+  } else {
+    options.geom = true;
   }
 
   if (searchReqParams.length == 1) {
@@ -68,7 +75,7 @@ app.get('/search', function(req, res) {
       } else {
         var hgids = result.map(function(hit) { return hit._id; });
 
-        var options = {
+        var reqOptions = {
               uri: CoreApiUri + 'traversal',
               method: 'POST',
               json: {
@@ -76,7 +83,7 @@ app.get('/search', function(req, res) {
               }
             };
 
-        request(options, function(error, response, body) {
+        request(reqOptions, function(error, response, body) {
           if (!error && response.statusCode == 200) {
             res.send({
               '@context': context,
@@ -99,11 +106,18 @@ app.get('/search', function(req, res) {
                   return pit;
                 });
 
-                return {
-                  type: feature.type,
-                  properties: feature.properties,
-                  geometry: feature.geometry
-                };
+                if (options.geom) {
+                  return {
+                    type: feature.type,
+                    properties: feature.properties,
+                    geometry: feature.geometry
+                  };
+                } else {
+                  return {
+                    type: feature.type,
+                    properties: feature.properties
+                  };
+                }
               })
             });
           } else {

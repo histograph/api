@@ -49,6 +49,12 @@ All Histograph API search calls expect one (_and one only_) of the following sea
 |-----------|------------------|---------------------
 | `type`    | `type=hg:Plaats` | Filter on PIT type
 
+#### Flags
+
+| Parameter | Example          | Description
+|-----------|------------------|---------------------
+| `geom`    | `geom=false`     | When set to `false`, the API will not return GeoJSON geometries. Default is `true`.
+
 #### Exact name search
 
 An extra boolean parameter `exact` is allowed when searching with parameter `name`, to
