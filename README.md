@@ -29,9 +29,9 @@ Histograph API currently has two endpoints:
 
 ### Search API
 
-| Endpoint      | Example                                  | Description
-|---------------|------------------------------------------|-----------------
-| `GET /search` | `/search?name=Bussum`                    | Search for place names
+| Endpoint      | Description
+|---------------|-----------------
+| `GET /search` | Search for place names
 
 #### Parameters
 
@@ -70,13 +70,23 @@ value is `false`.
 
 ### Sources API
 
-| Endpoint                                  | Example                           | Description
-|-------------------------------------------|-----------------------------------|-------------------------------
-| `GET /sources`                            |                                   | All sources used by Histograph
-| `GET /sources/:source`                    | `/sources/geonames`               | Metadata of single source
-| `GET /sources/:source/pits`               |                                   |
-| `GET /sources/:source/relations`          |                                   |
-| `GET /sources/:source/rejected_relations` | `/sources/tgn/rejected_relations` | Rejected edges of a single source
+| Endpoint                                  | Authentication | Description
+|-------------------------------------------|----------------|-------------------------------
+| `GET /sources`                            |                | All sources available via Histograph
+| `GET /sources/:source`                    |                | Metadata of single source
+| `GET /sources/:source/pits`               |                |
+| `GET /sources/:source/relations`          |                |
+| `GET /sources/:source/rejected_relations` |                | Rejected edges of a single source
+| `POST /sources`                           | Required       | Create new source
+| `PUT /sources/:source/pits`               | Required       | Update all pits of single source
+| `PUT /sources/:source/relations`          | Required       | Update all relations of single source
+| `DELETE /sources/:source`                 | Required       | Delete a source completely
+| `DELETE /sources/:source/pits`            | Required       | Delete all PITs of single source
+| `DELETE /sources/:source/relations`       | Required       | Delete all relations of single source
+
+#### Authentication
+
+[Basic authentication](http://en.wikipedia.org/wiki/Basic_access_authentication) via HTTPS.
 
 ## License
 
