@@ -70,23 +70,30 @@ value is `false`.
 
 ### Sources API
 
-| Endpoint                                  | Authentication | Description
-|-------------------------------------------|----------------|-------------------------------
-| `GET /sources`                            |                | All sources available via Histograph
-| `GET /sources/:source`                    |                | Metadata of single source
-| `GET /sources/:source/pits`               |                |
-| `GET /sources/:source/relations`          |                |
-| `GET /sources/:source/rejected_relations` |                | Rejected edges of a single source
-| `POST /sources`                           | Required       | Create new source
-| `PUT /sources/:source/pits`               | Required       | Update all pits of single source
-| `PUT /sources/:source/relations`          | Required       | Update all relations of single source
-| `DELETE /sources/:source`                 | Required       | Delete a source completely
-| `DELETE /sources/:source/pits`            | Required       | Delete all PITs of single source
-| `DELETE /sources/:source/relations`       | Required       | Delete all relations of single source
+| Endpoint                                  | Data             | Description
+|-------------------------------------------|------------------|-------------------------------
+| `GET /sources`                            |                  | All sources available via Histograph
+| `GET /sources/:source`                    |                  | Metadata of single source
+| `GET /sources/:source/pits`               |                  |
+| `GET /sources/:source/relations`          |                  |
+| `GET /sources/:source/rejected_relations` |                  | Rejected edges of a single source
+| `POST /sources`                           | JSON source      | Create new source
+| `PATCH /sources/:source`                  | JSON source      | Update existing source
+| `PUT /sources/:source/pits`               | NDJSON pits      | Update all pits of single source
+| `PUT /sources/:source/relations`          | NDJSON relations | Update all relations of single source
+| `DELETE /sources/:source`                 |                 | Delete a source completely
+
+#### Data
+
+- Source
+- PITs
+- Relations
+
+See https://github.com/histograph/schemas#histograph-io---json-schemas.
 
 #### Authentication
 
-[Basic authentication](http://en.wikipedia.org/wiki/Basic_access_authentication) via HTTPS.
+All `POST`, `PATCH`, `PUT` and `DELETE` requests require [basic authentication](http://en.wikipedia.org/wiki/Basic_access_authentication) via HTTPS.
 
 ## License
 
