@@ -1,14 +1,17 @@
 # Histograph API
 
-Histograph's RESTful search API. To start Histograph API, run
+Histograph JSON API. To start Histograph API, run
 
     npm install
     forever index.js
 
 Prerequisites:
 
-- Running version of Histograph Core,
-- Elasticsearch with Histograph indexes
+- Running version of [Histograph Core](https://github.com/histograph/core),
+- Running version of Elasticsearch, with Histograph indexes created by Histograph Core
+- `HISTOGRAPH_CONFIG` environment variable pointing to [Histograph configuration file](https://github.com/histograph/config)
+- Directory containing [Histograph IO](https://github.com/histograph/io)
+- [Redis](http://redis.io/)
 
 Some example URLs:
 
@@ -26,9 +29,9 @@ Histograph API currently has two endpoints:
 
 ### Search API
 
-| Endpoint  | Example                                  | Description
-|-----------|------------------------------------------|-----------------
-| `/search` | `/search?name=Bussum`                    | Search for place names
+| Endpoint      | Description
+|---------------|-----------------
+| `GET /search` | Search for place names
 
 #### Parameters
 
@@ -46,6 +49,12 @@ All Histograph API search calls expect one (_and one only_) of the following sea
 |-----------|------------------|---------------------
 | `type`    | `type=hg:Plaats` | Filter on PIT type
 
+#### Flags
+
+| Parameter | Example          | Description
+|-----------|------------------|---------------------
+| `geom`    | `geom=false`     | When set to `false`, the API will not return GeoJSON geometries. Default is `true`.
+
 #### Exact name search
 
 An extra boolean parameter `exact` is allowed when searching with parameter `name`, to
@@ -59,13 +68,32 @@ value is `false`.
 | `name=Gorinchem&exact=true`  | Search for exact PIT names, searches only for PITs exactly named _Gorinchem_
 | `name=gOrINchEm&exact=true`  | Same as the previous, as this search is case-insensitive
 
-### Source API
+### Sources API
 
-| Endpoint                              | Example                           | Description
-|---------------------------------------|-----------------------------------|-------------------------------
-| `/sources`                            |                                   | All sources used by Histograph
-| `/sources/:source`                    | `/sources/geonames`               | Metadata of single source
-| `/sources/:source/rejected_relations` | `/sources/tgn/rejected_relations` | Rejected edges of a single source
+| Endpoint                                  | Data             | Description
+|-------------------------------------------|------------------|-------------------------------
+| `GET /sources`                            |                  | All sources available via Histograph
+| `GET /sources/:source`                    |                  | Metadata of single source
+| `GET /sources/:source/pits`               |                  |
+| `GET /sources/:source/relations`          |                  |
+| `GET /sources/:source/rejected_relations` |                  | Rejected edges of a single source
+| `POST /sources`                           | JSON source      | Create new source
+| `PATCH /sources/:source`                  | JSON source      | Update existing source
+| `PUT /sources/:source/pits`               | NDJSON pits      | Update all pits of single source
+| `PUT /sources/:source/relations`          | NDJSON relations | Update all relations of single source
+| `DELETE /sources/:source`                 |                 | Delete a source completely
+
+#### Data
+
+- Source
+- PITs
+- Relations
+
+See https://github.com/histograph/schemas#histograph-io---json-schemas.
+
+#### Authentication
+
+All `POST`, `PATCH`, `PUT` and `DELETE` requests require [basic authentication](http://en.wikipedia.org/wiki/Basic_access_authentication) via HTTPS.
 
 ## License
 

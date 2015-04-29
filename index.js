@@ -1,8 +1,8 @@
 var express = require('express');
 var request = require('request');
-var JSONStream = require('JSONStream');
 var cors = require('cors');
 var config = require(process.env.HISTOGRAPH_CONFIG);
+var io = require(config.api.io);
 var exampleUrls = require('./data/exampleUrls.json');
 var context = require('./data/jsonldContext.json');
 var app = express();
@@ -22,6 +22,9 @@ var validFilterReqParams = [
 
 app.use(cors());
 
+// Mount Histograph IO
+app.use('/', io);
+
 app.get('/', function(req, res) {
   res.send({
     name: 'Histograph API',
@@ -32,21 +35,6 @@ app.get('/', function(req, res) {
   });
 });
 
-app.get('/sources/:source', function(req, res) {
-  res.send({
-    id: req.params.source,
-    description: 'stub for source meta data: owner, last_updated, #pits, weblink, etc.'
-  });
-});
-
-app.get('/sources/:source/rejected_relations', function(req, res) {
-  var uri = CoreApiUri + 'rejected?source=' + req.params.source;
-  request.get(uri)
-      .pipe(JSONStream.parse('rejected_relations.*'))
-      .pipe(JSONStream.stringify())
-      .pipe(res);
-});
-
 app.get('/search', function(req, res) {
 
   // Check request params for valid search and filter parameters
@@ -54,6 +42,7 @@ app.get('/search', function(req, res) {
   var filterReqParams = paramsFromRequest(validFilterReqParams, req.query);
   var options = {};
 
+  // TODO: make function paramIsTrue()
   if (req.query.highlight === 'true') {
     options.highlight = true;
   }
@@ -62,6 +51,12 @@ app.get('/search', function(req, res) {
     options.exactMatch = true;
   } else {
     options.exactMatch = false;
+  }
+
+  if (req.query.geometry === 'false') {
+    options.geometry = false;
+  } else {
+    options.geometry = true;
   }
 
   if (searchReqParams.length == 1) {
@@ -80,7 +75,7 @@ app.get('/search', function(req, res) {
       } else {
         var hgids = result.map(function(hit) { return hit._id; });
 
-        var options = {
+        var reqOptions = {
               uri: CoreApiUri + 'traversal',
               method: 'POST',
               json: {
@@ -88,7 +83,7 @@ app.get('/search', function(req, res) {
               }
             };
 
-        request(options, function(error, response, body) {
+        request(reqOptions, function(error, response, body) {
           if (!error && response.statusCode == 200) {
             res.send({
               '@context': context,
@@ -111,11 +106,18 @@ app.get('/search', function(req, res) {
                   return pit;
                 });
 
-                return {
-                  type: feature.type,
-                  properties: feature.properties,
-                  geometry: feature.geometry
-                };
+                if (options.geometry) {
+                  return {
+                    type: feature.type,
+                    properties: feature.properties,
+                    geometry: feature.geometry
+                  };
+                } else {
+                  return {
+                    type: feature.type,
+                    properties: feature.properties
+                  };
+                }
               })
             });
           } else {
