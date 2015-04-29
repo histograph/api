@@ -15,10 +15,10 @@ Prerequisites:
 
 Some example URLs:
 
-- http://api.histograph.io/search?name=utrecht
-- http://api.histograph.io/search?hgid=geonames/2758064
-- http://api.histograph.io/search?uri=http://vocab.getty.edu/tgn/7271174
-- http://api.histograph.io/search?name=amsterdam&type=hg:Gemeente
+- https://api.histograph.io/search?name=utrecht
+- https://api.histograph.io/search?hgid=geonames/2758064
+- https://api.histograph.io/search?uri=http://vocab.getty.edu/tgn/7271174
+- https://api.histograph.io/search?name=amsterdam&type=hg:Gemeente
 
 ## API specification
 
