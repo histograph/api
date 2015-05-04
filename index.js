@@ -102,6 +102,11 @@ app.get('/search', function(req, res) {
                     pit.relations['@id'] = pit.hgid;
                   }
 
+                  // Source is called sourcid in neo4j graph
+                  // TODO: maybe Core should do renaming in Traversal API...
+                  pit.source = pit.sourceid;
+                  delete pit.sourceid;
+
                   pit['@id'] = pit.hgid;
                   return pit;
                 });
