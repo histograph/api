@@ -25,7 +25,7 @@ Some example URLs:
 Histograph API currently has two endpoints:
 
 - [`/search`](#search-api): geocoding, searching place names
-- [`/source`](#source-api): source metadata, rejected edges
+- [`/sources`](#sources-api): source metadata, rejected edges
 
 ### Search API
 
