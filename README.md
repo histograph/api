@@ -45,15 +45,17 @@ All Histograph API search calls expect one (_and one only_) of the following sea
 
 #### Filters
 
-| Parameter | Example          | Description
-|-----------|------------------|---------------------
-| `type`    | `type=hg:Plaats` | Filter on PIT type
+| Parameter | Example         | Description
+|-----------|-----------------|---------------------
+| `type`    | `type=hg:Place` | Filter on PIT type
+
+See the [Histograph ontology](https://github.com/histograph/schemas/blob/master/ontology/histograph.ttl) for a list of valid types.
 
 #### Flags
 
 | Parameter | Example          | Description
 |-----------|------------------|---------------------
-| `geom`    | `geom=false`     | When set to `false`, the API will not return GeoJSON geometries. Default is `true`.
+| `geometry`| `geometry=false` | When set to `false`, the API will not return GeoJSON geometries. Default is `true`.
 
 #### Exact name search
 
