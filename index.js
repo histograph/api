@@ -4,6 +4,7 @@ var cors = require('cors');
 var config = require(process.env.HISTOGRAPH_CONFIG);
 var io = require(config.api.io);
 var queue = require('./lib/queue');
+var neo4jQueries = require('./lib/neo4jQueries');
 var exampleUrls = require('./data/exampleUrls.json');
 var context = require('./data/jsonldContext.json');
 var app = express();
@@ -37,6 +38,8 @@ app.get('/', function(req, res) {
     examples: exampleUrls.map(function(query) { return 'https://' + apiUri + query; })
   });
 });
+
+app.get('/query/liesIn', neo4jQueries.liesInResource);
 
 app.get('/search', function(req, res) {
 
