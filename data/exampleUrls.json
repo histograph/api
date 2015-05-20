@@ -5,5 +5,7 @@
   "/search?name=amsterdam&type=hg:Gemeente",
   "/search?name=omsterdom~",
   "/search?name=gorinchem",
-  "/search?name=gorinchem&exact=true"
+  "/search?name=gorinchem&exact=true",
+  "/query/liesIn?small=Sloten&big=geonames%2F2750405",
+  "/query/liesIn?small=Sloten&big=geonames%2F2750405&verbose=jagraag"
 ]
