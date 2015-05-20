@@ -3,6 +3,7 @@ var request = require('request');
 var cors = require('cors');
 var config = require(process.env.HISTOGRAPH_CONFIG);
 var io = require(config.api.io);
+var queue = require('./lib/queue');
 var exampleUrls = require('./data/exampleUrls.json');
 var context = require('./data/jsonldContext.json');
 var app = express();
@@ -24,6 +25,8 @@ app.use(cors());
 
 // Mount Histograph IO
 app.use('/', io);
+
+app.get('/status/queue', queue.status);
 
 app.get('/', function(req, res) {
   res.send({
