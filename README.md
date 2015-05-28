@@ -18,7 +18,7 @@ Some example URLs:
 - https://api.histograph.io/search?name=utrecht
 - https://api.histograph.io/search?hgid=geonames/2758064
 - https://api.histograph.io/search?uri=http://vocab.getty.edu/tgn/7271174
-- https://api.histograph.io/search?name=amsterdam&type=hg:Gemeente
+- https://api.histograph.io/search?name=amsterdam&type=hg:Municipality
 
 ## API specification
 
@@ -92,6 +92,8 @@ value is `false`.
 | Source    | JSON                         | `application/json`     | [`source.schema.json`](https://github.com/histograph/schemas/tree/master/json/source.schema.json)
 | PITs      | [NDJSON](http://ndjson.org/) | `application/x-ndjson` | [`pits.schema.json`](https://github.com/histograph/schemas/tree/master/json/pits.schema.json)
 | Relations | [NDJSON](http://ndjson.org/) | `application/x-ndjson` | [`relations.schema.json`](https://github.com/histograph/schemas/tree/master/json/relations.schema.json)
+
+You can send NDJSON data in your PUT request's body when you are uploading a small data set (i.e. less than 5MB). For bigger NDJSON files, you can use `multipart/form-data` file upload.
 
 #### Authentication
 
