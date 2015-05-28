@@ -74,8 +74,8 @@ app.get('/search', function(req, res) {
         function(error, result) {
       if (error) {
         res.status(400).send({
-          error: 'Error getting data from Elasticsearch',
-          message: result
+          message: 'Error getting data from Elasticsearch',
+          details: result
         });
 
       } else {
@@ -133,8 +133,8 @@ app.get('/search', function(req, res) {
             });
           } else {
             res.status(response.statusCode).send({
-              error: 'Error getting data from Histograph Core',
-              message: error
+              message 'Error getting data from Histograph Core',
+              details: error
             });
           }
         });
@@ -142,7 +142,7 @@ app.get('/search', function(req, res) {
     });
   } else {
     res.status(400).send({
-      error: 'Only one of the following search parameters allowed: ' +
+      message: 'Only one of the following search parameters allowed: ' +
           validSearchReqParams
               .map(function(param) { return '\'' + param + '\''; })
               .join(', ')
