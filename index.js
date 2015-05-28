@@ -10,17 +10,17 @@ var context = require('./data/jsonldContext.json');
 var app = express();
 var elasticsearch = require('./lib/elasticsearch');
 var CoreApiUri = 'http://' + config.core.traversal.host +
-        ':' + config.core.traversal.port +
-        '/';
+  ':' + config.core.traversal.port +
+  '/';
 var apiUri = config.api.host + (config.api.externalPort != 80 ? ':' + config.api.externalPort : '');
 var validSearchReqParams = [
-      'name',
-      'uri',
-      'hgid'
-    ];
+  'name',
+  'uri',
+  'hgid'
+];
 var validFilterReqParams = [
-      'type'
-    ];
+  'type'
+];
 
 app.use(cors());
 
@@ -133,7 +133,7 @@ app.get('/search', function(req, res) {
             });
           } else {
             res.status(response.statusCode).send({
-              message 'Error getting data from Histograph Core',
+              message: 'Error getting data from Histograph Core',
               details: error
             });
           }
