@@ -42,6 +42,7 @@ All Histograph API search calls expect one (_and one only_) of the following sea
 | `name`     | `name=Bussum`                            | Elasticsearch [query string](http://www.elastic.co/guide/en/elasticsearch/reference/1.x/query-dsl-query-string-query.html#query-string-syntax) on PIT names
 | `hgid`     | `hgid=tgn/7268026`                       | Exact match on `hgid`
 | `uri`      | `uri=http://vocab.getty.edu/tgn/7268026` | Exact match on `uri`
+| `q`        | `q=boskoop`                              | `uri` query if `q`'s value starts with `http`, `hgid` query if value contains `/`, `name` query otherwise
 
 #### Filters
 
