@@ -41,7 +41,7 @@ app.get('/search',
           message: err
         });
       } else {
-        res.send(jsonld(results, query));
+        res.send(jsonld(results, req.query));
       }
     });
   }
