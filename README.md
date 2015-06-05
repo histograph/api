@@ -79,7 +79,7 @@ Example search API GeoJSON output:
         ]
       },
       "geometry": {
-        "type": "GeometryCollection"
+        "type": "GeometryCollection",
         "geometries": [
           {
             "type": "Point",
