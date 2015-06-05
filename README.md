@@ -45,9 +45,6 @@ Each PIT can have its own name and geometry - you can find a PIT's geometry insi
 var pitGeometry = feature.geometry.geometries[pit.geometryIndex];
 ```
 
-
-
-
 Example search API GeoJSON output:
 
 ```json
