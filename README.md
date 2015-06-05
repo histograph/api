@@ -48,7 +48,7 @@ Example search API GeoJSON output:
 ```json
 {
   "@context": {
-    …
+    "…"
   },
   "type": "FeatureCollection",
   "features": [
@@ -58,15 +58,15 @@ Example search API GeoJSON output:
         "type": "hg:Street",
         "pits": [
           {
-            "@id": "source1/12345"
+            "@id": "source1/12345",
             "hgid": "source1/12345",
             "name": "Place",
             "type": "hg:Place",
             "source": "source1",
             "geometryIndex": 0,
             "data": {
-              …
-            }
+              "…"
+            },
             "relations": {
               "hg:sameHgConcept": [
                 {
@@ -77,13 +77,13 @@ Example search API GeoJSON output:
             }
           }
         ]
-      }
+      },
       "geometry": {
         "type": "GeometryCollection"
         "geometries": [
           {
-            "type": "Point"
-            "coordinates":[
+            "type": "Point",
+            "coordinates": [
               4.48741,
               52.15581
             ]
