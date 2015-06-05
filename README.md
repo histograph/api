@@ -42,7 +42,18 @@ Each Feature represents a [Histograph Concept](http://histograph.io/concepts#con
 Each PIT can have its own name and geometry - you can find a PIT's geometry inside its containing Concept's [GeometryCollection](http://geojson.org/geojson-spec.html#geometrycollection), where a PIT's `geometryIndex` property denoted the index of its geometry in the `geometries` array. __TL;DR__:
 
 ```js
-var pitGeometry = feature.geometry.geometries[pit.geometryIndex];
+geojson.features.forEach(function(feature) {
+
+  // Each feature is a Histograph Concept, and consists of a set of PITs
+  feature.properties.pits.forEach(function(pit) {
+
+    // A PIT has each own name, data source and identifier.
+    // And it's own geometry, too!
+    if (pit.geometryIndex > -1) {
+      var pitGeometry = feature.geometry.geometries[pit.geometryIndex];
+    }
+  });
+});
 ```
 
 Example search API GeoJSON output:
