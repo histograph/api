@@ -35,13 +35,18 @@ Histograph API currently has two endpoints:
 
 #### Results
 
-Results from the search API are [GeoJSON](http://geojson.org/) documents (with a [JSON-LD context](http://json-ld.org/)). Each Feature represents a [Histograph Concept](http://histograph.io/concepts#concepts). A Histograph Concept represents a single geospatial concept (i.e. a populated place, a country, a street, etc.), and consists of a set of [place-in-time objects (PITs)](http://histograph.io/concepts#place-in-time), connected by [`hg:sameHgConcept` relations](http://histograph.io/concepts#relations). For more information about Concepts, PITs and relations, see [histograph.io](http://histograph.io/concepts).
+Results from the search API are [GeoJSON](http://geojson.org/) documents (with a [JSON-LD context](http://json-ld.org/)). This means you can easily view the data on a map (with [Leaflet](http://leafletjs.com/examples/geojson.html), for example). Or just copy and paste API output into [geojson.io](http://geojson.io/).
+
+Each Feature represents a [Histograph Concept](http://histograph.io/concepts#concepts). A Histograph Concept represents a single geospatial concept (i.e. a populated place, a country, a street, etc.), and consists of a set of [place-in-time objects (PITs)](http://histograph.io/concepts#place-in-time), connected by [`hg:sameHgConcept` relations](http://histograph.io/concepts#relations). For more information about Concepts, PITs and relations, see [histograph.io](http://histograph.io/concepts).
 
 Each PIT can have its own name and geometry - you can find a PIT's geometry inside its containing Concept's [GeometryCollection](http://geojson.org/geojson-spec.html#geometrycollection), where a PIT's `geometryIndex` property denoted the index of its geometry in the `geometries` array. __TL;DR__:
 
 ```js
 var pitGeometry = feature.geometry.geometries[pit.geometryIndex];
 ```
+
+
+
 
 Example search API GeoJSON output:
 
