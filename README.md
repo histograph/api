@@ -33,8 +33,98 @@ Histograph API currently has two endpoints:
 |---------------|-----------------
 | `GET /search` | Search for place names
 
-*note* This only returns PITs with geometry or having a `SAMEHGCONCEPT`
+*Note*: This only returns PITs with geometry or having a `SAMEHGCONCEPT`
 relation to another PIT with geometry. 
+
+=======
+#### Results
+
+Results from the search API are [GeoJSON](http://geojson.org/) documents (with a [JSON-LD context](http://json-ld.org/)). This means you can easily view the data on a map (with [Leaflet](http://leafletjs.com/examples/geojson.html), for example). Or just copy and paste API output into [geojson.io](http://geojson.io/).
+
+Each Feature represents a [Histograph Concept](http://histograph.io/concepts#concepts). A Histograph Concept represents a single geospatial concept (i.e. a populated place, a country, a street, etc.), and consists of a set of [place-in-time objects (PITs)](http://histograph.io/concepts#place-in-time), connected by [`hg:sameHgConcept` relations](http://histograph.io/concepts#relations). For more information about Concepts, PITs and relations, see [histograph.io](http://histograph.io/concepts).
+
+Each PIT can have its own name and geometry - you can find a PIT's geometry inside its containing Concept's [GeometryCollection](http://geojson.org/geojson-spec.html#geometrycollection), where a PIT's `geometryIndex` property denoted the index of its geometry in the `geometries` array. __TL;DR__:
+
+```js
+geojson.features.forEach(function(feature) {
+
+  // Each feature is a Histograph Concept, and consists of a set of PITs
+  feature.properties.pits.forEach(function(pit) {
+
+    // A PIT has each own name, data source and identifier.
+    // And it's own geometry, too!
+    if (pit.geometryIndex > -1) {
+      var pitGeometry = feature.geometry.geometries[pit.geometryIndex];
+    }
+  });
+});
+```
+
+Example search API GeoJSON output:
+
+```json
+{
+  "@context": {
+    "…"
+  },
+  "type": "FeatureCollection",
+  "features": [
+    {
+      "type": "Feature",
+      "properties": {
+        "type": "hg:Street",
+        "pits": [
+          {
+            "@id": "source1/12345",
+            "hgid": "source1/12345",
+            "name": "Place",
+            "type": "hg:Place",
+            "source": "source1",
+            "geometryIndex": 0,
+            "data": {
+              "…"
+            },
+            "relations": {
+              "hg:sameHgConcept": [
+                {
+                  "@id": "source2/54321"
+                }
+              ],
+              "@id": "source1/12345"
+            }
+          }
+        ]
+      },
+      "geometry": {
+        "type": "GeometryCollection",
+        "geometries": [
+          {
+            "type": "Point",
+            "coordinates": [
+              4.48741,
+              52.15581
+            ]
+          }
+        ]
+      }
+    }
+  ]
+}
+```
+
+| Field           | Description
+|-----------------|------------------------------------------
+| `@context`      | [JSON-LD context](http://json-ld.org/)
+| `pits`          | Array of PITs in [Histograph Concept](http://histograph.io/concepts#concepts)
+| `hgid`          | Unique identifier of PIT
+| `@id`           | Same as `hgid`, used for JSON-LD serialization
+| `name`          | PIT name
+| `type`          | PIT type, see the [Histograph ontology](https://github.com/histograph/schemas/blob/master/ontology/histograph.ttl) for a list of accepted types
+| `source`        | ID of PIT's data source
+| `geometryIndex` | Index of PIT's geometry in GeometryCollection's `geometries` array; `-1` if PIT does not have a geometry
+| `data`          | JSON object containing extra PIT data
+| `relations`     | JSON object containing relations of PITs PIT is connected to
+| `geometry`      | GeoJSON [GeometryCollection](http://geojson.org/geojson-spec.html#geometrycollection) containing `geometries` array with all PIT geometries
 
 #### Parameters
 

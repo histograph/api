@@ -32,6 +32,7 @@ app.get('/', function(req, res) {
 });
 
 app.get('/search',
+  params.preprocess,
   params.check,
   function(req, res) {
     var searchParam = params.getSearchParam(req.query);
