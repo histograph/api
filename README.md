@@ -33,6 +33,9 @@ Histograph API currently has two endpoints:
 |---------------|-----------------
 | `GET /search` | Search for place names
 
+*note* This only returns PITs with geometry or having a `SAMEHGCONCEPT`
+relation to another PIT with geometry. 
+
 #### Parameters
 
 All Histograph API search calls expect one (_and one only_) of the following search parameters:
@@ -99,6 +102,14 @@ You can send NDJSON data in your PUT request's body when you are uploading a sma
 #### Authentication
 
 All `POST`, `PATCH`, `PUT` and `DELETE` requests require [basic authentication](http://en.wikipedia.org/wiki/Basic_access_authentication) via HTTPS.
+
+#### Examples
+
+Using [httpie](https://github.com/jakubroztocil/httpie)
+
+	http --auth erfgeo:erfgeo --form PUT https://api.erfgeo.nl/sources/menno/pits "file@/tmp/menno/pits.ndjson"
+
+Please notice that PITs without geometry don't show up in the search results.
 
 ## License
 
