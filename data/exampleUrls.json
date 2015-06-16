@@ -9,5 +9,5 @@
   "/search?name=gorinchem",
   "/search?name=gorinchem&exact=true",
   "/search?name=amsterdam&hg:liesIn=drenthe",
-  "/search?name=keizersgracht,eindhoven"
+  "/search?q=amsterdam,drenthe"
 ]
