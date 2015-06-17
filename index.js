@@ -6,6 +6,7 @@ var app = express();
 var query = require('./lib/query');
 var queue = require('./lib/queue');
 var jsonld = require('./lib/jsonld');
+var filter = require('./lib/filter');
 var params = require('./lib/params');
 var exampleUrls = require('./data/exampleUrls.json');
 
@@ -42,7 +43,8 @@ app.get('/search',
           message: err
         });
       } else {
-        res.send(jsonld(results, req.query));
+        results = jsonld(filter(results, req.query), req.query);
+        res.send(results);
       }
     });
   }
