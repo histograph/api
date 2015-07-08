@@ -6,8 +6,10 @@ var app = express();
 var query = require('./lib/query');
 var queue = require('./lib/queue');
 var jsonld = require('./lib/jsonld');
+var geojson = require('./lib/geojson');
 var filter = require('./lib/filter');
 var params = require('./lib/params');
+var graph = require('./lib/graph');
 var exampleUrls = require('./data/exampleUrls.json');
 
 var apiUri = config.api.host + (config.api.externalPort != 80 ? ':' + config.api.externalPort : '');
@@ -43,7 +45,7 @@ app.get('/search',
           message: err
         });
       } else {
-        results = jsonld(filter(results, req.query), req.query);
+        results = jsonld(filter(geojson(results), req.query), req.query);
         res.send(results);
       }
     });
