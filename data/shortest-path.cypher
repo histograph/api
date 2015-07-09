@@ -1,6 +1,6 @@
 MATCH
-  path = shortestPath((p:PIT)-[r:SAMEHGCONCEPT|LIESIN*1..6]->(q:PIT))
+  path = shortestPath((p:_)-[r:hg_liesIn|hg_sameHgConcept*1..10]->(q:_))
 WHERE
-  p.hgid IN {hgidsFrom} AND q.hgid IN {hgidsTo}
+  p.id IN {idsFrom} AND q.id IN {idsTo}
 RETURN DISTINCT
-  p.hgid
+  p.id

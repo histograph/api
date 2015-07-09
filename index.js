@@ -9,8 +9,7 @@ var jsonld = require('./lib/jsonld');
 var geojson = require('./lib/geojson');
 var filter = require('./lib/filter');
 var params = require('./lib/params');
-var graph = require('./lib/graph');
-var exampleUrls = require('./data/exampleUrls.json');
+var exampleUrls = require('./data/example-urls.json');
 
 var apiUri = config.api.host + (config.api.externalPort != 80 ? ':' + config.api.externalPort : '');
 
@@ -50,6 +49,7 @@ app.get('/search',
       }
     });
   }
+
 );
 
 app.listen(config.api.internalPort, function() {

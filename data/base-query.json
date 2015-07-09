@@ -2,7 +2,7 @@
   "size": 50,
   "_source": [
     "name",
-    "hgid"
+    "id"
   ],
   "query": {
     "filtered": {

@@ -10,10 +10,7 @@
     "@id": "type",
     "@type": "@id"
   },
-  "uri": {
-    "@id": "owl:sameAs",
-    "@type": "@id"
-  },
+  "hairs": "_:hairs",
   "relations": "_:relations",
   "properties": "_:properties",
   "pits": "_:pits",
