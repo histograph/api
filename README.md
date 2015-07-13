@@ -34,7 +34,7 @@ Histograph API currently has two endpoints:
 | `GET /search` | Search for place names
 
 *Note*: This only returns PITs with geometry or having a `SAMEHGCONCEPT`
-relation to another PIT with geometry. 
+relation to another PIT with geometry.
 
 =======
 #### Results
@@ -132,7 +132,7 @@ All Histograph API search calls expect one (_and one only_) of the following sea
 
 | Parameter  | Example                                  | Description
 |------------|------------------------------------------|-----------------
-| `name`     | `name=Bussum`                            | Elasticsearch [query string](http://www.elastic.co/guide/en/elasticsearch/reference/1.x/query-dsl-query-string-query.html#query-string-syntax) on PIT names
+| `name`     | `name=Bussum`                            | Elasticsearch [query string](https://www.elastic.co/guide/en/elasticsearch/reference/1.6/query-dsl-query-string-query.html) on PIT names
 | `hgid`     | `hgid=tgn/7268026`                       | Exact match on `hgid`
 | `uri`      | `uri=http://vocab.getty.edu/tgn/7268026` | Exact match on `uri`
 | `q`        | `q=boskoop`                              | `uri` query if `q`'s value starts with `http`, `hgid` query if value contains `/`, `name` query otherwise
