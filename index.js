@@ -7,7 +7,6 @@ var query = require('./lib/query');
 var queue = require('./lib/queue');
 var jsonld = require('./lib/jsonld');
 var geojson = require('./lib/geojson');
-var filter = require('./lib/filter');
 var params = require('./lib/params');
 var exampleUrls = require('./data/example-urls.json');
 
@@ -37,19 +36,17 @@ app.get('/search',
   params.preprocess,
   params.check,
   function(req, res) {
-    var searchParam = params.getSearchParam(req.query);
-    query(searchParam.type, searchParam.value, req.query, function(err, results) {
+    query(req.processedQuery, function(err, results) {
       if (err) {
         res.status(400).send({
           message: err
         });
       } else {
-        results = jsonld(filter(geojson(results), req.query), req.query);
+        results = jsonld(geojson(results), req.query);
         res.send(results);
       }
     });
   }
-
 );
 
 app.listen(config.api.internalPort, function() {

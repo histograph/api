@@ -33,3 +33,9 @@ https://api.histograph.io/search?q=amsterdam&hg:liesIn=bag/amsterdam
 https://api.histograph.io/search?q=amsterdam&hg:liesIn=POLYGON(53.2343,5.32 54.32,4.4555)
 https://api.histograph.io/search?q=amsterdam&hg:before=1954
 https://api.histograph.io/search?q=amsterdam&hg:before=periods/gouden-eeuw
+
+
+
+
+
+https://github.com/erfgoed-en-locatie/historische-geocoder/blob/7a204712c86c118b8c544a790e3e765427843003/docs/voorbeeldqueries.md
