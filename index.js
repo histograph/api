@@ -47,6 +47,7 @@ app.get('/search',
       }
     });
   }
+
 );
 
 app.listen(config.api.internalPort, function() {
