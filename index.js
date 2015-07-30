@@ -1,10 +1,10 @@
 var express = require('express');
 var cors = require('cors');
 var config = require(process.env.HISTOGRAPH_CONFIG);
-var io = require(config.api.io);
+var io = require('histograph-io');
+var stats = require('histograph-stats');
 var app = express();
 var query = require('./lib/query');
-var queue = require('./lib/queue');
 var jsonld = require('./lib/jsonld');
 var geojson = require('./lib/geojson');
 var params = require('./lib/params');
@@ -17,15 +17,15 @@ app.use(cors());
 // Mount Histograph IO
 app.use('/', io);
 
-// TODO: move status code to new repo?!
-app.get('/status/queue', queue.status);
+// Mount Histograph Stats
+app.use('/stats', stats);
 
 app.get('/', function(req, res) {
   res.send({
     name: 'Histograph API',
-    version: '0.1.3',
-    message: 'Histograph - historical geocoder (alpha version)',
-    docs: 'http://histograph.io/docs',
+    version: '0.5.0',
+    message: 'Histograph - Historical Geocoder',
+    docs: 'http://histograph.io/',
     examples: exampleUrls.map(function(query) {
       return 'https://' + apiUri + query;
     })

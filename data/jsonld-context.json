@@ -2,8 +2,8 @@
   "@base": "http://erfgeo.nl/hg/",
   "@vocab": "http://erfgeo.nl/",
   "features": "_:features",
-  "source": {
-    "@id": "source",
+  "dataset": {
+    "@id": "dataset",
     "@type": "@id"
   },
   "type": {

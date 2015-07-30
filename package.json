@@ -1,6 +1,6 @@
 {
   "name": "histograph-api",
-  "version": "0.0.1",
+  "version": "0.5.0",
   "description": "API for Histograph",
   "main": "./index.js",
   "dependencies": {
@@ -10,14 +10,16 @@
     "elasticsearch": "^3.1.3",
     "express": "^4.8.8",
     "highland": "^2.5.1",
-    "histograph-uri-normalizer": "git://github.com/histograph/uri-normalizer",
     "is-my-json-valid": "^2.12.0",
     "neo4j": "^2.0.0-RC1",
     "optimist": "~0.6.1",
     "path": "~0.11.14",
     "redis": "^0.12.1",
     "request": "^2.53.0",
-    "wellknown": "^0.3.1"
+    "wellknown": "^0.3.1",
+    "histograph-uri-normalizer": "histograph/uri-normalizer",
+    "histograph-io": "git://github.com/histograph/io.git#graphmalizer",
+    "histograph-stats": "histograph/stats"
   },
   "devDependencies": {
     "mocha": "^2.2.1",
@@ -44,7 +46,7 @@
       "email": "rutger@waag.org"
     }
   ],
-  "license": "GPLv3",
+  "license": "GPL-3.0",
   "jshintConfig": {
     "node": true,
     "globalstrict": false,
