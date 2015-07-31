@@ -1,6 +1,6 @@
 var express = require('express');
 var cors = require('cors');
-var config = require(process.env.HISTOGRAPH_CONFIG);
+var config = require('histograph-config');
 var io = require('histograph-io');
 var stats = require('histograph-stats');
 var app = express();
@@ -10,7 +10,7 @@ var geojson = require('./lib/geojson');
 var params = require('./lib/params');
 var exampleUrls = require('./data/example-urls.json');
 
-var apiUri = config.api.host + (config.api.externalPort != 80 ? ':' + config.api.externalPort : '');
+var apiUri = config.api.baseUrl || ('http://' + config.api.host + ':' + config.api.port);
 
 app.use(cors());
 
@@ -27,7 +27,7 @@ app.get('/', function(req, res) {
     message: 'Histograph - Historical Geocoder',
     docs: 'http://histograph.io/',
     examples: exampleUrls.map(function(query) {
-      return 'https://' + apiUri + query;
+      return apiUri + query;
     })
   });
 });
@@ -50,7 +50,7 @@ app.get('/search',
 
 );
 
-app.listen(config.api.internalPort, function() {
+app.listen(config.api.port, function() {
   console.log(config.logo.join('\n'));
-  console.log('Histograph API listening at port ' + config.api.internalPort);
+  console.log('Histograph API listening at port ' + config.api.port);
 });

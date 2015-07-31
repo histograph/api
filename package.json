@@ -19,7 +19,8 @@
     "wellknown": "^0.3.1",
     "histograph-uri-normalizer": "histograph/uri-normalizer",
     "histograph-io": "git://github.com/histograph/io.git#graphmalizer",
-    "histograph-stats": "histograph/stats"
+    "histograph-stats": "histograph/stats",
+    "histograph-config": "histograph/config"
   },
   "devDependencies": {
     "mocha": "^2.2.1",
