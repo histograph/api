@@ -10,4 +10,4 @@ MATCH n <-[:`=`]- (nConcept:`=`)
 MATCH p = allShortestPaths( mConcept -[:`=R` * 1 .. 8 ]-> nConcept )
 WHERE all(r IN relationships(p) WHERE r.label IN {relations})
 
-RETURN DISTINCT m.id
+RETURN DISTINCT m.id AS id
