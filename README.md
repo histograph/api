@@ -5,6 +5,10 @@ Histograph JSON API. To start Histograph API, run
     npm install
     node index.js
 
+Running in "production", using `forever`
+
+    forever start -a --uid "api" index.js --prod --config ~/my-config.yml
+
 ## Installation
 
 See [histograph.io/installation](http://histograph.io/installation).
