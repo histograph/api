@@ -111,16 +111,16 @@ Example search API GeoJSON output:
 |-----------------|------------------------------------------
 | `@context`      | [JSON-LD context](http://json-ld.org/)
 | `pits`          | Array of PITs in [Histograph Concept](http://histograph.io/concepts#concepts)
-| `id`            | (External) URI - unique PIT identifier
-| `uri`           | Dataset-internal ID - unique PIT identifier
+| `uri`            | (External) URI - unique PIT identifier
+| `id`           | Dataset-internal identifier - unique PIT identifier
 | `@id`           | Same as either `uri` or `id`, used for JSON-LD serialization
 | `name`          | PIT name
 | `type`          | PIT type, see the [Histograph ontology](https://github.com/histograph/schemas/blob/master/ontology/histograph.ttl) for a list of accepted types
-| `dataset`       | Dataset ID
+| `dataset`       | Dataset identifier
 | `geometryIndex` | Index of PIT's geometry in GeometryCollection's `geometries` array; `-1` if PIT does not have a geometry
 | `data`          | JSON object containing extra PIT data
-| `relations`     | JSON object containing relations of PITs PIT is connected to
-| `hairs`         |
+| `relations`     | Outgoing relations of PIT
+| `hairs`         | URI and name of each outgoing relation's target PIT
 | `geometry`      | GeoJSON [GeometryCollection](http://geojson.org/geojson-spec.html#geometrycollection) containing `geometries` array with all PIT geometries
 
 #### Parameters
