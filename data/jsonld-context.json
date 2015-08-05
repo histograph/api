@@ -2,18 +2,15 @@
   "@base": "http://erfgeo.nl/hg/",
   "@vocab": "http://erfgeo.nl/",
   "features": "_:features",
-  "source": {
-    "@id": "source",
+  "dataset": {
+    "@id": "dataset",
     "@type": "@id"
   },
   "type": {
     "@id": "type",
     "@type": "@id"
   },
-  "uri": {
-    "@id": "owl:sameAs",
-    "@type": "@id"
-  },
+  "hairs": "_:hairs",
   "relations": "_:relations",
   "properties": "_:properties",
   "pits": "_:pits",

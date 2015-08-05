@@ -3,29 +3,28 @@
 Histograph JSON API. To start Histograph API, run
 
     npm install
-    forever index.js
+    node index.js
 
-Prerequisites:
+Running in "production", using `forever`
 
-- Running version of [Histograph Core](https://github.com/histograph/core),
-- Running version of Elasticsearch, with Histograph indexes created by Histograph Core
-- `HISTOGRAPH_CONFIG` environment variable pointing to [Histograph configuration file](https://github.com/histograph/config)
-- Directory containing [Histograph IO](https://github.com/histograph/io)
-- [Redis](http://redis.io/)
+    forever start -a --uid "api" index.js --prod --config ~/my-config.yml
 
-Some example URLs:
+## Installation
+
+See [histograph.io/installation](http://histograph.io/installation).
+
+## Examples
 
 - https://api.histograph.io/search?name=utrecht
-- https://api.histograph.io/search?hgid=geonames/2758064
 - https://api.histograph.io/search?uri=http://vocab.getty.edu/tgn/7271174
 - https://api.histograph.io/search?name=amsterdam&type=hg:Municipality
 
 ## API specification
 
-Histograph API currently has two endpoints:
+Histograph API has two endpoints:
 
 - [`/search`](#search-api): geocoding, searching place names
-- [`/sources`](#sources-api): source metadata, rejected edges
+- [`/datasets`](#datsets-api): dataset metadata
 
 ### Search API
 
@@ -33,10 +32,6 @@ Histograph API currently has two endpoints:
 |---------------|-----------------
 | `GET /search` | Search for place names
 
-*Note*: This only returns PITs with geometry or having a `SAMEHGCONCEPT`
-relation to another PIT with geometry. 
-
-=======
 #### Results
 
 Results from the search API are [GeoJSON](http://geojson.org/) documents (with a [JSON-LD context](http://json-ld.org/)). This means you can easily view the data on a map (with [Leaflet](http://leafletjs.com/examples/geojson.html), for example). Or just copy and paste API output into [geojson.io](http://geojson.io/).
@@ -51,7 +46,7 @@ geojson.features.forEach(function(feature) {
   // Each feature is a Histograph Concept, and consists of a set of PITs
   feature.properties.pits.forEach(function(pit) {
 
-    // A PIT has each own name, data source and identifier.
+    // A PIT has each own name, dataset and URI or ID.
     // And it's own geometry, too!
     if (pit.geometryIndex > -1) {
       var pitGeometry = feature.geometry.geometries[pit.geometryIndex];
@@ -75,11 +70,11 @@ Example search API GeoJSON output:
         "type": "hg:Street",
         "pits": [
           {
-            "@id": "source1/12345",
-            "hgid": "source1/12345",
+            "@id": "dataset1/12345",
+            "hgid": "dataset1/12345",
             "name": "Place",
             "type": "hg:Place",
-            "source": "source1",
+            "dataset": "dataset1",
             "geometryIndex": 0,
             "data": {
               "…"
@@ -87,10 +82,10 @@ Example search API GeoJSON output:
             "relations": {
               "hg:sameHgConcept": [
                 {
-                  "@id": "source2/54321"
+                  "@id": "dataset2/54321"
                 }
               ],
-              "@id": "source1/12345"
+              "@id": "dataset1/12345"
             }
           }
         ]
@@ -116,34 +111,42 @@ Example search API GeoJSON output:
 |-----------------|------------------------------------------
 | `@context`      | [JSON-LD context](http://json-ld.org/)
 | `pits`          | Array of PITs in [Histograph Concept](http://histograph.io/concepts#concepts)
-| `hgid`          | Unique identifier of PIT
-| `@id`           | Same as `hgid`, used for JSON-LD serialization
+| `uri`            | (External) URI - unique PIT identifier
+| `id`           | Dataset-internal identifier - unique PIT identifier
+| `@id`           | Same as either `uri` or `id`, used for JSON-LD serialization
 | `name`          | PIT name
 | `type`          | PIT type, see the [Histograph ontology](https://github.com/histograph/schemas/blob/master/ontology/histograph.ttl) for a list of accepted types
-| `source`        | ID of PIT's data source
+| `dataset`       | Dataset identifier
 | `geometryIndex` | Index of PIT's geometry in GeometryCollection's `geometries` array; `-1` if PIT does not have a geometry
 | `data`          | JSON object containing extra PIT data
-| `relations`     | JSON object containing relations of PITs PIT is connected to
+| `relations`     | Outgoing relations of PIT
+| `hairs`         | URI and name of each outgoing relation's target PIT
 | `geometry`      | GeoJSON [GeometryCollection](http://geojson.org/geojson-spec.html#geometrycollection) containing `geometries` array with all PIT geometries
 
 #### Parameters
 
-All Histograph API search calls expect one (_and one only_) of the following search parameters:
+All Histograph API search calls expect at least one of the following parameters:
 
-| Parameter  | Example                                  | Description
-|------------|------------------------------------------|-----------------
-| `name`     | `name=Bussum`                            | Elasticsearch [query string](http://www.elastic.co/guide/en/elasticsearch/reference/1.x/query-dsl-query-string-query.html#query-string-syntax) on PIT names
-| `hgid`     | `hgid=tgn/7268026`                       | Exact match on `hgid`
-| `uri`      | `uri=http://vocab.getty.edu/tgn/7268026` | Exact match on `uri`
-| `q`        | `q=boskoop`                              | `uri` query if `q`'s value starts with `http`, `hgid` query if value contains `/`, `name` query otherwise
+| Parameter    | Example                                    | Description
+|--------------|--------------------------------------------|-----------------
+| `name`       | `name=Bussum`                              | Elasticsearch [query string](https://www.elastic.co/guide/en/elasticsearch/reference/1.6/query-dsl-query-string-query.html) on PIT names
+| `uri`        | `uri=http://vocab.getty.edu/tgn/7268026`   | Exact match on `uri`
+| `id`         | `id=dataset1/123`                          | Exact match on `id` (dataset internal)
+| `q`          | `q=boskoop`                                | `uri` query if `q`'s value starts with `http`, `id` query if value contains `/`, `name` query otherwise
+| `type`       | `type=hg:Place`                            | Filter on PIT type (or comma-separated list of types). See the [Histograph ontology](https://github.com/histograph/schemas/blob/master/ontology/histograph.ttl) for a list of valid types
+| `dataset`    | `datset=tgn,geonames`                      | Filter on dataset ID (or comma-separated list of IDs)
+| `intersects` | `intersects=4.9308,52.7126,5.1601,52.5751` | Four-coordinate bounding box, GeoJSON string or WKT string specifying the bounding box or polygon PITs have to intersect
+| `before`     | `before=1950`                              |
+| `after`      | `after=1910-10-12`                         |
 
-#### Filters
+#### Related PITs
 
-| Parameter | Example         | Description
-|-----------|-----------------|---------------------
-| `type`    | `type=hg:Place` | Filter on PIT type
+Histograph can also search for PITs which have a certain relation (or path or relations) to other PITs. By specifying this relation with the `related` parameter, one can search for PITs with a `hg:liesIn` or `hg:originatedFrom` relation, for example.
 
-See the [Histograph ontology](https://github.com/histograph/schemas/blob/master/ontology/histograph.ttl) for a list of valid types.
+| Parameter            | Example               | Description
+|----------------------|-----------------------|---------------------
+| `related`            | `related=hg:liesIn`   | `related` must be one (or more, comma-separated) of the relations specified in the [Histograph ontology](https://github.com/histograph/schemas/blob/master/ontology/histograph.ttl) or [`JSON schema`](https://github.com/histograph/schemas/tree/master/json/relations.schema.json)
+| `related.:parameter` | `related.name=arnhem` | Any of the parameters above can be used to filter related PITs
 
 #### Flags
 
@@ -164,26 +167,25 @@ value is `false`.
 | `name=Gorinchem&exact=true`  | Search for exact PIT names, searches only for PITs exactly named _Gorinchem_
 | `name=gOrINchEm&exact=true`  | Same as the previous, as this search is case-insensitive
 
-### Sources API
+### Datasets API
 
 | Endpoint                                  | Data      | Description
 |-------------------------------------------|-----------|-------------------------------
-| `GET /sources`                            |           | All sources available via Histograph
-| `GET /sources/:source`                    |           | Metadata of single source
-| `GET /sources/:source/pits`               |           | All PITs of single source
-| `GET /sources/:source/relations`          |           | All relations of single source
-| `GET /sources/:source/rejected_relations` |           | Rejected relations of a single source
-| `POST /sources`                           | Source    | Create new source
-| `PATCH /sources/:source`                  | Source    | Update existing source
-| `PUT /sources/:source/pits`               | PITs      | Update all pits of single source
-| `PUT /sources/:source/relations`          | Relations | Update all relations of single source
-| `DELETE /sources/:source`                 |           | Delete a source completely
+| `GET /datasets`                           |           | All dataset available via Histograph
+| `GET /datasets/:dataset`                  |           | Metadata of single dataset
+| `GET /datasets/:dataset/pits`             |           | All PITs of single dataset
+| `GET /datasets/:dataset/relations`        |           | All relations of single dataset
+| `POST /datasets`                          | Dataset   | Create new, empty dataset
+| `PATCH /datasets/:dataset`                | Dataset   | Update existing dataset
+| `PUT /datasets/:dataset/pits`             | PITs      | Update all pits of single dataset
+| `PUT /datasets/:dataset/relations`        | Relations | Update all relations of single dataset
+| `DELETE /datasets/:dataset`               |           | Delete a dataset completely
 
 #### Data
 
 | Type      | Format                       | MIME type              | JSON schema
 |-----------|------------------------------|------------------------|------------
-| Source    | JSON                         | `application/json`     | [`source.schema.json`](https://github.com/histograph/schemas/tree/master/json/source.schema.json)
+| Dataset   | JSON                         | `application/json`     | [`dataset.schema.json`](https://github.com/histograph/schemas/tree/master/json/dataset.schema.json)
 | PITs      | [NDJSON](http://ndjson.org/) | `application/x-ndjson` | [`pits.schema.json`](https://github.com/histograph/schemas/tree/master/json/pits.schema.json)
 | Relations | [NDJSON](http://ndjson.org/) | `application/x-ndjson` | [`relations.schema.json`](https://github.com/histograph/schemas/tree/master/json/relations.schema.json)
 
@@ -193,14 +195,8 @@ You can send NDJSON data in your PUT request's body when you are uploading a sma
 
 All `POST`, `PATCH`, `PUT` and `DELETE` requests require [basic authentication](http://en.wikipedia.org/wiki/Basic_access_authentication) via HTTPS.
 
-#### Examples
-
-Using [httpie](https://github.com/jakubroztocil/httpie)
-
-	http --auth erfgeo:erfgeo --form PUT https://api.erfgeo.nl/sources/menno/pits "file@/tmp/menno/pits.ndjson"
-
-Please notice that PITs without geometry don't show up in the search results.
-
 ## License
+
+Copyright (C) 2015 [Waag Society](http://waag.org).
 
 The source for Histograph is released under the GNU General Public License as published by the Free Software Foundation, either version 3 of the License, or (at your option) any later version.

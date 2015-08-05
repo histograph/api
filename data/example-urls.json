@@ -1,0 +1,10 @@
+[
+  "/datasets",
+  "/search?q=hezingen",
+  "/search?uri=http://vocab.getty.edu/tgn/7271174",
+  "/search?name=hoorn&type=Municipality",
+  "/search?name=amsterdam&related=liesIn&related.q=drenthe",
+  "/search?q=amsterdam,drenthe",
+  "/search?q=nymegen&before=1600",
+  "/search?q=kerkstraat&intersects={\"type\":\"Polygon\",\"coordinates\":[[[4.601383,52.64545],[4.601383,52.67742],[4.666442,52.67742],[4.666442,52.64545],[4.601383,52.64545]]]}"
+]
