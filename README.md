@@ -25,6 +25,7 @@ Histograph API has two endpoints:
 
 - [`/search`](#search-api): geocoding, searching place names
 - [`/datasets`](#datsets-api): dataset metadata
+- [`/ontology`](#ontology-api): Histograph ontology
 
 ### Search API
 
@@ -194,6 +195,12 @@ You can send NDJSON data in your PUT request's body when you are uploading a sma
 #### Authentication
 
 All `POST`, `PATCH`, `PUT` and `DELETE` requests require [basic authentication](http://en.wikipedia.org/wiki/Basic_access_authentication) via HTTPS.
+
+### Ontology API
+
+| Endpoint        | Data                   | Description
+|-----------------|------------------------|-------------------------------
+| `GET /ontology` | Turtle/N3 RDF ontology | Histograph ontology, all types and relations
 
 ## License
 
