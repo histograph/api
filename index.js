@@ -2,6 +2,7 @@ var url = require('url');
 var express = require('express');
 var cors = require('cors');
 var config = require('histograph-config');
+var schemas = require('histograph-schemas');
 var io = require('histograph-io');
 var stats = require('histograph-stats');
 var app = express();
@@ -19,6 +20,11 @@ app.use('/', io);
 // Mount Histograph Stats
 app.use('/stats', stats);
 
+var ontology;
+schemas.ontology(function(err, results) {
+  ontology = results;
+});
+
 app.get('/', function(req, res) {
   res.send({
     name: 'Histograph API',
@@ -29,6 +35,11 @@ app.get('/', function(req, res) {
       return url.resolve(config.api.baseUrl, query);
     })
   });
+});
+
+app.get('/ontology', function(req, res) {
+  res.set('Content-Type', 'text/turtle');
+  res.send(ontology);
 });
 
 app.get('/search',
