@@ -25,6 +25,7 @@ Histograph API has two endpoints:
 
 - [`/search`](#search-api): geocoding, searching place names
 - [`/datasets`](#datsets-api): dataset metadata
+- [`/ontology`](#ontology-api): Histograph ontology
 
 ### Search API
 
@@ -111,11 +112,11 @@ Example search API GeoJSON output:
 |-----------------|------------------------------------------
 | `@context`      | [JSON-LD context](http://json-ld.org/)
 | `pits`          | Array of PITs in [Histograph Concept](http://histograph.io/concepts#concepts)
-| `uri`            | (External) URI - unique PIT identifier
-| `id`           | Dataset-internal identifier - unique PIT identifier
+| `uri`           | (External) URI - unique PIT identifier
+| `id`            | Dataset-internal identifier - unique PIT identifier
 | `@id`           | Same as either `uri` or `id`, used for JSON-LD serialization
 | `name`          | PIT name
-| `type`          | PIT type, see the [Histograph ontology](https://github.com/histograph/schemas/blob/master/ontology/histograph.ttl) for a list of accepted types
+| `type`          | PIT type, see the [Histograph ontology](https://api.histograph.io/ontology) for a list of accepted types
 | `dataset`       | Dataset identifier
 | `geometryIndex` | Index of PIT's geometry in GeometryCollection's `geometries` array; `-1` if PIT does not have a geometry
 | `data`          | JSON object containing extra PIT data
@@ -194,6 +195,12 @@ You can send NDJSON data in your PUT request's body when you are uploading a sma
 #### Authentication
 
 All `POST`, `PATCH`, `PUT` and `DELETE` requests require [basic authentication](http://en.wikipedia.org/wiki/Basic_access_authentication) via HTTPS.
+
+### Ontology API
+
+| Endpoint        | Data                   | Description
+|-----------------|------------------------|-------------------------------
+| `GET /ontology` | Turtle/N3 RDF ontology | Histograph ontology, all types and relations
 
 ## License
 

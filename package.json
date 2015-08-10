@@ -19,6 +19,7 @@
     "wellknown": "^0.3.1",
     "histograph-uri-normalizer": "histograph/uri-normalizer",
     "histograph-io": "histograph/io",
+    "histograph-schemas": "histograph/schemas",
     "histograph-stats": "histograph/stats",
     "histograph-config": "histograph/config"
   },
