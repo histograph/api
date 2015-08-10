@@ -11,6 +11,6 @@ WITH m, n, coalesce(nConcept, n) AS to,
      coalesce(mConcept, m) AS from LIMIT 1
 
 // ensure we have a path
-MATCH p = shortestPath(from -[:liesIn|`=` * 1 .. 6]-> to)
+MATCH p = shortestPath(from -[:`hg:liesIn`|`=`|`=i` * 1 .. 6]-> to)
 
 RETURN DISTINCT m.id AS id
