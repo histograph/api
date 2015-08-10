@@ -26,6 +26,7 @@ Histograph API has two endpoints:
 - [`/search`](#search-api): geocoding, searching place names
 - [`/datasets`](#datsets-api): dataset metadata
 - [`/ontology`](#ontology-api): Histograph ontology
+- [`/schemas`](#json-schemas-api): JSON schemas
 
 ### Search API
 
@@ -201,6 +202,13 @@ All `POST`, `PATCH`, `PUT` and `DELETE` requests require [basic authentication](
 | Endpoint        | Data                   | Description
 |-----------------|------------------------|-------------------------------
 | `GET /ontology` | Turtle/N3 RDF ontology | Histograph ontology, all types and relations
+
+### JSON schemas API
+
+| Endpoint                 | Data                                   | Description
+|--------------------------|----------------------------------------|-------------------------------
+| `GET /schemas/pits`      | [JSON schema](http://json-schema.org/) | JSON schema for PITs
+| `GET /schemas/relations` | JSON schema                            | JSON schema for relations
 
 ## License
 

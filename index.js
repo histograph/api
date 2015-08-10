@@ -42,6 +42,10 @@ app.get('/ontology', function(req, res) {
   res.send(ontology);
 });
 
+app.get('/schemas/:schema(pits|relations)', function(req, res) {
+  res.send(schemas[req.params.schema]);
+});
+
 app.get('/search',
   params.preprocess,
   params.check,
