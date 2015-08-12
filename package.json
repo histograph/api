@@ -30,7 +30,7 @@
   },
   "scripts": {
     "start": "node index.js",
-    "test": "jshint index.js lib test && jscs index.js lib test && node_modules/.bin/mocha test/test.js"
+    "test": "jshint index.js lib && jscs index.js lib"
   },
   "repository": {
     "type": "git",
