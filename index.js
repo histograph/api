@@ -56,7 +56,7 @@ app.get('/search',
           message: err
         });
       } else {
-        results = jsonld(geojson(results), req.query);
+        results = jsonld(geojson(results, req.processedQuery), req.processedQuery);
         res.send(results);
       }
     });
