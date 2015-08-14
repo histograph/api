@@ -2,7 +2,7 @@
   "/datasets",
   "/ontology",
   "/schemas/pits",
-  "/schemas/relations,"
+  "/schemas/relations",
   "/stats/queue",
   "/stats/queries",
   "/stats/queries/types-per-dataset",
