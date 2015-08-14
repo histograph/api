@@ -9,7 +9,6 @@ WITH ids, coalesce(concepts, ids) AS matched
 
 // find paths
 MATCH (found:_) «directionFrom» [:«relations»|`=`|`=i` * 3 .. 9] «directionTo» matched
-//MATCH shortestPath((found:_) «directionFrom» [:«relations»|`=`|`=i` * .. 6] «directionTo» matched)
 
 WHERE NOT found:_Rel AND NOT found:`=`
 RETURN DISTINCT found.id AS id
