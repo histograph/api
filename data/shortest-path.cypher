@@ -7,7 +7,8 @@ OPTIONAL MATCH m <-[:`=`]- (mConcept:`=`)
 OPTIONAL MATCH n <-[:`=`]- (nConcept:`=`)
 
 // choose the right node (EC if there, otherwise only member)
-WITH coalesce(nConcept, n) AS to,
+WITH m,
+     coalesce(nConcept, n) AS to,
      coalesce(mConcept, m) AS from
 
 // ensure we have a path
