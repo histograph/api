@@ -12,5 +12,5 @@
   "/search?name=amsterdam&related=hg:liesIn&related.q=drenthe",
   "/search?q=amsterdam,drenthe",
   "/search?q=nymegen&before=1600",
-  "/search?q=kerkstraat&intersects={\"type\":\"Polygon\",\"coordinates\":[[[4.601383,52.64545],[4.601383,52.67742],[4.666442,52.67742],[4.666442,52.64545],[4.601383,52.64545]]]}"
+  "/search?q=hoorn&intersects={%22type%22:%22Polygon%22,%22coordinates%22:[[[4.7316,53.0150],[4.7316,53.0310],[4.7766,53.0310],[4.77664,53.0150],[4.7316,53.0150]]]}"
 ]
