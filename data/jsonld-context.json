@@ -1,6 +1,6 @@
 {
-  "@base": "http://erfgeo.nl/hg/",
-  "@vocab": "http://erfgeo.nl/",
+  "@base": null,
+  "@vocab": null,
   "features": "_:features",
   "dataset": {
     "@id": "dataset",
