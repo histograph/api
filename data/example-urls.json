@@ -8,7 +8,7 @@
   "/stats/queries/types-per-dataset",
   "/search?q=hezingen",
   "/search?uri=http://vocab.getty.edu/tgn/7271174",
-  "/search?name=hoorn&type=Municipality",
+  "/search?name=hoorn&type=hg:Municipality",
   "/search?name=amsterdam&related=hg:liesIn&related.q=drenthe",
   "/search?q=amsterdam,drenthe",
   "/search?q=nymegen&before=1600",
