@@ -152,9 +152,10 @@ Histograph can also search for PITs which have a certain relation (or path or re
 
 #### Flags
 
-| Parameter | Example          | Description
-|-----------|------------------|---------------------
-| `geometry`| `geometry=false` | When set to `false`, the API will not return GeoJSON geometries. Default is `true`.
+| Parameter           | Example                  | Description
+|---------------------|--------------------------|---------------------
+| `geometry`          | `geometry=false`         | When set to `false`, the API will not return GeoJSON geometries. Default is `true`.
+| `simplify-geometry` | `simplify-geometry=true` | When `true`, all geometries only the [centroid geometries](https://github.com/Turfjs/turf-centroid) of each concept will be returned. Default is `false`.
 
 #### Exact name search
 
