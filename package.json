@@ -19,7 +19,6 @@
     "neo4j": "^2.0.0-RC1",
     "optimist": "~0.6.1",
     "path": "~0.11.14",
-    "redis": "^0.12.1",
     "request": "^2.53.0",
     "turf-centroid": "^1.1.2",
     "wellknown": "^0.3.1"
