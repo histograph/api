@@ -211,8 +211,5 @@ All `POST`, `PATCH`, `PUT` and `DELETE` requests require [basic authentication](
 | `GET /schemas/pits`      | [JSON schema](http://json-schema.org/) | JSON schema for PITs
 | `GET /schemas/relations` | JSON schema                            | JSON schema for relations
 
-## License
 
 Copyright (C) 2015 [Waag Society](http://waag.org).
-
-The source for Histograph is released under the GNU General Public License as published by the Free Software Foundation, either version 3 of the License, or (at your option) any later version.
