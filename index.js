@@ -25,6 +25,17 @@ schemas.ontology(function(err, results) {
   ontology = results;
 });
 
+function formatError(err) {
+  if (err && err.message && err.message.indexOf('IndexMissingException') === 0) {
+    var match = err.message.match(/\[\[(.*?)\]/);
+    if (match) {
+      return 'Dataset not found: ' + match[1];
+    }
+  }
+
+  return err;
+}
+
 app.get('/', function(req, res) {
   res.send({
     name: 'Histograph API',
@@ -52,8 +63,8 @@ app.get('/search',
   function(req, res) {
     query(req.processedQuery, function(err, results) {
       if (err) {
-        res.status(400).send({
-          message: err
+        res.status(err.status || 400).send({
+          message: formatError(err)
         });
       } else {
         results = jsonld(geojson(results, req.processedQuery), req.processedQuery);
