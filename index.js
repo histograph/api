@@ -28,7 +28,7 @@ schemas.ontology(function(err, results) {
 app.get('/', function(req, res) {
   res.send({
     name: 'Histograph API',
-    version: '0.5.0',
+    version: '0.5.1',
     message: 'Histograph - Historical Geocoder',
     docs: 'http://histograph.io/',
     examples: exampleUrls.map(function(query) {
