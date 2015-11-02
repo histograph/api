@@ -10,7 +10,6 @@ var query = require('./lib/query');
 var jsonld = require('./lib/jsonld');
 var geojson = require('./lib/geojson');
 var params = require('./lib/params');
-var exampleUrls = require('./data/example-urls.json');
 
 app.use(cors());
 
@@ -24,6 +23,8 @@ var ontology;
 schemas.ontology(function(err, results) {
   ontology = results;
 });
+
+var exampleUrls = config.api.exampleUrls || [];
 
 function formatError(err) {
   if (err && err.message && err.message.indexOf('IndexMissingException') === 0) {
