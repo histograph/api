@@ -21,12 +21,13 @@ See [histograph.io/installation](http://histograph.io/installation).
 
 ## API specification
 
-Histograph API has two endpoints:
+Histograph API has five endpoints:
 
 - [`/search`](#search-api): geocoding, searching place names
-- [`/datasets`](#datsets-api): dataset metadata
+- [`/datasets`](#datsets-api): datasets, PITs and relations
 - [`/ontology`](#ontology-api): Histograph ontology
 - [`/schemas`](#json-schemas-api): JSON schemas
+- [`/stats`](#data-and-system-statistics-api): data and system statistics
 
 ### Search API
 
@@ -73,7 +74,6 @@ Example search API GeoJSON output:
         "pits": [
           {
             "@id": "dataset1/12345",
-            "hgid": "dataset1/12345",
             "name": "Place",
             "type": "hg:Place",
             "dataset": "dataset1",
@@ -200,16 +200,22 @@ All `POST`, `PATCH`, `PUT` and `DELETE` requests require [basic authentication](
 
 ### Ontology API
 
-| Endpoint        | Data                   | Description
-|-----------------|------------------------|-------------------------------
-| `GET /ontology` | Turtle/N3 RDF ontology | Histograph ontology, all types and relations
+| Endpoint        | Description
+|-----------------|--------------------------------
+| `GET /ontology` | Histograph Turtle/N3 RDF ontology, all types and relations
 
 ### JSON schemas API
 
-| Endpoint                 | Data                                   | Description
-|--------------------------|----------------------------------------|-------------------------------
-| `GET /schemas/pits`      | [JSON schema](http://json-schema.org/) | JSON schema for PITs
-| `GET /schemas/relations` | JSON schema                            | JSON schema for relations
+| Endpoint                 | Description
+|--------------------------|--------------------------------
+| `GET /schemas/pits`      | [JSON schema](http://json-schema.org/) for PITs
+| `GET /schemas/relations` | JSON schema for relations
 
+### Data and system statistics API
+
+| Endpoint             | Description
+|----------------------|--------------------------------
+| `GET /stats/queue`   | Queue length
+| `GET /stats/queries` | Results of [data statistics queries](https://github.com/histograph/stats/tree/master/queries) (executed every _n_ hours)
 
 Copyright (C) 2015 [Waag Society](http://waag.org).
