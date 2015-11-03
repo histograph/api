@@ -1,17 +1,19 @@
 # Histograph API
 
-Histograph JSON API. To start Histograph API, run
+Histograph geocoding and dataset API. A production version of the API is running on [https://api.histograph.io](https://api.histograph.io).
+
+Some example queries:
+
+- https://api.histograph.io/search?name=utrecht
+- https://api.histograph.io/search?uri=http://vocab.getty.edu/tgn/7271174
+- https://api.histograph.io/search?name=amsterdam&type=hg:Municipality
+
+To run the API locally, clone this repository and type:
 
     npm install
     node index.js
 
-Running in "production", using `forever`
-
-    forever start -a --uid "api" index.js --prod --config ~/my-config.yml
-
-## Installation
-
-See [histograph.io/installation](http://histograph.io/installation).
+For more information about installing and running the complete Histograph stack, see the [`histograph/installation`](https://github.com/histograph/installation) repository.
 
 ## API specification
 
@@ -30,12 +32,6 @@ The Histograph API has five endpoints:
 | Endpoint      | Description
 |---------------|-----------------
 | `GET /search` | Search for place names
-
-## Examples
-
-- https://api.histograph.io/search?name=utrecht
-- https://api.histograph.io/search?uri=http://vocab.getty.edu/tgn/7271174
-- https://api.histograph.io/search?name=amsterdam&type=hg:Municipality
 
 #### Results
 
