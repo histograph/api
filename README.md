@@ -13,27 +13,29 @@ Running in "production", using `forever`
 
 See [histograph.io/installation](http://histograph.io/installation).
 
-## Examples
-
-- https://api.histograph.io/search?name=utrecht
-- https://api.histograph.io/search?uri=http://vocab.getty.edu/tgn/7271174
-- https://api.histograph.io/search?name=amsterdam&type=hg:Municipality
-
 ## API specification
 
-Histograph API has five endpoints:
+The Histograph API has five endpoints:
 
-- [`/search`](#search-api): geocoding, searching place names
-- [`/datasets`](#datsets-api): datasets, PITs and relations
-- [`/ontology`](#ontology-api): Histograph ontology
-- [`/schemas`](#json-schemas-api): JSON schemas
-- [`/stats`](#data-and-system-statistics-api): data and system statistics
+| Endpoint                                    | Description
+|---------------------------------------------|------------------------------------------
+| [`/search`](#search-api)                    | Geocoding and search
+| [`/datasets`](#datsets-api)                 | Datasets, PITs and relations
+| [`/ontology`](#ontology-api)                | Histograph ontology
+| [`/schemas`](#json-schemas-api)             | JSON schemas
+| [`/stats`](#data-and-system-statistics-api) | Data and system statistics
 
 ### Search API
 
 | Endpoint      | Description
 |---------------|-----------------
 | `GET /search` | Search for place names
+
+## Examples
+
+- https://api.histograph.io/search?name=utrecht
+- https://api.histograph.io/search?uri=http://vocab.getty.edu/tgn/7271174
+- https://api.histograph.io/search?name=amsterdam&type=hg:Municipality
 
 #### Results
 
