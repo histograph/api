@@ -132,7 +132,7 @@ All Histograph API search calls expect at least one of the following parameters:
 | `name`       | `name=Bussum`                              | Elasticsearch [query string](https://www.elastic.co/guide/en/elasticsearch/reference/1.6/query-dsl-query-string-query.html) on PIT names
 | `uri`        | `uri=http://vocab.getty.edu/tgn/7268026`   | Exact match on `uri`
 | `id`         | `id=dataset1/123`                          | Exact match on `id` (dataset internal)
-| `q`          | `q=boskoop`                                | `uri` query if `q`'s value starts with `http`, `id` query if value contains `/`, `name` query otherwise
+| `q`          | `q=boskoop`                                | `uri` query if `q`'s value starts with `http`, `id` query if value contains `/`, `name` query otherwise, or leave empty `q=` to query for everything including entities without a name. This can be interesting for example in combination with an intersects.
 | `type`       | `type=hg:Place`                            | Filter on PIT type (or comma-separated list of types). See the [Histograph ontology](https://github.com/histograph/schemas/blob/master/ontology/histograph.ttl) for a list of valid types
 | `dataset`    | `datset=tgn,geonames`                      | Filter on dataset ID (or comma-separated list of IDs)
 | `intersects` | `intersects=4.9308,52.7126,5.1601,52.5751` | Four-coordinate bounding box, GeoJSON string or WKT string specifying the bounding box or polygon PITs have to intersect
