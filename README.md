@@ -5,7 +5,7 @@ Histograph geocoding and dataset API. A production version of the API is running
 Some example queries:
 
 - https://api.histograph.io/search?name=utrecht
-- https://api.histograph.io/search?uri=http://vocab.getty.edu/tgn/7271174
+- https://api.histograph.io/search?uri=http://vocab.getty.edu/tgn/7269983
 - https://api.histograph.io/search?name=amsterdam&type=hg:Municipality
 
 To run the API locally, clone this repository and type:
