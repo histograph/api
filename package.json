@@ -48,7 +48,7 @@
       "email": "rutger@waag.org"
     }
   ],
-  "license": "GPL-3.0",
+  "license": "MIT",
   "jshintConfig": {
     "node": true,
     "globalstrict": false,
