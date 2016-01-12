@@ -10,6 +10,7 @@ var query = require('./lib/query');
 var jsonld = require('./lib/jsonld');
 var geojson = require('./lib/geojson');
 var params = require('./lib/params');
+var package = require('./package');
 
 app.use(cors());
 
@@ -40,7 +41,7 @@ function formatError(err) {
 app.get('/', function(req, res) {
   res.send({
     name: 'Histograph API',
-    version: '0.5.1',
+    version: package.version,
     message: 'Histograph - Historical Geocoder',
     docs: 'http://histograph.io/',
     examples: exampleUrls.map(function(query) {
