@@ -1,6 +1,6 @@
 {
   "name": "histograph-api",
-  "version": "0.5.0",
+  "version": "0.5.1",
   "description": "API for Histograph",
   "main": "./index.js",
   "dependencies": {
@@ -10,10 +10,10 @@
     "elasticsearch": "^8.2.0",
     "express": "^4.13.3",
     "highland": "^2.5.1",
-    "histograph-config": "git+https://github.com/histograph/config#v0.5.0",
-    "histograph-io": "git+https://github.com/histograph/io#v0.5.0",
-    "histograph-schemas": "git+https://github.com/histograph/schemas#v0.5.0",
-    "histograph-stats": "git+https://github.com/histograph/stats#v0.5.0",
+    "histograph-config": "git+https://github.com/histograph/config#v0.5.1",
+    "histograph-io": "git+https://github.com/histograph/io#v0.5.1",
+    "histograph-schemas": "git+https://github.com/histograph/schemas#v0.5.1",
+    "histograph-stats": "git+https://github.com/histograph/stats#v0.5.1",
     "histograph-uri-normalizer": "git+https://github.com/histograph/uri-normalizer#v0.5.0",
     "is-my-json-valid": "^2.12.0",
     "neo4j": "^2.0.0-alpha5",
