@@ -17,6 +17,7 @@
     "neo4j": "^2.0.0-RC2",
     "path": "^0.12.7",
     "request": "^2.79.0",
+    "@turf/centroid": "^3.7.3",
     "wellknown": "^0.5.0"
   },
   "devDependencies": {
