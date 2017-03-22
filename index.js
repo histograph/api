@@ -82,6 +82,6 @@ app.get('/search',
 );
 
 app.listen(config.api.bindPort, function() {
-  my_log.info(config.logo.join('\n'));
+  my_log.info("\n" + config.logo.join('\n'));
   my_log.info('Histograph API listening at port ' + config.api.bindPort);
 });
