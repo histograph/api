@@ -13,6 +13,7 @@
     "histograph-schemas": "git+https://github.com/histograph/schemas#puppetdeploy",
     "histograph-stats": "git+https://github.com/histograph/stats#puppetdeploy",
     "histograph-uri-normalizer": "git+https://github.com/histograph/uri-normalizer#puppetdeploy",
+    "histograph-logging": "git+https://github.com/histograph/logging#puppetdeploy",
     "is-my-json-valid": "^2.15.0",
     "neo4j": "^2.0.0-RC2",
     "path": "^0.12.7",

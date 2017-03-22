@@ -1,16 +1,20 @@
-var url = require('url');
-var express = require('express');
-var cors = require('cors');
-var config = require('histograph-config');
-var schemas = require('histograph-schemas');
-var io = require('histograph-io');
-var stats = require('histograph-stats');
-var app = express();
-var query = require('./lib/query');
-var jsonld = require('./lib/jsonld');
-var geojson = require('./lib/geojson');
-var params = require('./lib/params');
-var package = require('./package');
+const url = require('url');
+const express = require('express');
+const cors = require('cors');
+const config = require('histograph-config');
+const schemas = require('histograph-schemas');
+const io = require('histograph-io');
+const stats = require('histograph-stats');
+const app = express();
+const query = require('./lib/query');
+const jsonld = require('./lib/jsonld');
+const geojson = require('./lib/geojson');
+const params = require('./lib/params');
+const package = require('./package');
+const log = require('histograph-logging');
+
+const my_log = new log("api");
+
 
 app.use(cors());
 
@@ -78,6 +82,6 @@ app.get('/search',
 );
 
 app.listen(config.api.bindPort, function() {
-  console.log(config.logo.join('\n'));
-  console.log('Histograph API listening at port ' + config.api.bindPort);
+  my_log.info(config.logo.join('\n'));
+  my_log.info('Histograph API listening at port ' + config.api.bindPort);
 });
